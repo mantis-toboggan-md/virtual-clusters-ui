@@ -13,36 +13,14 @@ entries:
       catalog.cattle.io/ui-component: plugins
       catalog.cattle.io/ui-extensions-version: '>= 3.0.5-rc.6'
     apiVersion: v2
-    appVersion: 1.0.0-dev2
-    created: "2025-10-16T08:18:55.062837-07:00"
-    description: Virtual cluster provisioning using K3K
-    digest: c2a62498014ee97f324a289ef831268982e934dc25b6cf3777e4b12ec864db50
-    icon: https://raw.githubusercontent.com/rancher/virtual-clusters-ui/refs/heads/main/pkg/virtual-clusters/assets/icon-virtual-clusters.svg
-    name: virtual-clusters
-    type: application
-    urls:
-    - assets/virtual-clusters/virtual-clusters-1.0.0-dev2.tgz
-    version: 1.0.0-dev2
-  - annotations:
-      catalog.cattle.io/certified: rancher
-      catalog.cattle.io/display-name: Virtual Clusters
-      catalog.cattle.io/experimental: "true"
-      catalog.cattle.io/namespace: cattle-ui-plugin-system
-      catalog.cattle.io/os: linux
-      catalog.cattle.io/permits-os: linux, windows
-      catalog.cattle.io/rancher-version: '>=2.12.0'
-      catalog.cattle.io/scope: management
-      catalog.cattle.io/ui-component: plugins
-      catalog.cattle.io/ui-extensions-version: '>= 3.0.5-rc.6'
-    apiVersion: v2
     appVersion: 1.0.0-dev
-    created: "2025-10-16T08:18:55.062512-07:00"
+    created: "2025-10-16T08:24:40.559947-07:00"
     description: Virtual cluster provisioning using K3K
-    digest: 86380451b08bdb4a45891fca131f9faf7d5c3a6700c0d1be02980237d8e8dc6e
+    digest: eaf443188ef176525c8c989625eb1f89c0590b37ada338e78cf2d686b593f618
     icon: https://raw.githubusercontent.com/rancher/virtual-clusters-ui/refs/heads/main/pkg/virtual-clusters/assets/icon-virtual-clusters.svg
     name: virtual-clusters
     type: application
     urls:
     - assets/virtual-clusters/virtual-clusters-1.0.0-dev.tgz
     version: 1.0.0-dev
-generated: "2025-10-16T08:18:55.061409-07:00"
+generated: "2025-10-16T08:24:40.559161-07:00"
