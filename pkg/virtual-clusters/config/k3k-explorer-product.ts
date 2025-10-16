@@ -1,6 +1,40 @@
-import {STATE, NAME as NAME_COL, AGE} from '@shell/config/table-headers'
+
 import { K3K } from "../types";
 export const  NAME = 'virtualclusters'
+//TODO nb why doesnt table-headers import work when building
+const STATE = {
+  name:      'state',
+  labelKey:  'tableHeaders.state',
+  sort:      ['stateSort', 'nameSort'],
+  value:     'stateDisplay',
+  getValue:  (row: any) => row.stateDisplay,
+  width:     100,
+  default:   'unknown',
+  formatter: 'BadgeStateFormatter',
+};
+
+const NAME_COL = {
+  name:          'name',
+  labelKey:      'tableHeaders.name',
+  value:         'nameDisplay',
+  getValue:      (row: any) => row.nameDisplay,
+  sort:          ['nameSort'],
+  formatter:     'LinkDetail',
+  canBeVariable: true,
+};
+
+const AGE = {
+  name:      'age',
+  labelKey:  'tableHeaders.age',
+  value:     'creationTimestamp',
+  getValue:  (row: any) => row.creationTimestamp,
+  sort:      'creationTimestamp:desc',
+  search:    false,
+  formatter: 'LiveDate',
+  width:     100,
+  align:     'left'
+};
+
 
 export function init($plugin:any, store:any) {
   const {
