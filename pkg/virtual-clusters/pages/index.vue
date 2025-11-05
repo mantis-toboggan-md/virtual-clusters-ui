@@ -6,7 +6,6 @@ import InstallK3k from '../components/InstallK3k.vue';
 import { K3K_CHART_NAMESPACE, K3K_CHART_NAME, verifyK3kIsInstalled } from '../utils/k3kInstalled';
 import Loading from '@shell/components/Loading';
 import { isRancherPrime } from '@shell/config/version';
-import versions from '@shell/utils/versions';
 
 export default {
   name: 'K3kExplorerLandingPage',
@@ -14,7 +13,6 @@ export default {
   components: { InstallK3k, Loading },
 
   async fetch() {
-    await versions.fetch({ store: this.$store });
     this.isPrime = isRancherPrime();
     if (this.isPrime) {
       const currentCluster = this.$store.getters['currentCluster'];

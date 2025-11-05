@@ -13,17 +13,17 @@ export async function init($plugin:any, store:any) {
     basicType,
     headers
   } = $plugin.DSL(store, NAME);
-    product({
-      inStore:             'cluster',
-      inExplorer:          true,
-      icon:                'k3k',
-      removeable:          false,
-      showNamespaceFilter: true,
-    });
-
     await versions.fetch({ store: store });
 
     if(isRancherPrime()){
+        product({
+          inStore:             'cluster',
+          inExplorer:          true,
+          icon:                'k3k',
+          removeable:          false,
+          showNamespaceFilter: true,
+        });
+
         virtualType({
           labelKey:       'product.virtualclusters',
           icon:        'k3k',
