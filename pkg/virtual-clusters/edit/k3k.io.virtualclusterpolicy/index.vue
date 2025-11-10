@@ -2,7 +2,6 @@
 import CruResource from '@shell/components/CruResource';
 import Loading from '@shell/components/Loading';
 import Labels from '@shell/components/form/Labels';
-import Mode from '../../components/Mode.vue';
 import CreateEditView from '@shell/mixins/create-edit-view';
 import FormValidation from '@shell/mixins/form-validation';
 import Tab from '@shell/components/Tabbed/Tab';
@@ -14,12 +13,14 @@ import KeyValue from '@shell/components/form/KeyValue.vue';
 import LabeledSelect from '@shell/components/form/LabeledSelect';
 import Checkbox from '@components/Form/Checkbox/Checkbox';
 import { exceptionToErrorsArray } from '@shell/utils/error';
-import Quota from './Quota.vue';
 import { clear } from '@shell/utils/array';
 import { Banner } from '@rancher/components';
 
 import Projects from './Projects.vue';
 import { ANNOTATIONS } from '../../types';
+import Mode from '../../components/Mode.vue';
+import Sync from '../../components/Sync.vue';
+import Quota from './Quota.vue';
 
 const CONTAINER_LIMIT_TYPE = 'container';
 
@@ -42,7 +43,8 @@ export default {
     LabeledSelect,
     Projects,
     Checkbox,
-    Banner
+    Banner,
+    Sync
   },
 
   async fetch() {
