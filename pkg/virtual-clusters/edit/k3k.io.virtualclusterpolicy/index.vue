@@ -21,6 +21,7 @@ import { ANNOTATIONS } from '../../types';
 import Mode from '../../components/Mode.vue';
 import Sync from '../../components/Sync.vue';
 import Quota from './Quota.vue';
+import isEmpty from 'lodash/isEmpty';
 
 const CONTAINER_LIMIT_TYPE = 'container';
 
@@ -142,6 +143,19 @@ export default {
           delete this.value.spec.podSecurityAdmissionLevel;
         } else {
           this.value.spec.podSecurityAdmissionLevel = neu;
+        }
+      }
+    },
+
+    sync: {
+      get() {
+        return this.value?.spec?.sync || {};
+      },
+      set(neu) {
+        if (neu && !isEmpty(neu)) {
+          this.value.spec.sync = neu;
+        } else {
+          delete this.value.spec.sync;
         }
       }
     },
@@ -305,7 +319,7 @@ export default {
               :add-label="t('k3k.nodeSelector.addLabel')"
             >
               <template #title>
-                <h4>{{ t('k3k.nodeSelector.label') }}</h4>
+                <h3>{{ t('k3k.nodeSelector.label') }}</h3>
                 <t
                   class="text-muted"
                   raw
@@ -367,8 +381,11 @@ export default {
             />
           </div>
         </div>
-
-        <div class="row mb-10">
+        <Sync
+          v-model:sync="sync"
+          :mode="mode"
+        />
+        <!-- <div class="row mb-10">
           <div class="col span-12">
             <h3>{{ t('k3k.policy.synchronization.label') }}</h3>
             <t
@@ -393,7 +410,7 @@ export default {
               @update:value="e=>updateSync('priorityClasses', e)"
             />
           </div>
-        </div>
+        </div> -->
       </Tab>
       <Tab
         :weight="1"

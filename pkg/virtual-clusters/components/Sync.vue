@@ -1,10 +1,13 @@
 <script>
 import { _CREATE } from '@shell/config/query-params';
+import Checkbox from '@components/Form/Checkbox/Checkbox';
 
 export default {
   name: 'K3kResourceSync',
 
   emits: ['update:sync'],
+
+  components: { Checkbox },
 
   props: {
     mode: {
@@ -29,8 +32,25 @@ export default {
         const out = { ...this.sync };
 
         if (!out.ingresses) {
-          out.ingresses = { enabled: neu };
+          out.ingresses = {};
         }
+        out.ingresses.enabled = neu;
+        this.$emit('update:sync', out );
+      }
+    },
+
+    priorityClassesEnabled: {
+      get() {
+        return this.sync?.priorityClasses?.enabled || false;
+      },
+      set(neu) {
+        const out = { ...this.sync };
+
+        if (!out.priorityClasses) {
+          out.priorityClasses = {};
+        }
+        out.priorityClasses.enabled = neu;
+
         this.$emit('update:sync', out );
       }
     }
@@ -52,16 +72,14 @@ export default {
   <div class="row mb-20">
     <div class="col span-6 vertical-checkboxes">
       <Checkbox
-        :value="ingressesEnabled"
+        v-model:value="ingressesEnabled"
         :mode="mode"
         :label="t('k3k.policy.synchronization.ingressCheckbox')"
-        @update:value="e=>$emit('update:ingressesEnabled', e)"
       />
       <Checkbox
-        :value="priorityClassesEnabled"
+        v-model:value="priorityClassesEnabled"
         :mode="mode"
         :label="t('k3k.policy.synchronization.priorityClassCheckbox')"
-        @update:value="e=>$emit('update:priorityClassesEnabled', e)"
       />
     </div>
   </div>
