@@ -3,15 +3,8 @@
   "description": "Virtual cluster provisioning using K3K (Prime only)",
   "version": "1.0.0-dev5",
   "private": false,
-  "rancher": {
-    "annotations": {
-      "catalog.cattle.io/display-name": "Virtual Clusters",
-      "catalog.cattle.io/ui-extensions-version": ">= 3.0.5-rc.6",
-      "catalog.cattle.io/rancher-version": ">=2.12.0"
-    }
-  },
+  "rancher": true,
   "icon": "https://raw.githubusercontent.com/rancher/virtual-clusters-ui/refs/heads/main/pkg/virtual-clusters/assets/icon-k3k.svg",
-  "scripts": {},
   "engines": {
     "node": ">=16"
   },
@@ -20,9 +13,8 @@
     "@vue/cli-service": "~5.0.0",
     "@vue/cli-plugin-typescript": "~5.0.0"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+  "files": [
+    "**/*"
+  ],
+  "main": "virtual-clusters-1.0.0-dev5.umd.min.js"
 }
