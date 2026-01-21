@@ -22,6 +22,7 @@ import Mode from '../../components/Mode.vue';
 import Sync from '../../components/Sync.vue';
 import Quota from './Quota.vue';
 import isEmpty from 'lodash/isEmpty';
+import { MODES } from '../../utils/shared';
 
 const CONTAINER_LIMIT_TYPE = 'container';
 
@@ -50,7 +51,7 @@ export default {
 
   async fetch() {
     if (!this.value.spec) {
-      this.value.spec = {};
+      this.value.spec = { allowedMode: MODES.SHARED };
     }
   },
 
@@ -158,6 +159,9 @@ export default {
           delete this.value.spec.sync;
         }
       }
+    },
+    isSharedMode() {
+      return this.value?.spec?.allowedMode === MODES.SHARED;
     },
   },
 
@@ -280,6 +284,7 @@ export default {
         <Mode
           v-model:k3k-mode="value.spec.allowedMode"
           :mode="mode"
+          @update:k3k-mode="sync = {}"
         />
       </Tab>
       <Tab
@@ -343,8 +348,8 @@ export default {
         <div class="row mb-20">
           <div class="col span-6">
             <LabeledSelect
-              :mode="mode"
               v-model:value="podSecurityAdmissionLevel"
+              :mode="mode"
               :options="[noneOption,'privileged', 'baseline', 'restricted']"
               :label="t('cluster.rke2.defaultPodSecurityAdmissionConfigurationTemplateName.label')"
             />
@@ -383,6 +388,7 @@ export default {
           </div>
         </div>
         <Sync
+          v-if="isSharedMode"
           v-model:sync="sync"
           :mode="mode"
         />
