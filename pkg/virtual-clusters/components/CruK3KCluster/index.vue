@@ -328,10 +328,32 @@ export default {
     // create import cluster command from new prov cluster
     // run a job to generate kubeconfig and run the import command on the virtual cluster
     async importCluster() {
-      const clusterToken = await this.value.getOrCreateToken();
+      let clusterToken;
 
-      while (!clusterToken.command) {
-        await new Promise((resolve) => setTimeout(resolve, 250));
+      try {
+        clusterToken = await this.value.getOrCreateToken();
+        console.log('*** Cluster registration token: ', clusterToken);
+        console.log('*** Cluster registration token command: ', clusterToken.command);
+
+        let attempts = 0;
+        const maxAttempts = 240; // 60-second wait before timing out
+
+        while (!clusterToken.command && attempts < maxAttempts) {
+          console.log('*** Waiting for cluster registration token command...');
+          attempts++;
+          await new Promise((resolve) => setTimeout(resolve, 250));
+        }
+
+        if (!clusterToken.command) {
+          console.log('Timed out waiting for cluster registration token command');
+          throw new Error('');
+        }
+
+        console.log('*** Cluster registration token command found: ', clusterToken.command);
+      } catch {
+        this.errors.push(this.t('k3k.errors.timeoutGettingToken'));
+
+        return;
       }
 
       const command = clusterToken.command.split(' ');
