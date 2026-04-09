@@ -252,7 +252,8 @@ export default {
           rules:      ['namespaceRequired']
         },
       ],
-      VIEW: _VIEW
+      VIEW:                _VIEW,
+      defaultVersionLabel: this.t('k3k.k3sVersion.default')
     };
   },
 
@@ -284,7 +285,7 @@ export default {
     k3sVersionOptions() {
       const out = (this.k3sVersions?.data || []).map((d) => d.version.replace('+', '-')).reverse();
 
-      out.unshift({ label: this.t('k3k.k3sVersion.default'), value: null });
+      out.unshift(this.defaultVersionLabel);
 
       return out;
     },
@@ -318,6 +319,14 @@ export default {
 
     updateName({ name }) {
       this.k3kCluster.metadata.name = name;
+    },
+
+    updateVersion(e) {
+      if (e && e !== this.defaultVersionLabel) {
+        this.k3kCluster.spec.version = e;
+      } else {
+        delete this.k3kCluster.spec.version;
+      }
     },
 
     async findNormanCluster() {
@@ -537,11 +546,11 @@ export default {
         <div class="row mb-20">
           <div class="col span-6">
             <LabeledSelect
-              :value="k3kCluster.spec.version || t('k3k.k3sVersion.default')"
+              :value="k3kCluster.spec.version || defaultVersionLabel"
               label-key="k3k.k3sVersion.label"
               :options="k3sVersionOptions"
               :mode="mode"
-              @update:value="e=>k3kCluster.spec.version=e"
+              @update:value="updateVersion"
             />
           </div>
         </div>
