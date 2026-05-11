@@ -22,6 +22,8 @@ import Sync from '../../components/Sync.vue';
 import Quota from './Quota.vue';
 import isEmpty from 'lodash/isEmpty';
 import { MODES } from '../../utils/shared';
+import { fieldIsSupported } from '../../utils/k3kInstalled';
+import { K3K } from '../../types/k8s-types';
 
 const CONTAINER_LIMIT_TYPE = 'Container';
 
@@ -52,6 +54,9 @@ export default {
     if (!this.value.spec) {
       this.value.spec = { allowedMode: MODES.SHARED };
     }
+    const mgmtId = this.$store.getters['currentCluster'].id;
+
+    this.supportsTopography = await fieldIsSupported(this.$store, mgmtId, K3K.POLICY, 'spec.defaultServerAffinity');
   },
 
   data() {
@@ -60,7 +65,8 @@ export default {
       fvFormRuleSets:          [{
         path:  'name',
         rules: ['required'],
-      }]
+      }],
+      supportsTopography: false // Only k3k >= 1.1.0 supports the fields in the 'Topology' tab
     };
   },
 
@@ -306,6 +312,7 @@ export default {
         />
       </Tab>
       <Tab
+        v-if="supportsTopography"
         :weight="3"
         name="affinity"
         label-key="k3k.policy.tabs.topology"

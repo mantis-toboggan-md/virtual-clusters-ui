@@ -75,3 +75,24 @@ export const verifyUserCanCreateK3kClusters = async(store, mgmtId) => {
     return false;
   }
 };
+
+/**
+ * Check the schemaDefinition for a given type and return true if the specified field is found.
+ * Throws an error if the schema cannot be found
+ * @param {*} store vuex store ie component this.$store
+ * @param {*} mgmtId string id of the cluster to look for k3k in
+ * @param {*} type string k8s resource type to look for field in
+ * @param {*} field string field to look for in the schema definition, Can be a dot path eg 'spec.sync.configMaps'
+ */
+export const fieldIsSupported = async(store, mgmtId, type, field) => {
+  const schemaDefinition = await store.dispatch('management/request', {
+    url:    `/k8s/clusters/${ mgmtId }/v1/schemaDefinitions/${ type }`,
+    method: 'GET',
+  });
+
+  const { definitionType } = schemaDefinition;
+
+  const definitionPaths = Object.keys(schemaDefinition?.definitions || {});
+
+  return definitionPaths.includes(`${ definitionType }.${ field }`);
+};
