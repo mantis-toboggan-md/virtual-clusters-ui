@@ -24,7 +24,7 @@ import CreateEditView from '@shell/mixins/create-edit-view';
 import FormValidation from '@shell/mixins/form-validation';
 import { _CREATE, _VIEW } from '@shell/config/query-params';
 import { allHash } from '@shell/utils/promise';
-import { CLUSTER_BADGE } from '@shell/config/labels-annotations';
+import { CLUSTER_BADGE, CAPI as CAPI_ANNOTATIONS } from '@shell/config/labels-annotations';
 
 import { K3K } from '../../types';
 import InstallK3k from '../InstallK3k.vue';
@@ -38,6 +38,7 @@ import K3kVersionBanner from '../K3kVersionBanner.vue';
 
 import { MODES } from '../../utils/shared';
 import { fieldIsSupported } from '../../utils/k3kInstalled';
+import { ANNOTATIONS, LABELS } from '../../labels-annotations';
 
 import importConfigMapTemplate from '../../resources/import-configmap.json';
 import importJobTemplate from '../../resources/import-job.json';
@@ -94,9 +95,9 @@ const POLICY_OVERRIDES = {
  */
 const defaultAnnotations = {
   // prevent k3s-upgrade-controller from running: this will be managed by k3k
-  'rancher.io/imported-cluster-version-management': 'false',
+  [ANNOTATIONS.IMPORTED_VERSION_MGMT]: 'false',
   // display machine provider in cluster mgmt list
-  'ui.rancher/provider':                            'k3k'
+  [CAPI_ANNOTATIONS.UI_CUSTOM_PROVIDER]: 'k3k'
 };
 
 export default {
@@ -164,9 +165,9 @@ export default {
     if (this.mode === _CREATE) {
       this.k3kCluster = await this.$store.dispatch('management/create', cloneDeep(defaultCluster));
     } else {
-      const ns = this.value.metadata?.annotations?.['ui.rancher/k3k-namespace'] || '';
+      const ns = this.value.metadata?.annotations?.[ANNOTATIONS.K3K_NAMESPACE] || '';
       const id = `${ ns }/${ this.value.metadata.name }`;
-      const parentClusterId = this.value.metadata?.annotations?.['ui.rancher/parent-cluster'] || '';
+      const parentClusterId = this.value.metadata?.annotations?.[ANNOTATIONS.PARENT_CLUSTER] || '';
 
       const parentProvCluster = this.provClusters.find((c) => c?.mgmt?.id === parentClusterId);
 
@@ -510,10 +511,14 @@ export default {
           this.value.metadata = this.value.metadata || {};
           merge(this.value.metadata.annotations, defaultAnnotations);
 
-          this.value.metadata.annotations['ui.rancher/parent-cluster'] = cluster.id;
+          this.value.metadata.annotations[ANNOTATIONS.PARENT_CLUSTER] = cluster.id;
 
-          this.value.metadata.annotations['ui.rancher/parent-cluster-display'] = this.parentCluster.displayName || this.parentCluster.name;
-          this.value.metadata.annotations['ui.rancher/k3k-namespace'] = this.k3kCluster.metadata.namespace;
+          this.value.metadata.annotations[ANNOTATIONS.PARENT_CLUSTER_DISPLAY] = this.parentCluster.displayName || this.parentCluster.name;
+          this.value.metadata.annotations[ANNOTATIONS.K3K_NAMESPACE] = this.k3kCluster.metadata.namespace;
+
+          // Set label for SSP-compatible group-by-parent-cluster sorting
+          this.value.metadata.labels = this.value.metadata.labels || {};
+          this.value.metadata.labels[LABELS.PARENT_CLUSTER_DISPLAY] = this.parentCluster.displayName || this.parentCluster.name;
         } else {
           // save existing k3kCluster
           await cluster.$dispatch('request', {
@@ -521,6 +526,14 @@ export default {
             method: 'PUT',
             data:   this.k3kCluster
           });
+
+          // Migrate parent-cluster-display annotation to label for SSP compatibility
+          const parentDisplay = this.value.metadata?.annotations?.[ANNOTATIONS.PARENT_CLUSTER_DISPLAY];
+
+          if (parentDisplay && !this.value.metadata?.labels?.[LABELS.PARENT_CLUSTER_DISPLAY]) {
+            this.value.metadata.labels = this.value.metadata.labels || {};
+            this.value.metadata.labels[LABELS.PARENT_CLUSTER_DISPLAY] = parentDisplay;
+          }
         }
 
         // this.save is a method defined in the create edit view mixin

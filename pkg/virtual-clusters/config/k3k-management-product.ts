@@ -4,7 +4,7 @@ export async function init($plugin:any, store:any) {
   const { configureType } = $plugin.DSL(store, 'manager');
 
   if (isRancherPrime()) {
-    configureType('provisioning.cattle.io.cluster', {
+    configureType('management.cattle.io.cluster', {
       listGroups: [
         {
           icon:          'icon-folder',
