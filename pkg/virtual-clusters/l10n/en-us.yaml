@@ -4,7 +4,8 @@ k3k:
   policy:
     label: Virtual Cluster Policy
     placeholder: Select a policy
-    noneWarning: Clusters created without a policy should only be used for testing purposes.
+    noneWarning: Clusters created without a policy should only be used for testing purposes. 
+    description: Virtual clusters should be assigned to Virtual Cluster Policies. <br/>  <a href="https://documentation.suse.com/cloudnative/suse-virtual-clusters/latest/en/virtualclusterpolicy.html" target="_blank" rel="noopener noreferrer nofollow" href="" >Learn mode about virtual cluster policies <icon class="icon icon-external-link icon-sm"/></a>
     noneOption: No policy
     tabs:
       config: Config
@@ -146,7 +147,7 @@ k3k:
     createLabel: Create a new Namespace
   hostCluster:
     label: Host cluster
-    placeholder: The cluster that will host this virtual cluster
+    description: The host cluster where the virtual cluster will live.
     tooltip: The host must have the K3K helm chart installed
     notInstalled: The K3K controller must be installed in each cluster to be used as a host for virtual clusters. Follow manual installation instructions <a aria-label='link to the K3K github repository' href='https://github.com/rancher/K3K/tree/main?tab=readme-ov-file#install-the-K3K-controller' target="_blank" rel="noopener noreferrer nofollow">here</a> or click below to install the K3K chart with default values.
     installK3k: Install K3K
