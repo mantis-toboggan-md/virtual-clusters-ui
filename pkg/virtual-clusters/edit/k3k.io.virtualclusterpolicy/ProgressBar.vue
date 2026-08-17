@@ -1,11 +1,11 @@
 <script>
 export default {
-  name: 'K3kProgressBar',
+  'name': 'K3kProgressBar',
 
-  props: {
-    progress: {
-      type:    Number,
-      default: 0
+  'props': {
+    'progress': {
+      'type':    Number,
+      'default': 0
     }
   },
 };
