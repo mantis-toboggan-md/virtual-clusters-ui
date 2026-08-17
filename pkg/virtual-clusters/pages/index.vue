@@ -10,9 +10,12 @@ import { NAME as MGMT_NAME } from '@shell/config/product/manager';
 import { PARENT_CLUSTER } from '../labels-annotations';
 
 export default {
-  name: 'K3kExplorerLandingPage',
+  'name': 'K3kExplorerLandingPage',
 
-  components: { InstallK3k, Loading },
+  'components': {
+    InstallK3k,
+    Loading
+  },
 
   async fetch() {
     this.isPrime = isRancherPrime();
@@ -24,7 +27,9 @@ export default {
 
       try {
         this.currentProvCluster = await this.$store.dispatch('management/find', {
-          type: CAPI.RANCHER_CLUSTER, id: provClusterId, opt: { force: true }
+          'type': CAPI.RANCHER_CLUSTER,
+          'id':     provClusterId,
+          'opt':    { 'force': true }
         });
       } catch {}
 
@@ -36,16 +41,16 @@ export default {
 
       try {
         k3kIsAlreadyInstalled = await verifyK3kIsInstalled(this.$store, currentCluster.id);
-      } catch (e) {
+      } catch {
       }
 
       if (k3kIsAlreadyInstalled) {
         this.$router.replace({
-          name:   'c-cluster-product-resource',
-          params: {
+          'name':   'c-cluster-product-resource',
+          'params': {
             ...this.$router.currentRoute.params,
-            resource: K3K.POLICY,
-            product:  PRODUCT_NAME
+            'resource': K3K.POLICY,
+            'product':  PRODUCT_NAME
           }
         });
       } else {
@@ -56,28 +61,28 @@ export default {
 
   data() {
     return {
-      isLocal:            false,
-      isPrime:            false,
-      isVirtual:          false,
-      canInstallK3k:      false,
-      chartName:          K3K_CHART_NAME,
-      targetNamespace:    K3K_CHART_NAMESPACE,
-      currentProvCluster: null,
-      k3kInstalled:       false, // fetch will redirect away from this page if k3k is already installed. This variable tracks if k3k has been installed using the button on this page
-      managerUrl:                      this.$router.resolve({
-        name:   'c-cluster-product-resource',
-        params: {
-          product:  MGMT_NAME,
-          resource: CAPI.RANCHER_CLUSTER
+      'isLocal':            false,
+      'isPrime':            false,
+      'isVirtual':          false,
+      'canInstallK3k':      false,
+      'chartName':          K3K_CHART_NAME,
+      'targetNamespace':    K3K_CHART_NAMESPACE,
+      'currentProvCluster': null,
+      'k3kInstalled':       false, // fetch will redirect away from this page if k3k is already installed. This variable tracks if k3k has been installed using the button on this page
+      'managerUrl':                      this.$router.resolve({
+        'name':   'c-cluster-product-resource',
+        'params': {
+          'product':  MGMT_NAME,
+          'resource': CAPI.RANCHER_CLUSTER
         }
       }).href,
-      managerUrlFiltered:                      this.$router.resolve({
-        name:   'c-cluster-product-resource',
-        params: {
-          product:  MGMT_NAME,
-          resource: CAPI.RANCHER_CLUSTER
+      'managerUrlFiltered':                      this.$router.resolve({
+        'name':   'c-cluster-product-resource',
+        'params': {
+          'product':  MGMT_NAME,
+          'resource': CAPI.RANCHER_CLUSTER
         },
-        query: { q: '!virtual' }
+        'query': { 'q': '!virtual' }
       }).href,
     };
   },

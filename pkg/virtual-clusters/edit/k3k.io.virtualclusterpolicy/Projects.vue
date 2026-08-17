@@ -25,11 +25,11 @@ import { mapGetters } from 'vuex';
 const MODAL_SHOW_THRESHOLD = 200;
 
 export default {
-  name: 'K3kPolicyProjectSelect',
+  'name': 'K3kPolicyProjectSelect',
 
-  emits: ['update:errors', 'update:selectedProjects', 'finish'],
+  'emits': ['update:errors', 'update:selectedProjects', 'finish'],
 
-  components: {
+  'components': {
     LabeledSelect,
     ProjectStatusTable,
     AppModal,
@@ -37,26 +37,26 @@ export default {
     ProgressBar
   },
 
-  props: {
-    mode: {
-      type:    String,
-      default: _CREATE
+  'props': {
+    'mode': {
+      'type':    String,
+      'default': _CREATE
     },
 
-    policy: {
-      type:    Object,
-      default: () => {}
+    'policy': {
+      'type':    Object,
+      'default': () => {}
     },
 
-    errors: {
-      type:    Array,
-      default: () => []
+    'errors': {
+      'type':    Array,
+      'default': () => []
     }
 
   },
 
   async created() {
-    await this.$store.dispatch('management/findAll', { type: MANAGEMENT.PROJECT });
+    await this.$store.dispatch('management/findAll', { 'type': MANAGEMENT.PROJECT });
 
     if (this.mode !== _CREATE) {
       this.findProjectsFromAnnotations();
@@ -66,24 +66,24 @@ export default {
 
   data() {
     return {
-      projectOptions:              [],
-      showModal:                   false,
-      doneSavingNamespaces:        false,
-      namespacesDone:              [], // namespaces that have been successfully edited or are already in the correct state and wont be altered (eg edit mode fixing partial assignment)
-      nsWillSave:                  [], // namespaces to be edited
-      toBeAssignedCount:           0,
-      toBeUnAssssignedCount:       0,
-      nsSaveAttemptedCount:        0, // maybe succeeded maybe not. Used to calculate how far through saving the ui is
-      nsErrored:                   [], // namespaces the ui attempted and failed to edit
-      projectsWithServerErrors:    [], // the ui tracks which projects have been fully assigned/unassigned and annotates the project as well
+      'projectOptions':              [],
+      'showModal':                   false,
+      'doneSavingNamespaces':        false,
+      'namespacesDone':              [], // namespaces that have been successfully edited or are already in the correct state and wont be altered (eg edit mode fixing partial assignment)
+      'nsWillSave':                  [], // namespaces to be edited
+      'toBeAssignedCount':           0,
+      'toBeUnAssssignedCount':       0,
+      'nsSaveAttemptedCount':        0, // maybe succeeded maybe not. Used to calculate how far through saving the ui is
+      'nsErrored':                   [], // namespaces the ui attempted and failed to edit
+      'projectsWithServerErrors':    [], // the ui tracks which projects have been fully assigned/unassigned and annotates the project as well
 
-      selectedProjects:            [], // projects that the user wants assigned to their policy
-      deselectedProjects:          [], // these are projects that had been annotated previously and are being removed now
-      displayProjects:             [], // on edit, only projects that haven't been fully annotated, or projects that are being removed, are shown in the inline project status table
+      'selectedProjects':            [], // projects that the user wants assigned to their policy
+      'deselectedProjects':          [], // these are projects that had been annotated previously and are being removed now
+      'displayProjects':             [], // on edit, only projects that haven't been fully annotated, or projects that are being removed, are shown in the inline project status table
     };
   },
 
-  watch: {
+  'watch': {
     // update deselectedProjects to include any projects that have any namespaces annotated with this policy's name
     // we dont want to include all projects that have been deselected from the dropdown because some may have been selected and deselected without hitting save
     // this would not error but would give us wrong totals in the notification
@@ -128,7 +128,7 @@ export default {
     }
   },
 
-  methods: {
+  'methods': {
     /**
      * POLICY_ASSIGNED_TO annotation on the policy resource is used to determine which projects to show in the dropdown on edit
      * if a project has a label for the policy but is not, itself, in the policy's annotation, assume the user is trying to remove the project
@@ -166,7 +166,7 @@ export default {
     // filter out projects without namespaces and projects assigned to other policies
     async getProjectOptions() {
       this.projectOptions = [];
-      const allProjects = this.$store.getters['management/all']({ type: MANAGEMENT.PROJECT });
+      const allProjects = this.$store.getters['management/all']({ 'type': MANAGEMENT.PROJECT });
 
       for (const p of allProjects) {
         const ns = p.namespaces || [];
@@ -178,7 +178,10 @@ export default {
 
         if (policyLabel && policyLabel !== this?.policy?.metadata?.name) {
           try {
-            const exists = await this.$store.dispatch('cluster/find', { type: K3K.POLICY, id: policyLabel });
+            const exists = await this.$store.dispatch('cluster/find', {
+              'type': K3K.POLICY,
+              'id':     policyLabel
+            });
 
             if (exists) {
               continue;
@@ -186,14 +189,14 @@ export default {
           } catch {
             // catch 404 when looking for a policy that has been deleted
             this.projectOptions.push( {
-              label: p?.spec?.displayName,
-              value: p
+              'label': p?.spec?.displayName,
+              'value': p
             });
           }
         } else {
           this.projectOptions.push( {
-            label: p?.spec?.displayName,
-            value: p
+            'label': p?.spec?.displayName,
+            'value': p
           });
         }
       }
@@ -212,14 +215,18 @@ export default {
       const url = `/k8s/clusters/${ this.currentCluster.id }/v1/namespaces/${ ns.metadata.name }`;
 
       return await this.$store.dispatch('cluster/request', {
-        url, method: 'PUT', data: ns.cleanForSave(JSON.parse(JSON.stringify(ns)))
+        url,
+        'method': 'PUT',
+        'data':   ns.cleanForSave(JSON.parse(JSON.stringify(ns)))
       });
     },
 
     async verifyNamespaceWasSaved(namespace) {
       const shouldBeLabeled = !!namespace?.metadata?.labels[LABELS.POLICY];
       const refreshed = await this.$store.dispatch('cluster/find', {
-        type: NAMESPACE, id: namespace.id, opt: { force: true }
+        'type': NAMESPACE,
+        'id':     namespace.id,
+        'opt':    { 'force': true }
       });
 
       return shouldBeLabeled ? !!refreshed?.metadata?.labels[LABELS.POLICY] : !refreshed?.metadata?.labels[LABELS.POLICY];
@@ -287,7 +294,13 @@ export default {
       const { nsWillSave, namespacesDone, projectsWithServerErrors } = this;
 
       const policyName = `${ this.policy?.metadata?.name }`;
-      const editRoute = { ...this.policy?.detailLocation || {}, query: { [MODE]: _EDIT, [AS]: _UNFLAG } };
+      const editRoute = {
+        ...this.policy?.detailLocation || {},
+        'query': {
+          [MODE]: _EDIT,
+          [AS]:   _UNFLAG
+        }
+      };
       const editPath = this.$router.resolve(editRoute)?.fullPath; // edit path is used to add a 'go to edit' button to failure notifications
 
       this.selectedProjects.forEach((p) => {
@@ -333,7 +346,10 @@ export default {
           return p.save();
         }));
       } catch {
-        this.addProjectNotification({ policyName, editPath });
+        this.addProjectNotification({
+          policyName,
+          editPath
+        });
       }
 
       try {
@@ -341,7 +357,7 @@ export default {
           return this.saveEachNamespace(ns);
         }));
         this.doneSavingNamespaces = true;
-      } catch (e) {
+      } catch {
         if (!this.showModal) {
           this.$emit('finish');
         }
@@ -398,13 +414,9 @@ export default {
         translationKeyPath = 'k3k.policy.projects.notification.removingNamespaces';
       }
 
-      let level = NotificationLevel.Task;
-      let title = this.t(`${ translationKeyPath }.task.title`);
-      let message = this.t(`${ translationKeyPath }.task.message`, {
-        namespaceCount:      toBeAssignedCount || toBeUnAssssignedCount,
-        removeCount:    toBeUnAssssignedCount,
-        policyName,
-      });
+      let level;
+      let title;
+      let message;
       let primaryAction = null;
 
       const succeeded = !nsErrored?.length;
@@ -412,20 +424,23 @@ export default {
       if (!succeeded) {
         level = NotificationLevel.Error;
         title = this.t(`${ translationKeyPath }.error.title`);
-        message = this.t(`${ translationKeyPath }.error.message`, { policyName, removeCount: toBeUnAssssignedCount });
+        message = this.t(`${ translationKeyPath }.error.message`, {
+          policyName,
+          'removeCount': toBeUnAssssignedCount
+        });
 
         if (nsErrored.length) {
           primaryAction = {
-            label:  this.t('k3k.policy.projects.notification.primaryAction'),
-            route: editPath,
+            'label':  this.t('k3k.policy.projects.notification.primaryAction'),
+            'route': editPath,
           };
         }
       } else {
         level = NotificationLevel.Success;
         title = this.t(`${ translationKeyPath }.success.title`);
         message = this.t(`${ translationKeyPath }.success.message`, {
-          namespaceCount:       toBeAssignedCount || toBeUnAssssignedCount,
-          removeCount:    toBeUnAssssignedCount,
+          'namespaceCount':       toBeAssignedCount || toBeUnAssssignedCount,
+          'removeCount':    toBeUnAssssignedCount,
           policyName
         });
       }
@@ -435,7 +450,7 @@ export default {
         title,
         message,
         primaryAction,
-        id: randomStr()
+        'id': randomStr()
       });
     },
 
@@ -444,20 +459,23 @@ export default {
       const policyName = this.policy?.metadata?.name;
 
       this.$store.dispatch('notifications/add', {
-        level:         NotificationLevel.Error,
-        title:         this.t('k3k.policy.projects.notification.savingProjects.title'),
-        message:       this.t('k3k.policy.projects.notification.savingProjects.message', { policyName }),
-        primaryAction:            {
-          label:  this.t('k3k.policy.projects.notification.primaryAction'),
-          route: editPath,
+        'level':         NotificationLevel.Error,
+        'title':         this.t('k3k.policy.projects.notification.savingProjects.title'),
+        'message':       this.t('k3k.policy.projects.notification.savingProjects.message', { policyName }),
+        'primaryAction':            {
+          'label':  this.t('k3k.policy.projects.notification.primaryAction'),
+          'route': editPath,
         },
-        id: randomStr()
+        'id': randomStr()
       });
     }
   },
 
-  computed: {
-    ...mapGetters({ t: 'i18n/t', currentCluster: 'currentCluster' }),
+  'computed': {
+    ...mapGetters({
+      't':              'i18n/t',
+      'currentCluster': 'currentCluster'
+    }),
 
     isCreate() {
       return this.mode === _CREATE;
