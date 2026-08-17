@@ -158,6 +158,7 @@ k3k:
     virtual: Virtual
     tooltip: By default virtual clusters are provisioned using the shared mode. You can use the virtual mode for more advanced isolation.
   agents:
+    label: Agents
     number:
       label: Number of Agent Pods
     envVars:
@@ -165,6 +166,7 @@ k3k:
       addLabel: Add Env Var
   servers:
     title: Server and Agents
+    label: Servers
     number:
       label: Number of Server Pods
     envVars:
@@ -178,6 +180,9 @@ k3k:
     tooltip: Add a node selector to all server and agent pods. In <code>shared</code> mode, the node selector will also be applied to workloads.
     addLabel: Add Label
     warning: In SUSE Virtual Cluster Engine v1.1.0 and onwards, the 'Topology' tab is the recommended way to configure server and agent pod scheduling.
+  networking:
+    addresses:
+      label: Network Addresses
   clusterCIDR:
     label: Cluster CIDR
     placeholder: 10.42.0.0/16

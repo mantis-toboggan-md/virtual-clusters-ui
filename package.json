@@ -8,7 +8,7 @@
   "dependencies": {
     "@babel/plugin-transform-class-static-block": "7.28.3",
     "@rancher/components": "0.3.0-alpha.4",
-    "@rancher/shell": "v3.0.12-rc.2",
+    "@rancher/shell": "v3.0.13",
     "@types/lodash": "4.14.196",
     "cache-loader": "4.1.0",
     "core-js": "3.48.0",
@@ -17,13 +17,13 @@
     "semver": "7.5.4"
   },
   "devDependencies": {
+    "@types/node": "25.3.3",
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-jest": "24.4.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "7.2.1",
-    "eslint-plugin-vue": "9.32.0",
-    "@types/node": "25.3.3"
+    "eslint-plugin-vue": "10.10.0"
   },
   "resolutions": {
     "**/webpack": "5"
