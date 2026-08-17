@@ -126,7 +126,7 @@ export default {
         'policy':        drawerPolicy,
         'parentCluster': this.hostCluster,
         'showHeader':    false,
-        'width':         '50%'
+        'width':         'wide'
       });
     },
 

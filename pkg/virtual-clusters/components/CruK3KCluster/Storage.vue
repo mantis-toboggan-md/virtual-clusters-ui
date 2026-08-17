@@ -149,15 +149,18 @@ export default {
 </script>
 
 <template>
-  <div>
-    <h3>{{ t('k3k.storage.title') }}</h3>
+  <div class="gap-md">
     <Banner
       v-if="storageClassErrors.length"
       color="error"
       :label="storageClassErrors.join('. ')"
     />
-    <div class="row mb-20">
-      <div class="col span-6">
+      <div class="span-6">
+            <t
+          class="text-label centered"
+          raw
+          k="k3k.storage.storageClass.description"
+        />
         <LabeledSelect
           :disabled="storageClassOptions.length === 1"
           :value="storageClassName || t('k3k.storage.noneOption')"
@@ -167,18 +170,11 @@ export default {
           :options="storageClassOptions"
           @update:value="updateStorageClass"
         />
+
       </div>
-      <div class="col span-6">
-        <t
-          class="text-label centered"
-          raw
-          k="k3k.storage.storageClass.description"
-        />
-      </div>
-    </div>
     <div
       v-if="storageClassName"
-      class="row mb-20"
+      class=""
     >
       <div class="col span-3">
         <UnitInput

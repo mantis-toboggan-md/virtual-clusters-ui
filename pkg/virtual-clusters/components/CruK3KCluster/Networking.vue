@@ -4,6 +4,7 @@ import ArrayList from '@shell/components/form/ArrayList';
 import LabeledInput from '@components/Form/LabeledInput/LabeledInput.vue';
 import RadioButton from '@components/Form/Radio/RadioButton.vue';
 import KeyValue from '@shell/components/form/KeyValue.vue';
+import { RcSection } from '@components/RcSection';
 import cloneDeep from 'lodash/cloneDeep';
 
 export default {
@@ -15,7 +16,8 @@ export default {
     LabeledInput,
     ArrayList,
     RadioButton,
-    KeyValue
+    KeyValue,
+    RcSection
   },
 
   'props': {
@@ -111,231 +113,269 @@ export default {
 </script>
 
 <template>
-  <div>
-    <div class="row mb-20">
-      <div class="col span-6">
-        <LabeledInput
-          :value="clusterCIDR"
-          label-key="k3k.clusterCIDR.label"
-          placeholder-key="k3k.clusterCIDR.placeholder"
-          :mode="mode"
-          @update:value="e=>$emit('update:clusterCIDR', e)"
-        />
+  <div class="gap-md">
+    <RcSection
+      type="secondary"
+      mode="with-header"
+      :expandable="true"
+      :expanded="true"
+      :title="t('k3k.networking.addresses.label')"
+    >
+      <div class="gap-md">
+        <div class="row">
+          <div class="col span-6">
+            <LabeledInput
+              :value="clusterCIDR"
+              label-key="k3k.clusterCIDR.label"
+              placeholder-key="k3k.clusterCIDR.placeholder"
+              :mode="mode"
+              @update:value="e=>$emit('update:clusterCIDR', e)"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col span-6">
+            <LabeledInput
+              :value="serviceCIDR"
+              label-key="k3k.serviceCIDR.label"
+              placeholder-key="k3k.serviceCIDR.placeholder"
+              :mode="mode"
+              @update:value="e=>$emit('update:serviceCIDR', e)"
+            />
+          </div>
+          <div class="col span-6 centered">
+            <t
+              k="k3k.serviceCIDR.tooltip"
+              class="text-label"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col span-6">
+            <LabeledInput
+              :value="clusterDNS"
+              label-key="k3k.clusterDNS.label"
+              placeholder-key="k3k.clusterDNS.placeholder"
+              :mode="mode"
+              @update:value="e=>$emit('update:clusterDNS', e)"
+            />
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="row mb-20">
-      <div class="col span-6">
-        <LabeledInput
-          :value="serviceCIDR"
-          label-key="k3k.serviceCIDR.label"
-          placeholder-key="k3k.serviceCIDR.placeholder"
-          :mode="mode"
-          @update:value="e=>$emit('update:serviceCIDR', e)"
-        />
+    </RcSection>
+
+    <RcSection
+      type="secondary"
+      mode="with-header"
+      :expandable="true"
+      :expanded="true"
+      :title="t('k3k.tlsSANs.label')"
+    >
+      <div class="row">
+        <div class="col span-6">
+          <ArrayList
+            :value="tlsSANs"
+            :protip="false"
+            :mode="mode"
+            :initial-empty-row="true"
+            :rules="rules.tlsSANs || []"
+            :required="rules.tlsSANs && rules.tlsSANs.length"
+            @update:value="e=>$emit('update:tlsSANs', e)"
+          />
+        </div>
       </div>
-      <div class="col span-6 centered">
-        <t
-          k="k3k.serviceCIDR.tooltip"
-          class="text-label"
-        />
-      </div>
-    </div>
-    <div class="row mb-20">
-      <div class="col span-6">
-        <LabeledInput
-          :value="clusterDNS"
-          label-key="k3k.clusterDNS.label"
-          placeholder-key="k3k.clusterDNS.placeholder"
-          :mode="mode"
-          @update:value="e=>$emit('update:clusterDNS', e)"
-        />
-      </div>
-    </div>
-    <div class="row mb-20">
-      <div class="col span-6">
-        <ArrayList
-          :value="tlsSANs"
-          :protip="false"
-          :mode="mode"
-          :initial-empty-row="true"
-          :title="t('k3k.tlsSANs.label')"
-          :rules="rules.tlsSANs || []"
-          :required="rules.tlsSANs && rules.tlsSANs.length"
-          @update:value="e=>$emit('update:tlsSANs', e)"
-        />
-      </div>
-    </div>
+    </RcSection>
 
     <!-- EXPOSE -->
-    <div class="mb-20">
-      <h3>{{ t('k3k.expose.label') }}</h3>
-      <t
-        class="text-label"
-        raw
-        k="k3k.expose.description"
-      />
-    </div>
-    <div class="row mb-5">
-      <div class="col span-12">
-        <RadioButton
-          v-model:value="exposeMode"
-          :val="exposeModes.NONE"
-        >
-          <template #label>
-            <h3>
-              {{ t('k3k.expose.notExposed.label') }}
-            </h3>
-          </template>
-        </RadioButton>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col span-12">
-        <RadioButton
-          v-model:value="exposeMode"
-          :val="exposeModes.INGRESS"
-        >
-          <template #label>
-            <h3>
-              {{ t('k3k.expose.ingress.label') }}
-            </h3>
-          </template>
-        </RadioButton>
-      </div>
-    </div>
-    <div
-      v-if="expose.ingress"
-      class="row mb-20 radio-sub-row"
+    <RcSection
+      type="secondary"
+      mode="with-header"
+      :expandable="true"
+      :expanded="true"
+      :title="t('k3k.expose.label')"
     >
-      <div class="col span-6">
-        <LabeledInput
-          v-model:value="expose.ingress.ingressClassName"
-          label-key="k3k.expose.ingress.ingressClassName.label"
-          :mode="mode"
-        />
-      </div>
-      <div class="col span-6 centered">
+      <div class="gap-md">
         <t
-          k="k3k.expose.ingress.ingressClassName.description"
           class="text-label"
           raw
+          k="k3k.expose.description"
         />
-      </div>
-    </div>
-    <div
-      v-if="expose.ingress"
-      class="row mb-20 radio-sub-row"
-    >
-      <div class="col span-12">
-        <KeyValue
-          v-model:value="expose.ingress.annotations"
-          :mode="mode"
-          :add-label="t('k3k.expose.ingress.annotations.add')"
-          :read-allowed="false"
-        >
-          <template #title>
-            <h3 class="mb-0">
-              {{ t('k3k.expose.ingress.annotations.label') }}
-            </h3>
-          </template>
-        </KeyValue>
-      </div>
-    </div>
+        <div class="row mb-5">
+          <div class="col span-12">
+            <RadioButton
+              v-model:value="exposeMode"
+              :val="exposeModes.NONE"
+            >
+              <template #label>
+                <h3>
+                  {{ t('k3k.expose.notExposed.label') }}
+                </h3>
+              </template>
+            </RadioButton>
+          </div>
+        </div>
 
-    <div class="row mb-5">
-      <div class="col span-12">
-        <RadioButton
-          v-model:value="exposeMode"
-          :label="t('k3k.expose.loadbalancer.label')"
-          :val="exposeModes.LOAD_BALANCER"
+        <div class="row">
+          <div class="col span-12">
+            <RadioButton
+              v-model:value="exposeMode"
+              :val="exposeModes.INGRESS"
+            >
+              <template #label>
+                <h3>
+                  {{ t('k3k.expose.ingress.label') }}
+                </h3>
+              </template>
+            </RadioButton>
+          </div>
+        </div>
+        <div
+          v-if="expose.ingress"
         >
-          <template #label>
-            <h3 class="mb-5">
-              {{ t('k3k.expose.loadbalancer.label') }}
-            </h3>
-            <t
-              class="text-label"
-              raw
-              k="k3k.expose.loadbalancer.description"
-            />
-          </template>
-        </RadioButton>
-      </div>
-    </div>
-    <div
-      v-if="expose.loadbalancer"
-      class="row mb-20 radio-sub-row"
-    >
-      <div class="col span-6">
-        <LabeledInput
-          v-model:value.number="expose.loadbalancer.serverPort"
-          type="number"
-          label-key="k3k.expose.loadbalancer.serverPort.label"
-          :placeholder="t('k3k.expose.loadbalancer.serverPort.placeholder')"
-          :mode="mode"
-        />
-      </div>
-      <div class="col span-6">
-        <LabeledInput
-          v-model:value.number="expose.loadbalancer.etcdPort"
-          type="number"
-          label-key="k3k.expose.loadbalancer.etcdPort.label"
-          :placeholder="t('k3k.expose.loadbalancer.etcdPort.placeholder')"
-          :mode="mode"
-        />
-      </div>
-    </div>
+          <RcSection
+            type="secondary"
+            mode="no-header"
+            :title="t('k3k.expose.ingress.label')"
+          >
+            <div class="gap-md">
+              <div class="row">
+                <div class="col span-6">
+                  <LabeledInput
+                    v-model:value="expose.ingress.ingressClassName"
+                    label-key="k3k.expose.ingress.ingressClassName.label"
+                    :mode="mode"
+                  />
+                </div>
+                <div class="col span-6 centered">
+                  <t
+                    k="k3k.expose.ingress.ingressClassName.description"
+                    class="text-label"
+                    raw
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col span-12">
+                  <KeyValue
+                    v-model:value="expose.ingress.annotations"
+                    :mode="mode"
+                    :add-label="t('k3k.expose.ingress.annotations.add')"
+                    :read-allowed="false"
+                  >
+                    <template #title>
+                      <h3 class="mb-0">
+                        {{ t('k3k.expose.ingress.annotations.label') }}
+                      </h3>
+                    </template>
+                  </KeyValue>
+                </div>
+              </div>
+            </div>
+          </RcSection>
+        </div>
 
-    <div class="row mb-5">
-      <div class="col span-12">
-        <RadioButton
-          v-model:value="exposeMode"
-          :label="t('k3k.expose.nodePort.label')"
-          :val="exposeModes.NODE_PORT"
+        <div class="row mb-5">
+          <div class="col span-12">
+            <RadioButton
+              v-model:value="exposeMode"
+              :label="t('k3k.expose.loadbalancer.label')"
+              :val="exposeModes.LOAD_BALANCER"
+            >
+              <template #label>
+                <h3 class="mb-5">
+                  {{ t('k3k.expose.loadbalancer.label') }}
+                </h3>
+                <t
+                  class="text-label"
+                  raw
+                  k="k3k.expose.loadbalancer.description"
+                />
+              </template>
+            </RadioButton>
+          </div>
+        </div>
+        <div
+          v-if="expose.loadbalancer"
         >
-          <template #label>
-            <h3 class="mb-5">
-              {{ t('k3k.expose.nodePort.label') }}
-            </h3>
-            <t
-              class="text-label"
-              raw
-              k="k3k.expose.nodePort.description"
-            />
-          </template>
-        </RadioButton>
+          <RcSection
+            type="secondary"
+            mode="no-header"
+            :title="t('k3k.expose.loadbalancer.label')"
+          >
+            <div class="row">
+              <div class="col span-6">
+                <LabeledInput
+                  v-model:value.number="expose.loadbalancer.serverPort"
+                  type="number"
+                  label-key="k3k.expose.loadbalancer.serverPort.label"
+                  :placeholder="t('k3k.expose.loadbalancer.serverPort.placeholder')"
+                  :mode="mode"
+                />
+              </div>
+              <div class="col span-6">
+                <LabeledInput
+                  v-model:value.number="expose.loadbalancer.etcdPort"
+                  type="number"
+                  label-key="k3k.expose.loadbalancer.etcdPort.label"
+                  :placeholder="t('k3k.expose.loadbalancer.etcdPort.placeholder')"
+                  :mode="mode"
+                />
+              </div>
+            </div>
+          </RcSection>
+        </div>
+
+        <div class="row mb-5">
+          <div class="col span-12">
+            <RadioButton
+              v-model:value="exposeMode"
+              :label="t('k3k.expose.nodePort.label')"
+              :val="exposeModes.NODE_PORT"
+            >
+              <template #label>
+                <h3 class="mb-5">
+                  {{ t('k3k.expose.nodePort.label') }}
+                </h3>
+                <t
+                  class="text-label"
+                  raw
+                  k="k3k.expose.nodePort.description"
+                />
+              </template>
+            </RadioButton>
+          </div>
+        </div>
+        <div
+          v-if="expose.nodePort"
+        >
+          <RcSection
+            type="secondary"
+            mode="no-header"
+            :title="t('k3k.expose.nodePort.label')"
+          >
+            <div class="row">
+              <div class="col span-6">
+                <LabeledInput
+                  v-model:value.number="expose.nodePort.serverPort"
+                  type="number"
+                  label-key="k3k.expose.loadbalancer.serverPort.label"
+                  :placeholder="t('k3k.expose.nodePort.serverPort.placeholder')"
+                  :mode="mode"
+                />
+              </div>
+              <div class="col span-6">
+                <LabeledInput
+                  v-model:value.number="expose.nodePort.etcdPort"
+                  type="number"
+                  label-key="k3k.expose.loadbalancer.etcdPort.label"
+                  :placeholder="t('k3k.expose.nodePort.serverPort.placeholder')"
+                  :mode="mode"
+                />
+              </div>
+            </div>
+          </RcSection>
+        </div>
       </div>
-    </div>
-    <div
-      v-if="expose.nodePort"
-      class="row mb-20 radio-sub-row"
-    >
-      <div class="col span-6">
-        <LabeledInput
-          v-model:value.number="expose.nodePort.serverPort"
-          type="number"
-          label-key="k3k.expose.loadbalancer.serverPort.label"
-          :placeholder="t('k3k.expose.nodePort.serverPort.placeholder')"
-          :mode="mode"
-        />
-      </div>
-      <div class="col span-6">
-        <LabeledInput
-          v-model:value.number="expose.nodePort.etcdPort"
-          type="number"
-          label-key="k3k.expose.loadbalancer.etcdPort.label"
-          :placeholder="t('k3k.expose.nodePort.serverPort.placeholder')"
-          :mode="mode"
-        />
-      </div>
-    </div>
+    </RcSection>
   </div>
 </template>
-
-<style lang="scss" scoped>
-// this is the width of the radio circle + margin between radio and its label
-.radio-sub-row{
-  margin-left: 19px;
-}
-</style>
