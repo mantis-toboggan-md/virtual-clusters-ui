@@ -155,23 +155,22 @@ export default {
       color="error"
       :label="storageClassErrors.join('. ')"
     />
-      <div class="span-6">
-            <t
-          class="text-label centered"
-          raw
-          k="k3k.storage.storageClass.description"
-        />
-        <LabeledSelect
-          :disabled="storageClassOptions.length === 1"
-          :value="storageClassName || t('k3k.storage.noneOption')"
-          :loading="loadingStorageClasses"
-          :mode="mode"
-          label-key="k3k.storage.storageClass.label"
-          :options="storageClassOptions"
-          @update:value="updateStorageClass"
-        />
-
-      </div>
+    <div class="span-6">
+      <t
+        class="text-label centered"
+        raw
+        k="k3k.storage.storageClass.description"
+      />
+      <LabeledSelect
+        :disabled="storageClassOptions.length === 1"
+        :value="storageClassName || t('k3k.storage.noneOption')"
+        :loading="loadingStorageClasses"
+        :mode="mode"
+        label-key="k3k.storage.storageClass.label"
+        :options="storageClassOptions"
+        @update:value="updateStorageClass"
+      />
+    </div>
     <div
       v-if="storageClassName"
       class=""
