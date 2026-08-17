@@ -5,28 +5,31 @@ import { QUOTA_COMPUTED } from '@rancher/shell/components/form/ResourceQuota/sha
 import { GENERIC_QUOTA_TYPES } from '../../utils/quota.js';
 
 export default {
-  emits: ['remove', 'update:value'],
+  'emits': ['remove', 'update:value'],
 
-  name: 'VirtualClusterQuota',
+  'name': 'VirtualClusterQuota',
 
-  components: { ArrayList, Row },
+  'components': {
+    ArrayList,
+    Row
+  },
 
-  props: {
-    mode: {
-      type:     String,
-      required: true,
+  'props': {
+    'mode': {
+      'type':     String,
+      'required': true,
     },
 
-    value: {
-      type:    Object,
-      default: () => {
+    'value': {
+      'type':    Object,
+      'default': () => {
         return {};
       }
     }
   },
 
   data() {
-    return { typeValues: [] };
+    return { 'typeValues': [] };
   },
 
   created() {
@@ -34,7 +37,7 @@ export default {
       .filter((type) => !!this.typeOption(type));
   },
 
-  computed: {
+  'computed': {
     ...QUOTA_COMPUTED,
 
     types() {
@@ -42,7 +45,7 @@ export default {
     },
   },
 
-  methods: {
+  'methods': {
     updateType(i, type) {
       this.typeValues[i] = type;
       this.$emit('update:value', this.value);

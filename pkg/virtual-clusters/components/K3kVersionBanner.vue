@@ -5,7 +5,7 @@ import { Banner } from '@rancher/components';
 import { verifyK3kVersionMatches } from '../utils/k3kInstalled';
 import type { ParentClusterType } from '../types/k3k';
 
-const props = withDefaults(defineProps<{ parentCluster?: ParentClusterType }>(), { parentCluster: null });
+const props = withDefaults(defineProps<{ parentCluster?: ParentClusterType }>(), { 'parentCluster': null });
 
 const store = useStore();
 const showK3kVersionBanner = ref(false);
@@ -39,7 +39,7 @@ watch(targetMgmtId, async(neu) => {
   const versionsMatch = await verifyK3kVersionMatches(store, neu);
 
   showK3kVersionBanner.value = versionsMatch === false;
-}, { immediate: true });
+}, { 'immediate': true });
 </script>
 
 <template>

@@ -14,19 +14,19 @@ import { RcButton } from '@components/RcButton';
 import { useI18n } from '@shell/composables/useI18n';
 
 const props = defineProps({
-  mode: {
-    type:    String,
-    default: _CREATE
+  'mode': {
+    'type':    String,
+    'default': _CREATE
   },
 
-  enabled: {
-    type:    Boolean,
-    default: false
+  'enabled': {
+    'type':    Boolean,
+    'default': false
   },
 
-  selector: {
-    type:    Object,
-    default: undefined
+  'selector': {
+    'type':    Object,
+    'default': undefined
   },
 
   /**
@@ -34,9 +34,9 @@ const props = defineProps({
    * Resource Drawer (e.g. policy form during cluster creation) where `currentCluster`
    * is not set in the store. Mirrors the pattern used by K3kVersionBanner.
    */
-  parentCluster: {
-    type:    Object,
-    default: null
+  'parentCluster': {
+    'type':    Object,
+    'default': null
   }
 });
 
@@ -60,22 +60,22 @@ const hasClusterStoreContext = computed(() => !!store.getters.currentCluster);
 const isView = computed(() => props.mode === _VIEW);
 
 const storageClassEnabled = computed({
-  get: () => props.enabled,
-  set: (neu) => {
+  'get': () => props.enabled,
+  'set': (neu) => {
     emit('update:enabled', neu);
   }
 });
 
 const storageClassSelector = computed({
-  get: () => props.selector || {},
-  set: (neu) => {
+  'get': () => props.selector || {},
+  'set': (neu) => {
     emit('update:selector', neu);
   }
 });
 
 const useStorageClassSelector = computed({
-  get: () => !!props.selector,
-  set: (neu) => {
+  'get': () => !!props.selector,
+  'set': (neu) => {
     if (neu) {
       emit('update:selector', props.selector || {});
     } else {
@@ -86,12 +86,12 @@ const useStorageClassSelector = computed({
 
 const storageClassSelectorOptions = [
   {
-    labelKey: 'k3k.policy.synchronization.storageClass.allStorageClasses',
-    value:    false
+    'labelKey': 'k3k.policy.synchronization.storageClass.allStorageClasses',
+    'value':    false
   },
   {
-    labelKey: 'k3k.policy.synchronization.storageClass.manuallySelectStorageClasses',
-    value:    true
+    'labelKey': 'k3k.policy.synchronization.storageClass.manuallySelectStorageClasses',
+    'value':    true
   }
 ];
 
@@ -126,10 +126,10 @@ const updateMatchingResources = debounce(async() => {
       // Normal page navigation: the `cluster` store is initialised and handles
       // both pagination modes (VAI / legacy) transparently.
       const res = await matching({
-        labelSelector: { matchLabels: storageClassSelector.value },
-        type:          STORAGE_CLASS,
-        inStore:       'cluster',
-        $store:        store,
+        'labelSelector': { 'matchLabels': storageClassSelector.value },
+        'type':          STORAGE_CLASS,
+        'inStore':       'cluster',
+        '$store':        store,
       });
 
       targetedStorageClasses.value = res?.matches || [];
@@ -143,11 +143,14 @@ const updateMatchingResources = debounce(async() => {
 
       const res = await store.dispatch('management/request', {
         url,
-        method: 'GET',
+        'method': 'GET',
       });
 
       targetedStorageClasses.value = await Promise.all(
-        (res.data || []).map((item) => store.dispatch('management/create', { ...item, type: STORAGE_CLASS }))
+        (res.data || []).map((item) => store.dispatch('management/create', {
+          ...item,
+          'type': STORAGE_CLASS
+        }))
       );
     }
   } catch (err) {
@@ -169,8 +172,8 @@ const fetchTotalStorageClassCount = async() => {
 
   try {
     const count = await store.dispatch('management/request', {
-      url:    `/k8s/clusters/${ targetMgmtId.value }/v1/counts/count`,
-      method: 'GET',
+      'url':    `/k8s/clusters/${ targetMgmtId.value }/v1/counts/count`,
+      'method': 'GET',
     });
 
     totalStorageClassCount.value = count?.counts?.[STORAGE_CLASS]?.summary?.count || 0;
@@ -183,13 +186,13 @@ watch(useStorageClassSelector, (neu) => {
   if (neu) {
     fetchTotalStorageClassCount();
   }
-}, { immediate: true });
+}, { 'immediate': true });
 
 watch(storageClassSelector, (neu) => {
   if (neu && Object.keys(neu).length > 0) {
     updateMatchingResources();
   }
-}, { immediate: true });
+}, { 'immediate': true });
 
 </script>
 

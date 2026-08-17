@@ -1,5 +1,5 @@
 <script>
-export default { name: 'SyncNotAllowed' };
+export default { 'name': 'SyncNotAllowed' };
 </script>
 
 <template>

@@ -21,18 +21,18 @@ import { PARENT_CLUSTER } from '../labels-annotations';
 const DOWNLOAD_MAX_RETRIES = 10;
 const RETRY_WAIT = 1000;
 const K3K_VALUES = {
-  agent: {
-    shared: {
-      image: {
-        registry:   'registry.suse.com',
-        repository: 'rancher/appco-k3k-kubelet'
+  'agent': {
+    'shared': {
+      'image': {
+        'registry':   'registry.suse.com',
+        'repository': 'rancher/appco-k3k-kubelet'
       }
     }
   },
-  controller: {
-    image: {
-      registry:   'registry.suse.com',
-      repository: 'rancher/appco-k3k'
+  'controller': {
+    'image': {
+      'registry':   'registry.suse.com',
+      'repository': 'rancher/appco-k3k'
     }
   }
 };
@@ -40,51 +40,54 @@ const K3K_VALUES = {
 const INCLUDE_LOCAL = process.env.dev;
 
 export default {
-  name: 'K3kHostClusterAndInstallk3k',
+  'name': 'K3kHostClusterAndInstallk3k',
 
-  emits: ['update:parentCluster', 'update:k3kInstalled', 'error'],
+  'emits': ['update:parentCluster', 'update:k3kInstalled', 'error'],
 
-  components: { LabeledSelect, AsyncButton },
+  'components': {
+    LabeledSelect,
+    AsyncButton
+  },
 
-  props: {
+  'props': {
     // parent cluster's prov cluster
-    parentCluster: {
-      type:    Object,
-      default: () => {
+    'parentCluster': {
+      'type':    Object,
+      'default': () => {
         return {};
       }
     },
 
     // display-only fallback for edit/view mode if the current user can't fetch the parent prov cluster
-    parentClusterDisplayAnnotation: {
-      type:    String,
-      default: ''
+    'parentClusterDisplayAnnotation': {
+      'type':    String,
+      'default': ''
     },
 
-    mode: {
-      type:    String,
-      default: _CREATE
+    'mode': {
+      'type':    String,
+      'default': _CREATE
     },
 
     // Array of all provisioning clusters
-    clusters: {
-      type:    Array,
-      default: () => []
+    'clusters': {
+      'type':    Array,
+      'default': () => []
     },
 
-    k3kInstalled: {
-      type:    Boolean,
-      default: false
+    'k3kInstalled': {
+      'type':    Boolean,
+      'default': false
     },
 
-    showButtonOnly: {
-      type:    Boolean,
-      default: false
+    'showButtonOnly': {
+      'type':    Boolean,
+      'default': false
     },
 
-    rules: {
-      type:    Object,
-      default: () => {
+    'rules': {
+      'type':    Object,
+      'default': () => {
         return {};
       }
     }
@@ -101,26 +104,26 @@ export default {
     // track if k3k chart is present in the currently selected host cluster AND
     // track if the user installed k3k while viewing this page
     return {
-      didInstallK3k:           false,
-      localParentCluster:      this.parentCluster,
-      allParentClusterOptions: [],
-      loadingClusters:         false,
+      'didInstallK3k':           false,
+      'localParentCluster':      this.parentCluster,
+      'allParentClusterOptions': [],
+      'loadingClusters':         false,
     };
   },
 
-  watch: {
-    parentClusterOptions: {
+  'watch': {
+    'parentClusterOptions': {
       handler(neu = []) {
         if (!this.parentCluster?.id && neu.length === 1) {
           this.selectedParentOption = neu[0].value;
         }
       },
-      immediate: true
+      'immediate': true
     },
   },
 
-  computed: {
-    ...mapGetters({ t: 'i18n/withFallback' }),
+  'computed': {
+    ...mapGetters({ 't': 'i18n/withFallback' }),
 
     isCreate() {
       return this.mode === _CREATE;
@@ -142,7 +145,7 @@ export default {
       return sortBy(out, 'label');
     },
 
-    selectedParentOption: {
+    'selectedParentOption': {
       // building parentClusterOptions is only done on create because it requires multiple api calls per cluster
       // on edit/view, just show the parent cluster display name
       get() {
@@ -164,7 +167,7 @@ export default {
     }
   },
 
-  methods: {
+  'methods': {
     isEmpty,
 
     getClusterDisplayName(provCluster) {
@@ -188,11 +191,11 @@ export default {
         ]) : [false, false, false];
 
         out.push({
-          isVirtual:            !!pCluster.metadata?.annotations?.[PARENT_CLUSTER],
-          isLocal:              pCluster.name === 'local',
-          isReady:              mgmt.isReady,
-          label:                this.getClusterDisplayName(pCluster),
-          value:                pCluster,
+          'isVirtual':            !!pCluster.metadata?.annotations?.[PARENT_CLUSTER],
+          'isLocal':              pCluster.name === 'local',
+          'isReady':              mgmt.isReady,
+          'label':                this.getClusterDisplayName(pCluster),
+          'value':                pCluster,
           k3kInstalled,
           canInstallK3k,
           canCreateK3kClusters,
@@ -225,10 +228,13 @@ export default {
       this.$emit('error', false);
 
       const repo = {
-        apiVersion: 'catalog.cattle.io/v1',
-        kind:       'ClusterRepo',
-        metadata:   { name: K3K_REPO_NAME },
-        spec:       { url: K3K_REPO_URL, insecurePlainHttp: false }
+        'apiVersion': 'catalog.cattle.io/v1',
+        'kind':       'ClusterRepo',
+        'metadata':   { 'name': K3K_REPO_NAME },
+        'spec':       {
+          'url':               K3K_REPO_URL,
+          'insecurePlainHttp': false
+        }
       };
 
       const cluster = this.parentCluster;
@@ -244,7 +250,7 @@ export default {
         // create k3k repo crd
         const repoYaml = saferDump(repo);
 
-        await normanCluster.doAction('importYaml', { yaml: repoYaml });
+        await normanCluster.doAction('importYaml', { 'yaml': repoYaml });
 
         // wait for the repo to be downloaded
         let fetched = false;
@@ -254,8 +260,8 @@ export default {
 
         while (!fetched) {
           k3kRepo = await this.$store.dispatch('management/request', {
-            url:    k3kRepoUrl,
-            method: 'GET',
+            'url':    k3kRepoUrl,
+            'method': 'GET',
           });
           const downloadedCondition = k3kRepo.status.conditions.find((s) => s.type === 'OCIDownloaded');
 
@@ -265,8 +271,8 @@ export default {
             // get the latest version of the chart
             const indexUrl = k3kRepo?.links?.index;
             const repoReq = await this.$store.dispatch('management/request', {
-              url:    `${ indexUrl }`,
-              method: 'GET',
+              'url':    `${ indexUrl }`,
+              'method': 'GET',
             });
 
             if (repoReq?.entries?.[K3K_CHART_NAME] && repoReq?.entries?.[K3K_CHART_NAME].length) {
@@ -291,24 +297,24 @@ export default {
 
         // install k3k chart
         const installRequest = {
-          charts: [
+          'charts': [
             {
-              annotations: {
+              'annotations': {
                 'catalog.cattle.io/ui-source-repo':      K3K_REPO_NAME,
                 'catalog.cattle.io/ui-source-repo-type': 'cluster'
               },
-              chartName:   K3K_CHART_NAME,
-              releaseName: K3K_CHART_NAME,
-              version:     latestK3kChartVersion || '1.0.0',
-              values:      K3K_VALUES
+              'chartName':   K3K_CHART_NAME,
+              'releaseName': K3K_CHART_NAME,
+              'version':     latestK3kChartVersion || '1.0.0',
+              'values':      K3K_VALUES
             }
           ],
-          disableOpenAPIValidation: false,
-          namespace:                K3K_CHART_NAMESPACE,
-          noHooks:                  false,
-          skipCRDs:                 false,
-          timeout:                  '600s',
-          wait:                     true
+          'disableOpenAPIValidation': false,
+          'namespace':                K3K_CHART_NAMESPACE,
+          'noHooks':                  false,
+          'skipCRDs':                 false,
+          'timeout':                  '600s',
+          'wait':                     true
         };
 
         let installTries = 0;
@@ -318,9 +324,9 @@ export default {
           installTries++;
           try {
             const res = await this.$store.dispatch('management/request', {
-              url:    `${ k3kRepoUrl }?action=install`,
-              method: 'POST',
-              data:   installRequest
+              'url':    `${ k3kRepoUrl }?action=install`,
+              'method': 'POST',
+              'data':   installRequest
             });
 
             if (res._status === 201) {

@@ -1,25 +1,28 @@
 module.exports = {
-  root:          true,
-  parser:        'vue-eslint-parser',
-  parserOptions: {
-    parser:              '@typescript-eslint/parser',
-    ecmaVersion:         'latest',
-    sourceType:          'module',
-    extraFileExtensions: ['.vue']
+  'root':          true,
+  'parser':        'vue-eslint-parser',
+  'parserOptions': {
+    'parser':              '@typescript-eslint/parser',
+    'ecmaVersion':         'latest',
+    'sourceType':          'module',
+    'extraFileExtensions': ['.vue']
   },
-  env:  {
-    browser: true,
-    node:    true
+  'env':  {
+    'browser': true,
+    'node':    true
   },
-  globals: { NodeJS: true, Timer: true },
-  extends: [
+  'globals': {
+    'NodeJS': true,
+    'Timer':    true
+  },
+  'extends': [
     'standard',
     'eslint:recommended',
     'plugin:cypress/recommended',
     'plugin:vue/vue3-recommended',
   ],
   // add your custom rules here
-  rules: {
+  'rules': {
     'dot-notation':                  'off',
     'generator-star-spacing':        'off',
     'guard-for-in':                  'off',
@@ -33,7 +36,7 @@ module.exports = {
     'nuxt/no-cjs-in-config':         'off',
     'semi-spacing':                  'off',
     'space-in-parens':               'off',
-    strict:                          'off',
+    'strict':                          'off',
     'unicorn/no-new-buffer':         'off',
     'vue/html-self-closing':         'off',
     'vue/no-unused-components':      'warn',
@@ -42,20 +45,23 @@ module.exports = {
     'vue/no-v-for-template-key':     'off',
     'array-bracket-spacing':             'warn',
     'arrow-parens':                      'warn',
-    'arrow-spacing':                     ['warn', { before: true, after: true }],
+    'arrow-spacing':                     ['warn', {
+      'before': true,
+      'after':    true
+    }],
     'block-spacing':                     ['warn', 'always'],
     'brace-style':                       ['warn', '1tbs'],
     'comma-dangle':                      ['warn', 'only-multiline'],
     'comma-spacing':                     'warn',
-    curly:                               'warn',
-    eqeqeq:                              'warn',
+    'curly':                               'warn',
+    'eqeqeq':                              'warn',
     'func-call-spacing':                 ['warn', 'never'],
     'implicit-arrow-linebreak':          'warn',
-    indent:                              ['warn', 2],
+    'indent':                              ['warn', 2],
     'keyword-spacing':                   'warn',
-    'lines-between-class-members':       ['warn', 'always', { exceptAfterSingleLine: true }],
+    'lines-between-class-members':       ['warn', 'always', { 'exceptAfterSingleLine': true }],
     'multiline-ternary':                 ['warn', 'never'],
-    'newline-per-chained-call':          ['warn', { ignoreChainWithDepth: 4 }],
+    'newline-per-chained-call':          ['warn', { 'ignoreChainWithDepth': 4 }],
     'no-caller':                         'warn',
     'no-cond-assign':                    ['warn', 'except-parens'],
     'no-console':                        'warn',
@@ -74,7 +80,7 @@ module.exports = {
     'prefer-template':                   'warn',
     'quote-props':                       'warn',
     'rest-spread-spacing':               'warn',
-    semi:                                ['warn', 'always'],
+    'semi':                                ['warn', 'always'],
     'space-before-function-paren':       ['warn', 'never'],
     'space-infix-ops':                   'warn',
     'spaced-comment':                    'warn',
@@ -83,76 +89,76 @@ module.exports = {
     'yield-star-spacing':                ['warn', 'both'],
 
     'key-spacing':              ['warn', {
-      align: {
-        beforeColon: false,
-        afterColon:  true,
-        on:          'value',
-        mode:        'minimum'
+      'align': {
+        'beforeColon': false,
+        'afterColon':  true,
+        'on':          'value',
+        'mode':        'minimum'
       },
-      multiLine: {
-        beforeColon: false,
-        afterColon:  true
+      'multiLine': {
+        'beforeColon': false,
+        'afterColon':  true
       },
     }],
 
     'object-curly-newline':          ['warn', {
-      ObjectExpression:  {
-        multiline:     true,
-        minProperties: 3
+      'ObjectExpression':  {
+        'multiline':     true,
+        'minProperties': 3
       },
-      ObjectPattern:     {
-        multiline:     true,
-        minProperties: 4
+      'ObjectPattern':     {
+        'multiline':     true,
+        'minProperties': 4
       },
-      ImportDeclaration: {
-        multiline:     true,
-        minProperties: 5
+      'ImportDeclaration': {
+        'multiline':     true,
+        'minProperties': 5
       },
-      ExportDeclaration: {
-        multiline:     true,
-        minProperties: 3
+      'ExportDeclaration': {
+        'multiline':     true,
+        'minProperties': 3
       }
     }],
 
     'padding-line-between-statements': [
       'warn',
       {
-        blankLine: 'always',
-        prev:      '*',
-        next:      'return',
+        'blankLine': 'always',
+        'prev':      '*',
+        'next':      'return',
       },
       {
-        blankLine: 'always',
-        prev:      'function',
-        next:      'function',
+        'blankLine': 'always',
+        'prev':      'function',
+        'next':      'function',
       },
       // This configuration would require blank lines after every sequence of variable declarations
       {
-        blankLine: 'always',
-        prev:      ['const', 'let', 'var'],
-        next:      '*'
+        'blankLine': 'always',
+        'prev':      ['const', 'let', 'var'],
+        'next':      '*'
       },
       {
-        blankLine: 'any',
-        prev:      ['const', 'let', 'var'],
-        next:      ['const', 'let', 'var']
+        'blankLine': 'any',
+        'prev':      ['const', 'let', 'var'],
+        'next':      ['const', 'let', 'var']
       }
     ],
 
-    quotes: [
+    'quotes': [
       'warn',
       'single',
       {
-        avoidEscape:           true,
-        allowTemplateLiterals: true
+        'avoidEscape':           true,
+        'allowTemplateLiterals': true
       },
     ],
 
     'space-unary-ops': [
       'warn',
       {
-        words:    true,
-        nonwords: false,
+        'words':    true,
+        'nonwords': false,
       }
     ],
 
@@ -165,10 +171,10 @@ module.exports = {
     '@typescript-eslint/no-unused-vars':    'off',
     'array-callback-return':                'off',
   },
-  overrides: [
+  'overrides': [
     {
-      files: ['*.js'],
-      rules: {
+      'files': ['*.js'],
+      'rules': {
         // FIXME: The following is disabled due to new linter and old JS code. These should all be enabled and underlying issues fixed
         'prefer-regex-literals':                'off',
         'vue/component-definition-name-casing': 'off',

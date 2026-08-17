@@ -5,50 +5,53 @@ import StorageClasses from './StorageClasses.vue';
 
 // in the cluster context storage class sync cannot be configured
 export const SYNC_CONTEXT = {
-  cluster: 'cluster',
-  policy:  'policy'
+  'cluster': 'cluster',
+  'policy':  'policy'
 };
 
 export default {
-  name: 'K3kResourceSync',
+  'name': 'K3kResourceSync',
 
-  emits: ['update:ingresses', 'update:priorityClasses', 'update:storageClasses', 'error'],
+  'emits': ['update:ingresses', 'update:priorityClasses', 'update:storageClasses', 'error'],
 
-  components: { Checkbox, StorageClasses },
+  'components': {
+    Checkbox,
+    StorageClasses
+  },
 
-  props: {
-    mode: {
-      type:    String,
-      default: _CREATE
+  'props': {
+    'mode': {
+      'type':    String,
+      'default': _CREATE
     },
 
-    ingresses: {
-      type:    Object,
-      default: () => ({})
+    'ingresses': {
+      'type':    Object,
+      'default': () => ({})
     },
 
-    priorityClasses: {
-      type:    Object,
-      default: () => ({})
+    'priorityClasses': {
+      'type':    Object,
+      'default': () => ({})
     },
 
-    storageClasses: {
-      type:    Object,
-      default: () => ({})
+    'storageClasses': {
+      'type':    Object,
+      'default': () => ({})
     },
 
-    context: {
-      type:    String, // "cluster" or "policy"
-      default: SYNC_CONTEXT.policy
+    'context': {
+      'type':    String, // "cluster" or "policy"
+      'default': SYNC_CONTEXT.policy
     },
 
-    parentCluster: {
-      type:    Object,
-      default: null
+    'parentCluster': {
+      'type':    Object,
+      'default': null
     }
   },
 
-  computed: {
+  'computed': {
     isView() {
       return this.mode === _VIEW;
     },
@@ -57,21 +60,27 @@ export default {
       return this.context === SYNC_CONTEXT.policy;
     },
 
-    ingressesEnabled: {
+    'ingressesEnabled': {
       get() {
         return this.ingresses?.enabled || false;
       },
       set(neu) {
-        this.$emit('update:ingresses', { ...this.ingresses, enabled: neu });
+        this.$emit('update:ingresses', {
+          ...this.ingresses,
+          'enabled': neu
+        });
       }
     },
 
-    priorityClassesEnabled: {
+    'priorityClassesEnabled': {
       get() {
         return this.priorityClasses?.enabled || false;
       },
       set(neu) {
-        this.$emit('update:priorityClasses', { ...this.priorityClasses, enabled: neu });
+        this.$emit('update:priorityClasses', {
+          ...this.priorityClasses,
+          'enabled': neu
+        });
       }
     },
 

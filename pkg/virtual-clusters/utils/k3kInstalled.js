@@ -17,12 +17,12 @@ export const K3K_REPO_URL = 'oci://registry.suse.com/rancher/charts/appco-suse-v
 export const verifyK3kIsInstalled = async(store, mgmtId) => {
   try {
     const count = await store.dispatch('management/request', {
-      url:    `/k8s/clusters/${ mgmtId }/v1/counts/count`,
-      method: 'GET',
+      'url':    `/k8s/clusters/${ mgmtId }/v1/counts/count`,
+      'method': 'GET',
     });
 
     return !!count?.counts?.[CATALOG.APP]?.namespaces?.[K3K_CHART_NAMESPACE]?.count;
-  } catch (err) {
+  } catch {
     return false;
   }
 };
@@ -38,8 +38,8 @@ export const verifyK3kIsInstalled = async(store, mgmtId) => {
 export const verifyUserCanInstallK3k = async(store, mgmtId) => {
   try {
     const nsSchema = await store.dispatch('management/request', {
-      url:    `/k8s/clusters/${ mgmtId }/v1/schemas/${ NAMESPACE }`,
-      method: 'GET',
+      'url':    `/k8s/clusters/${ mgmtId }/v1/schemas/${ NAMESPACE }`,
+      'method': 'GET',
     });
 
     const canCreateNS = nsSchema?.collectionMethods.find((x) => x.toLowerCase() === 'post');
@@ -49,8 +49,8 @@ export const verifyUserCanInstallK3k = async(store, mgmtId) => {
     }
 
     const repoSchema = await store.dispatch('management/request', {
-      url:    `/k8s/clusters/${ mgmtId }/v1/schemas/${ CATALOG.CLUSTER_REPO }`,
-      method: 'GET',
+      'url':    `/k8s/clusters/${ mgmtId }/v1/schemas/${ CATALOG.CLUSTER_REPO }`,
+      'method': 'GET',
     });
 
     return !!repoSchema?.collectionMethods.find((x) => x.toLowerCase() === 'post');
@@ -68,12 +68,12 @@ export const verifyUserCanInstallK3k = async(store, mgmtId) => {
 export const verifyUserCanCreateK3kClusters = async(store, mgmtId) => {
   try {
     const k3kClusterSchema = await store.dispatch('management/request', {
-      url:    `/k8s/clusters/${ mgmtId }/v1/schemas/${ K3K.CLUSTER }`,
-      method: 'GET',
+      'url':    `/k8s/clusters/${ mgmtId }/v1/schemas/${ K3K.CLUSTER }`,
+      'method': 'GET',
     });
 
     return !!k3kClusterSchema?.collectionMethods.find((x) => x.toLowerCase() === 'post');
-  } catch (err) {
+  } catch {
     return false;
   }
 };
@@ -87,8 +87,8 @@ export const verifyK3kVersionMatches = async(store, mgmtId) => {
     const extensionVersion = pkgjson?.version;
 
     const appSchema = await store.dispatch('management/request', {
-      url:    `/k8s/clusters/${ mgmtId }/v1/schemas/${ CATALOG.APP }`,
-      method: 'GET',
+      'url':    `/k8s/clusters/${ mgmtId }/v1/schemas/${ CATALOG.APP }`,
+      'method': 'GET',
     });
 
     if (!appSchema || !(appSchema.resourceMethods || []).includes('GET')) {
@@ -96,8 +96,8 @@ export const verifyK3kVersionMatches = async(store, mgmtId) => {
     }
 
     const k3kApp = await store.dispatch('management/request', {
-      url:    `/k8s/clusters/${ mgmtId }/v1/${ CATALOG.APP }s/${ K3K_CHART_NAMESPACE }/${ K3K_CHART_NAME }`,
-      method: 'GET'
+      'url':    `/k8s/clusters/${ mgmtId }/v1/${ CATALOG.APP }s/${ K3K_CHART_NAMESPACE }/${ K3K_CHART_NAME }`,
+      'method': 'GET'
     });
 
     const k3kVersion = k3kApp?.spec?.chart?.metadata?.appVersion;
@@ -114,7 +114,7 @@ export const verifyK3kVersionMatches = async(store, mgmtId) => {
     }
 
     return semver.major(coercedK3kVersion) === semver.major(coercedExtensionVersion) && semver.minor(coercedK3kVersion) === semver.minor(coercedExtensionVersion);
-  } catch (e) {
+  } catch {
     return null;
   }
 };
@@ -128,8 +128,8 @@ export const verifyK3kVersionMatches = async(store, mgmtId) => {
  */
 export const fieldIsSupported = async(store, mgmtId, type, field) => {
   const schemaDefinition = await store.dispatch('management/request', {
-    url:    `/k8s/clusters/${ mgmtId }/v1/schemaDefinitions/${ type }`,
-    method: 'GET',
+    'url':    `/k8s/clusters/${ mgmtId }/v1/schemaDefinitions/${ type }`,
+    'method': 'GET',
   });
 
   const { definitionType } = schemaDefinition;

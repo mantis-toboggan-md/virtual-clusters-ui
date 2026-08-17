@@ -7,57 +7,57 @@ import KeyValue from '@shell/components/form/KeyValue.vue';
 import cloneDeep from 'lodash/cloneDeep';
 
 export default {
-  name: 'K3kClusterNetworking',
+  'name': 'K3kClusterNetworking',
 
-  emits: ['update:clusterCIDR', 'update:serviceCIDR', 'update:clusterDNS', 'update:tlsSANs', 'update:expose'],
+  'emits': ['update:clusterCIDR', 'update:serviceCIDR', 'update:clusterDNS', 'update:tlsSANs', 'update:expose'],
 
-  components: {
+  'components': {
     LabeledInput,
     ArrayList,
     RadioButton,
     KeyValue
   },
 
-  props: {
-    mode: {
-      type:    String,
-      default: _CREATE
+  'props': {
+    'mode': {
+      'type':    String,
+      'default': _CREATE
     },
-    clusterCIDR: {
-      type:    String,
-      default: ''
+    'clusterCIDR': {
+      'type':    String,
+      'default': ''
     },
-    serviceCIDR: {
-      type:    String,
-      default: ''
+    'serviceCIDR': {
+      'type':    String,
+      'default': ''
     },
-    clusterDNS: {
-      type:    String,
-      default: ''
+    'clusterDNS': {
+      'type':    String,
+      'default': ''
     },
-    tlsSANs: {
-      type:    Array,
-      default: () => []
+    'tlsSANs': {
+      'type':    Array,
+      'default': () => []
     },
-    expose: {
-      type:    Object,
-      default: () => {
+    'expose': {
+      'type':    Object,
+      'default': () => {
         return {};
       }
     },
-    rules: {
-      type:    Object,
-      default: () => {}
+    'rules': {
+      'type':    Object,
+      'default': () => {}
     },
   },
 
   data() {
     let exposeMode;
     const exposeModes = {
-      INGRESS:       'ingress',
-      LOAD_BALANCER: 'loadbalancer',
-      NODE_PORT:     'nodePort',
-      NONE:          'none'
+      'INGRESS':       'ingress',
+      'LOAD_BALANCER': 'loadbalancer',
+      'NODE_PORT':     'nodePort',
+      'NONE':          'none'
     };
     // expose can have one of ingress, loadbalancer, or node port defined
     const { ingress, loadbalancer, nodePort } = this.expose;
@@ -72,10 +72,13 @@ export default {
       exposeMode = exposeModes.NONE;
     }
 
-    return { exposeModes, exposeMode };
+    return {
+      exposeModes,
+      exposeMode
+    };
   },
 
-  watch: {
+  'watch': {
     exposeMode(neu) {
       const out = cloneDeep(this.expose || {});
 

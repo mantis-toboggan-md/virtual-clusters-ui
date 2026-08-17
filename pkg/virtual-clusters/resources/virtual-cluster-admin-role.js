@@ -1,29 +1,29 @@
 export default {
-  apiVersion:  'management.cattle.io/v3',
-  kind:        'RoleTemplate',
-  context:     'project',
-  displayName: 'Virtual Cluster Admin',
-  description: 'Create and manage virtual clusters.',
-  metadata:    {
-    name:   'virtual-cluster-admin',
-    labels: { 'management.cattle.io/ui-role-name': 'virtual-cluster-admin' }
+  'apiVersion':  'management.cattle.io/v3',
+  'kind':        'RoleTemplate',
+  'context':     'project',
+  'displayName': 'Virtual Cluster Admin',
+  'description': 'Create and manage virtual clusters.',
+  'metadata':    {
+    'name':   'virtual-cluster-admin',
+    'labels': { 'management.cattle.io/ui-role-name': 'virtual-cluster-admin' }
   },
-  roleTemplateNames: [
+  'roleTemplateNames': [
     'workloads-manage',
     'persistentvolumeclaims-view',
     'clustercatalogs-view',
     'configmaps-manage',
     'secrets-view'
   ],
-  rules: [
+  'rules': [
     {
-      apiGroups: [
+      'apiGroups': [
         'k3k.io'
       ],
-      resources: [
+      'resources': [
         'Clusters'
       ],
-      verbs: [
+      'verbs': [
         '*'
       ]
     }

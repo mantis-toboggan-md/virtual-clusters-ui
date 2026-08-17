@@ -6,26 +6,26 @@ import { getProjectIds } from '../models/k3k.io.virtualclusterpolicy';
 const MAX_CHARS = 35; // maximum characters to show before using + n more and a tooltip to show the full list
 
 export default {
-  name: 'K3KPolicyAssignmentFormatter',
+  'name': 'K3KPolicyAssignmentFormatter',
 
-  components: { Shortened },
+  'components': { Shortened },
 
-  props: {
-    row:   {
-      type:    Object,
-      default: () => {
+  'props': {
+    'row':   {
+      'type':    Object,
+      'default': () => {
         return {};
       }
     },
 
     // not used, but the component doesn't render if its not defined
-    value: {
-      type:    String,
-      default: ''
+    'value': {
+      'type':    String,
+      'default': ''
     },
   },
 
-  computed: {
+  'computed': {
     projectIds() {
       return this.row?.projectIds || getProjectIds(this.row) || [];
     },
@@ -39,7 +39,7 @@ export default {
     },
   },
 
-  methods: {
+  'methods': {
     // get projects' human-readable names and make a comma-separated list
     computeDisplayValues(maxLength) {
       let out = '';
@@ -57,7 +57,7 @@ export default {
 
             out += `${ shortened }...`;
           }
-          out += ` ${ this.t('k3k.policy.listView.plusMore', { n: projectIds.length - i }) }`;
+          out += ` ${ this.t('k3k.policy.listView.plusMore', { 'n': projectIds.length - i }) }`;
           break;
         }
 
