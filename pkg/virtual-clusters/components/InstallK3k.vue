@@ -362,10 +362,10 @@ export default {
 </script>
 
 <template>
-  <div class="row mb-20">
+  <div class="row">
     <div
       v-if="!showButtonOnly"
-      class="col span-6"
+      class="mmr-4 span-6"
     >
       <LabeledSelect
         v-model:value="selectedParentOption"
@@ -398,7 +398,7 @@ export default {
     </div>
     <div
       v-else-if="parentCluster && !isEmpty(parentCluster) && didInstallK3k"
-      class="col span-6 centered"
+      class="span-6 centered"
     >
       <span> <i class="icon icon-checkmark text-success mr-5" />{{ t('k3k.hostCluster.didInstall') }}</span>
     </div>

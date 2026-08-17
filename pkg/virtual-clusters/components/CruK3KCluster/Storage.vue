@@ -157,7 +157,7 @@ export default {
     />
     <div class="span-6">
       <t
-        class="text-label centered"
+        class="text-label  mmb-2 centered"
         raw
         k="k3k.storage.storageClass.description"
       />
