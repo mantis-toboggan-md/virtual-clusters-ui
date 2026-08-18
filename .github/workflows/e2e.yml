@@ -5,6 +5,13 @@ on:
     branches: [main]
   push:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      rancher_version:
+        description: "Test a specific Rancher minor line only (e.g. 2.15). Leave empty for the full matrix."
+        required: false
+        type: string
+        default: ""
 
 concurrency:
   group: e2e-${{ github.event.pull_request.number || github.ref }}
@@ -26,9 +33,22 @@ jobs:
 
       - name: Resolve Rancher versions for this branch
         id: resolve
+        env:
+          RANCHER_VERSION_INPUT: ${{ github.event.inputs.rancher_version }}
         run: |
           BRANCH="${{ github.event_name == 'pull_request' && github.base_ref || github.ref_name }}"
-          MATRIX=$(jq -c --arg branch "$BRANCH" '.[$branch] // error("no rancher-versions.json entry for branch \($branch)")' rancher-versions.json)
+          # workflow_dispatch's rancher_version input narrows the matrix to a single
+          # row, so a fix can be iterated on without paying for the full matrix every time.
+          MATRIX=$(jq -c --arg branch "$BRANCH" --arg version "$RANCHER_VERSION_INPUT" '
+            (.[$branch] // error("no rancher-versions.json entry for branch \($branch)")) as $all
+            | if $version != "" then ($all | map(select(.chartVersionPrefix == $version))) else $all end
+          ' rancher-versions.json)
+
+          if [ "$(echo "$MATRIX" | jq 'length')" = "0" ]; then
+            echo "::error::rancher_version '${RANCHER_VERSION_INPUT}' has no entry in rancher-versions.json for branch '${BRANCH}'"
+            exit 1
+          fi
+
           echo "Testing against: ${MATRIX}"
           echo "matrix=${MATRIX}" >> "$GITHUB_OUTPUT"
 

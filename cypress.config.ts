@@ -1,6 +1,16 @@
 import { defineConfig } from 'cypress';
 
-const baseUrl = (process.env.TEST_BASE_URL || 'https://localhost:8005').replace(/\/$/, '');
+// Required for a local .env file to populate process.env before Cypress reads it.
+require('dotenv').config();
+
+// No sensible default: unlike rancher/dashboard (which runs its own Rancher
+// dev server on :8005), this repo only builds/serves the extension package
+// itself - there is no local Rancher instance to fall back to.
+if (!process.env.TEST_BASE_URL) {
+  throw new Error('TEST_BASE_URL must be set to the Rancher instance to test against');
+}
+
+const baseUrl = process.env.TEST_BASE_URL.replace(/\/$/, '');
 
 export default defineConfig({
   // The served extension is plain HTTP while Rancher runs on HTTPS.
