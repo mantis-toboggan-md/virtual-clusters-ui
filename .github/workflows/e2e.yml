@@ -17,9 +17,13 @@ concurrency:
   group: e2e-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
+# Neither job calls the GitHub API or pushes anything - explicit least-privilege
+# regardless of the org/repo default token permissions.
+permissions:
+  contents: read
+
 env:
   CATTLE_BOOTSTRAP_PASSWORD: password
-  TEST_BASE_URL: https://127.0.0.1.sslip.io
   EXTENSION_SERVER_PORT: "8080"
 
 jobs:
@@ -75,6 +79,20 @@ jobs:
 
       - name: Install packages
         run: yarn install --frozen-lockfile
+
+      - name: Resolve a Rancher URL reachable from k3d's containers
+        run: |
+          # k3s (hosting Rancher) runs natively on this runner, but the k3d
+          # cluster imported later runs as containers on Docker's bridge
+          # network. From inside those containers, 127.0.0.1 means the
+          # container itself, not this host, so the cluster-agent could
+          # never dial back to Rancher and the import would hang in
+          # "pending" forever. The bridge gateway IP is reachable from both
+          # the host and from containers on that bridge, so route
+          # TEST_BASE_URL through it instead of a loopback address.
+          HOST_IP=$(docker network inspect bridge --format '{{(index .IPAM.Config 0).Gateway}}')
+          echo "Routing TEST_BASE_URL through the Docker bridge gateway: ${HOST_IP}"
+          echo "TEST_BASE_URL=https://${HOST_IP}.sslip.io" >> "$GITHUB_ENV"
 
       - name: Start Rancher (Prime alpha, Helm on k3s)
         env:

@@ -30,7 +30,8 @@ CLUSTER_NAME=${CLUSTER_NAME:-e2e-generic}
 K3D_KUBECONFIG=${K3D_KUBECONFIG:-$HOME/.kube/k3d-${CLUSTER_NAME}.yaml}
 
 echo "Installing k3d.........."
-curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+K3D_INSTALL_VERSION=${K3D_INSTALL_VERSION:-v5.9.0}
+curl -s "https://raw.githubusercontent.com/k3d-io/k3d/${K3D_INSTALL_VERSION}/install.sh" | TAG="$K3D_INSTALL_VERSION" bash
 
 echo "Creating k3d cluster '${CLUSTER_NAME}'.........."
 k3d cluster create "$CLUSTER_NAME" --wait
