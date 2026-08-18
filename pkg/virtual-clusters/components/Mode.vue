@@ -5,7 +5,8 @@ import { _CREATE } from '@shell/config/query-params';
 
 export const MODES = {
   'SHARED':  'shared',
-  'VIRTUAL': 'virtual'
+  'VIRTUAL': 'virtual',
+  'HCP':     'hcp'
 };
 
 export default {
@@ -52,7 +53,7 @@ export default {
         name="k3k-cluster-mode"
         :row="true"
         :mode="mode"
-        :options="[{label: t('k3k.mode.shared'), value: modes.SHARED},{label: t('k3k.mode.virtual'), value: modes.VIRTUAL} ]"
+        :options="[{label: t('k3k.mode.shared'), value: modes.SHARED},{label: t('k3k.mode.virtual'), value: modes.VIRTUAL},{label: t('k3k.mode.hcp'), value: modes.HCP} ]"
         @update:value="e=>$emit('update:k3k-mode', e)"
       >
         <template #label>

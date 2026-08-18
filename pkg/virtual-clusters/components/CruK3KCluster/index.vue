@@ -401,6 +401,14 @@ export default {
       return this.k3kCluster?.spec?.mode === MODES.SHARED;
     },
 
+    doneLocationOverride() {
+      if (this.isCreate && this.k3kCluster?.spec?.mode === MODES.HCP) {
+        return this.value.detailLocation;
+      }
+
+      return null;
+    },
+
   },
 
   'methods': {
