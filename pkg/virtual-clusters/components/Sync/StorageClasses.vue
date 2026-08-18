@@ -63,12 +63,12 @@ const storageClassEnabled = computed({
   'get': () => props.enabled,
   'set': (neu) => {
     emit('update:enabled', neu);
-     // Changing `enabled` and `selector` both trigger `update:storageClasses` in the parent; defer selector clearing to avoid overwriting the enabled update.
-     if (!neu && props.selector) {
-       nextTick(() => {
-         emit('update:selector', undefined);
-       });
-     }
+    // Changing `enabled` and `selector` both trigger `update:storageClasses` in the parent; defer selector clearing to avoid overwriting the enabled update.
+    if (!neu && props.selector) {
+      nextTick(() => {
+        emit('update:selector', undefined);
+      });
+    }
   }
 });
 
@@ -155,11 +155,7 @@ const updateMatchingResources = debounce(async() => {
       targetedStorageClasses.value = await Promise.all(
         (res.data || []).map((item) => store.dispatch('management/create', {
           ...item,
-<<<<<<< HEAD
-          type: STORAGE_CLASS
-=======
           'type': STORAGE_CLASS
->>>>>>> ba9bc08 (update to eslint 10)
         }))
       );
     }

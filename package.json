@@ -17,24 +17,11 @@
     "semver": "7.5.4"
   },
   "devDependencies": {
-<<<<<<< HEAD
-    "@eslint/js": "10.0.1",
-    "eslint": "10.5.0",
-    "eslint-plugin-cypress": "4.3.0",
-=======
->>>>>>> ba9bc08 (update to eslint 10)
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-local-rules": "link:./eslint-plugin-local-rules",
     "eslint-plugin-node": "11.1.0",
-<<<<<<< HEAD
-    "eslint-plugin-vue": "10.10.0",
-    "globals": "17.7.0",
-    "neostandard": "0.13.0",
-    "typescript-eslint": "8.62.0",
-=======
     "eslint-plugin-promise": "7.2.1",
     "eslint-plugin-vue": "10.10.0",
->>>>>>> ba9bc08 (update to eslint 10)
     "@types/node": "25.3.3"
   },
   "resolutions": {
