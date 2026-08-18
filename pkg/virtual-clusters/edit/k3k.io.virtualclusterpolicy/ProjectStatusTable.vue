@@ -4,57 +4,57 @@ import { LABELS } from '../../types';
 import { Banner } from '@rancher/components';
 
 export default {
-  'name': 'K3kProjectNSLabelStatus',
+  name: 'K3kProjectNSLabelStatus',
 
-  'props': {
-    'mode': {
-      'type':    String,
-      'default': _CREATE
+  props: {
+    mode: {
+      type:    String,
+      default: _CREATE
     },
 
-    'selectedProjects': {
-      'type':    Array,
-      'default': () => []
+    selectedProjects: {
+      type:    Array,
+      default: () => []
     },
 
-    'deselectedProjects': {
-      'type':    Array,
-      'default': () => []
+    deselectedProjects: {
+      type:    Array,
+      default: () => []
     },
 
-    'displayProjects': {
-      'type':    Array,
-      'default': () => []
+    displayProjects: {
+      type:    Array,
+      default: () => []
     },
 
-    'policyName': {
-      'type':    String,
-      'default': ''
+    policyName: {
+      type:    String,
+      default: ''
     },
 
-    'isInModal': {
-      'type':    Boolean,
-      'default': false
+    isInModal: {
+      type:    Boolean,
+      default: false
     },
 
-    'namespacesDone': {
-      'type':    Array,
-      'default': () => []
+    namespacesDone: {
+      type:    Array,
+      default: () => []
     },
 
-    'doneSavingNamespaces': {
-      'type':    Boolean,
-      'default': false
+    doneSavingNamespaces: {
+      type:    Boolean,
+      default: false
     },
   },
 
-  'components': { Banner },
+  components: { Banner },
 
   created() {
     this.computeAllStatuses();
   },
 
-  'watch': {
+  watch: {
     displayProjects() {
       if (!this.isInModal) {
         this.statuses = {};
@@ -70,10 +70,10 @@ export default {
   },
 
   data() {
-    return { 'statuses': {} };
+    return { statuses: {} };
   },
 
-  'computed': {
+  computed: {
     showErrorBanner() {
       return !!(Object.values(this.statuses) || []).find((status) => {
         return status?.errMsg;
@@ -81,7 +81,7 @@ export default {
     },
   },
 
-  'methods': {
+  methods: {
     computeNamespaceStatus(p = {}) {
       const namespaces = p.namespaces || [];
       const hasServerErrors = namespaces.filter((ns) => !!ns?.__policyServerError)?.length;
@@ -108,8 +108,8 @@ export default {
       }
 
       this.statuses[p.id] = {
-        'project':             p,
-        'willSave':            namespaces,
+        project:             p,
+        willSave:            namespaces,
         saved,
         showDeselectIcon,
         showSuccessIcon,

@@ -14,56 +14,56 @@ import isEmpty from 'lodash/isEmpty';
 import { PROJECT } from '@shell/config/labels-annotations';
 
 export default {
-  'name': 'K3kPolicySelector',
+  name: 'K3kPolicySelector',
 
   setup() {
     const { open } = useDrawer();
 
-    return { 'openDrawer': open };
+    return { openDrawer: open };
   },
 
-  'emits': ['update:policy', 'update:targetNamespace'],
+  emits: ['update:policy', 'update:targetNamespace'],
 
-  'components': {
+  components: {
     LabeledSelect,
     LabeledSelectWithCreate,
     Banner
   },
 
-  'props': {
+  props: {
 
-    'mode': {
-      'type':    String,
-      'default': _CREATE
+    mode: {
+      type:    String,
+      default: _CREATE
     },
 
-    'targetNamespace': {
-      'type':    String,
-      'default': ''
+    targetNamespace: {
+      type:    String,
+      default: ''
     },
 
-    'hostCluster': {
-      'type':    Object,
-      'default': () => {
+    hostCluster: {
+      type:    Object,
+      default: () => {
         return {};
       }
     },
 
-    'k3kInstalled': {
-      'type':    Boolean,
-      'default': false
+    k3kInstalled: {
+      type:    Boolean,
+      default: false
     },
 
-    'policy': {
-      'type':    Object,
-      'default': () => {
+    policy: {
+      type:    Object,
+      default: () => {
         return {};
       }
     },
 
-    'rules': {
-      'type':    Object,
-      'default': () => {}
+    rules: {
+      type:    Object,
+      default: () => {}
     },
   },
 
@@ -76,16 +76,16 @@ export default {
 
   data() {
     return {
-      'policies':                     [],
-      'namespaces':                   [],
-      'loadingPoliciesAndNamespaces': false,
-      'namespaceError':               false,
-      'policyError':                  false,
-      'previousTargetNamespace':      ''
+      policies:                     [],
+      namespaces:                   [],
+      loadingPoliciesAndNamespaces: false,
+      namespaceError:               false,
+      policyError:                  false,
+      previousTargetNamespace:      ''
     };
   },
 
-  'watch': {
+  watch: {
     hostClusterId(neu) {
       // policy is unset (not an explicit None) until we know what's available for the new host cluster
       this.$emit('update:policy', null);
@@ -106,7 +106,7 @@ export default {
 
   },
 
-  'methods': {
+  methods: {
     async openPolicyDrawer() {
       if (!this.policy || isEmpty(this.policy)) {
         return;
@@ -117,16 +117,16 @@ export default {
       let drawerPolicy;
 
       try {
-        drawerPolicy = await this.$store.dispatch('management/clone', { 'resource': this.policy });
+        drawerPolicy = await this.$store.dispatch('management/clone', { resource: this.policy });
       } catch {
         drawerPolicy = this.policy;
       }
 
       this.openDrawer(PolicyDrawer, '[data-testid="k3k-policy-open-drawer"]', {
-        'policy':        drawerPolicy,
-        'parentCluster': this.hostCluster,
-        'showHeader':    false,
-        'width':         '50%'
+        policy:        drawerPolicy,
+        parentCluster: this.hostCluster,
+        showHeader:    false,
+        width:         '50%'
       });
     },
 
@@ -139,8 +139,8 @@ export default {
 
           try {
             const res = await this.$store.dispatch('management/request', {
-              'url':    `/k8s/clusters/${ this.hostClusterId }/v1/${ K3K.POLICY }`,
-              'method': 'GET'
+              url:    `/k8s/clusters/${ this.hostClusterId }/v1/${ K3K.POLICY }`,
+              method: 'GET'
             });
 
             this.policies = res.data || [];
@@ -182,8 +182,8 @@ export default {
       this.namespaceError = false;
       try {
         const res = await this.$store.dispatch('management/request', {
-          'url':    `/k8s/clusters/${ this.hostClusterId }/v1/${ NAMESPACE }`,
-          'method': 'GET'
+          url:    `/k8s/clusters/${ this.hostClusterId }/v1/${ NAMESPACE }`,
+          method: 'GET'
         });
 
         this.namespaces = res.data || [];
@@ -229,12 +229,12 @@ export default {
       }
 
       await this.$store.dispatch('management/request', {
-        'url':    `/k8s/clusters/${ this.hostClusterId }/v1/${ NAMESPACE }`,
-        'method': 'POST',
-        'data':   {
-          'apiVersion': 'v1',
-          'kind':       'Namespace',
-          'metadata':   { 'name': this.targetNamespace },
+        url:    `/k8s/clusters/${ this.hostClusterId }/v1/${ NAMESPACE }`,
+        method: 'POST',
+        data:   {
+          apiVersion: 'v1',
+          kind:       'Namespace',
+          metadata:   { name: this.targetNamespace },
         },
       });
 
@@ -242,7 +242,7 @@ export default {
     }
   },
 
-  'computed': {
+  computed: {
     isCreate() {
       return this.mode === _CREATE;
     },
@@ -261,7 +261,7 @@ export default {
     },
 
     namespaceIdsByProject() {
-      const out = { 'none': [] };
+      const out = { none: [] };
 
       this.namespaces.forEach((ns) => {
         // the ns project annotation is formatted differently than resource ids
@@ -285,8 +285,8 @@ export default {
 
     policyOptions() {
       return [{
-        'label': this.t('k3k.policy.noneOption'),
-        'value':   {}
+        label: this.t('k3k.policy.noneOption'),
+        value:   {}
       }, ...this.policies.reduce((hasNs, p) => {
         const projectIds = (getProjectIds(p) || []);
 
@@ -294,8 +294,8 @@ export default {
 
         if (hasNamespaces) {
           hasNs.push({
-            'label': p?.metadata?.name,
-            'value':   p
+            label: p?.metadata?.name,
+            value:   p
           });
         }
 

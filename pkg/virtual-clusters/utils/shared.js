@@ -1,4 +1,4 @@
 export const MODES = {
-  'SHARED':  'shared',
-  'VIRTUAL': 'virtual'
+  SHARED:  'shared',
+  VIRTUAL: 'virtual'
 };

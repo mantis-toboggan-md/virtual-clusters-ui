@@ -7,50 +7,50 @@ import { STORAGE } from '@shell/config/labels-annotations';
 import UnitInput from '@shell/components/form/UnitInput';
 
 const PERSISTENCE_TYPES = {
-  'EPHEMERAL': 'ephemeral',
-  'DYNAMIC':   'dynamic'
+  EPHEMERAL: 'ephemeral',
+  DYNAMIC:   'dynamic'
 };
 
 export default {
-  'name': 'K3KStorage',
+  name: 'K3KStorage',
 
-  'emits': ['update:storageClassName', 'update:persistenceType', 'update:storageRequestSize'],
+  emits: ['update:storageClassName', 'update:persistenceType', 'update:storageRequestSize'],
 
-  'components': {
+  components: {
     Banner,
     LabeledSelect,
     UnitInput
   },
 
-  'props': {
-    'mode': {
-      'type':    String,
-      'default': _CREATE
+  props: {
+    mode: {
+      type:    String,
+      default: _CREATE
     },
 
-    'storageClassName': {
-      'type':    String,
-      'default': null
+    storageClassName: {
+      type:    String,
+      default: null
     },
 
-    'persistenceType': {
-      'type':    String,
-      'default': PERSISTENCE_TYPES.DYNAMIC
+    persistenceType: {
+      type:    String,
+      default: PERSISTENCE_TYPES.DYNAMIC
     },
 
-    'storageRequestSize': {
-      'type':    String,
-      'default': ''
+    storageRequestSize: {
+      type:    String,
+      default: ''
     },
 
     // provisioning cluster
-    'parentCluster': {
-      'type':    Object,
-      'default': null
+    parentCluster: {
+      type:    Object,
+      default: null
     }
   },
 
-  'watch': {
+  watch: {
     parentCluster(neu) {
       if (neu) {
         this.$emit('update:storageClassName', undefined);
@@ -64,7 +64,7 @@ export default {
       }
     },
 
-    'storageClassName': {
+    storageClassName: {
       handler(neu) {
         if (!neu) {
           this.$emit('update:persistenceType', PERSISTENCE_TYPES.EPHEMERAL );
@@ -72,20 +72,20 @@ export default {
           this.$emit('update:persistenceType', PERSISTENCE_TYPES.DYNAMIC );
         }
       },
-      'immediate': true
+      immediate: true
     }
   },
 
   data() {
     return {
-      'storageClassErrors':    [],
-      'loadingStorageClasses': false,
-      'storageClasses':        []
+      storageClassErrors:    [],
+      loadingStorageClasses: false,
+      storageClasses:        []
     };
   },
 
-  'computed': {
-    ...mapGetters({ 't': 'i18n/t' }),
+  computed: {
+    ...mapGetters({ t: 'i18n/t' }),
 
     storageClassOptions() {
       const out = [this.t('k3k.storage.noneOption')];
@@ -102,8 +102,7 @@ export default {
     }
   },
 
-  'methods': {
-
+  methods: {
     async fetchStorageClasses() {
       this.loadingStorageClasses = true;
       this.storageClassErrors = [];
@@ -115,24 +114,24 @@ export default {
 
       try {
         const scSchema = await this.$store.dispatch('management/request', {
-          'url':    `/k8s/clusters/${ mgmtCluster.id }/v1/schemas/storage.k8s.io.storageclass`,
-          'method': 'GET',
+          url:    `/k8s/clusters/${ mgmtCluster.id }/v1/schemas/storage.k8s.io.storageclass`,
+          method: 'GET',
         });
 
         if (!scSchema) {
-          this.storageClassErrors.push(this.t('k3k.errors.loadingStorageClasses', { 'cluster': clusterName }) + this.t('k3k.errors.storageClassSchema'));
+          this.storageClassErrors.push(this.t('k3k.errors.loadingStorageClasses', { cluster: clusterName }) + this.t('k3k.errors.storageClassSchema'));
 
           return;
         }
 
         const res = await this.$store.dispatch('management/request', {
-          'url':    `/k8s/clusters/${ mgmtCluster.id }/v1/storage.k8s.io.storageclasses`,
-          'method': 'GET',
+          url:    `/k8s/clusters/${ mgmtCluster.id }/v1/storage.k8s.io.storageclasses`,
+          method: 'GET',
         });
 
         this.storageClasses = res.data;
       } catch (err) {
-        this.storageClassErrors.push(this.t('k3k.errors.loadingStorageClasses', { 'cluster': clusterName }) + err.data || err);
+        this.storageClassErrors.push(this.t('k3k.errors.loadingStorageClasses', { cluster: clusterName }) + err.data || err);
       }
       this.loadingStorageClasses = false;
     },

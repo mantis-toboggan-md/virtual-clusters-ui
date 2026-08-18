@@ -1,35 +1,35 @@
 export default {
-  'apiVersion':  'management.cattle.io/v3',
-  'kind':        'RoleTemplate',
-  'context':     'cluster',
-  'displayName': 'Virtual Cluster Policy Read',
-  'description': 'View virtual cluster policies.',
-  'metadata':    {
-    'name':   'virtual-cluster-policy-read',
-    'labels': { 'management.cattle.io/ui-role-name': 'virtual-cluster-policy-read' }
+  apiVersion:  'management.cattle.io/v3',
+  kind:        'RoleTemplate',
+  context:     'cluster',
+  displayName: 'Virtual Cluster Policy Read',
+  description: 'View virtual cluster policies.',
+  metadata:    {
+    name:   'virtual-cluster-policy-read',
+    labels: { 'management.cattle.io/ui-role-name': 'virtual-cluster-policy-read' }
   },
-  'rules': [
+  rules: [
     {
-      'apiGroups': [
+      apiGroups: [
         'k3k.io'
       ],
-      'resources': [
+      resources: [
         'VirtualClusterPolicies'
       ],
-      'verbs': [
+      verbs: [
         'get',
         'list',
         'watch'
       ]
     },
     {
-      'apiGroups': [
+      apiGroups: [
         'catalog.cattle.io'
       ],
-      'resources': [
+      resources: [
         'Apps'
       ],
-      'verbs': [
+      verbs: [
         'get'
       ]
     }

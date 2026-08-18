@@ -5,18 +5,18 @@ import { Banner } from '@rancher/components';
 import sum from 'lodash/sum';
 
 export default {
-  'name': 'VirtualClusterPolicyPromptRemove',
+  name: 'VirtualClusterPolicyPromptRemove',
 
-  'components': { Banner },
+  components: { Banner },
 
-  'props': {
-    'value': {
-      'type':    Array,
-      'default': () => []
+  props: {
+    value: {
+      type:    Array,
+      default: () => []
     },
-    'names': {
-      'type':    Array,
-      'default': () => []
+    names: {
+      type:    Array,
+      default: () => []
     },
 
   },
@@ -29,12 +29,12 @@ export default {
 
   data() {
     return {
-      'assignedClusterCount': 0,
+      assignedClusterCount: 0,
       K3K,
     };
   },
 
-  'computed': {
+  computed: {
     isBulk() {
       return this.value?.length && this.value?.length > 1;
     },

@@ -3,43 +3,43 @@ import Select from '@shell/components/form/Select';
 import UnitInput from '@shell/components/form/UnitInput';
 
 export default {
-  'emits': ['type-change', 'update'],
+  emits: ['type-change', 'update'],
 
-  'components': {
-    'UnabeledSelect': Select,
+  components: {
+    UnabeledSelect: Select,
     UnitInput
   },
 
-  'props': {
-    'mode': {
-      'type':     String,
-      'required': true,
+  props: {
+    mode: {
+      type:     String,
+      required: true,
     },
 
-    'types': {
-      'type':    Array,
-      'default': () => []
+    types: {
+      type:    Array,
+      default: () => []
     },
 
-    'type': {
-      'type':    String,
-      'default': ''
+    type: {
+      type:    String,
+      default: ''
     },
 
-    'typeOption': {
-      'type':     Object,
-      'default':  () => ({})
+    typeOption: {
+      type:     Object,
+      default:  () => ({})
     },
 
-    'value': {
-      'type':    Object,
-      'default': () => {
+    value: {
+      type:    Object,
+      default: () => {
         return {};
       }
     }
   },
 
-  'methods': {
+  methods: {
     // delete the old type key and tell the parent component to add a new one
     updateType(type) {
       if (typeof this.value[this.type] !== 'undefined') {

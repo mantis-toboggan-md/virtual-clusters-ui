@@ -7,7 +7,7 @@ const tsPlugin = require('@typescript-eslint/eslint-plugin');
 
 module.exports = [
   {
-    'ignores': [
+    ignores: [
       'coverage',
       '.nyc_output',
       'node_modules/',
@@ -42,23 +42,23 @@ module.exports = [
   js.configs.recommended,
   ...vuePlugin.configs['flat/recommended'],
   {
-    'languageOptions': {
-      'parser':        vueParser,
-      'parserOptions': {
-        'parser':              tsParser,
-        'ecmaVersion':         'latest',
-        'sourceType':          'module',
-        'extraFileExtensions': ['.vue'],
+    languageOptions: {
+      parser:        vueParser,
+      parserOptions: {
+        parser:              tsParser,
+        ecmaVersion:         'latest',
+        sourceType:          'module',
+        extraFileExtensions: ['.vue'],
       },
-      'globals': {
+      globals: {
         ...globals.browser,
         ...globals.node,
-        'NodeJS': true,
-        'Timer':  true,
+        NodeJS: true,
+        Timer:  true,
       },
     },
-    'plugins': { '@typescript-eslint': tsPlugin },
-    'rules':   {
+    plugins: { '@typescript-eslint': tsPlugin },
+    rules:   {
       'dot-notation':                  'off',
       'generator-star-spacing':        'off',
       'guard-for-in':                  'off',
@@ -82,8 +82,8 @@ module.exports = [
       'array-bracket-spacing':             'warn',
       'arrow-parens':                      'warn',
       'arrow-spacing':                     ['warn', {
-        'before': true,
-        'after':    true
+        before: true,
+        after:    true
       }],
       'block-spacing':                     ['warn', 'always'],
       'brace-style':                       ['warn', '1tbs'],
@@ -95,9 +95,9 @@ module.exports = [
       'implicit-arrow-linebreak':          'warn',
       'indent':                              ['warn', 2],
       'keyword-spacing':                   'warn',
-      'lines-between-class-members':       ['warn', 'always', { 'exceptAfterSingleLine': true }],
+      'lines-between-class-members':       ['warn', 'always', { exceptAfterSingleLine: true }],
       'multiline-ternary':                 ['warn', 'never'],
-      'newline-per-chained-call':          ['warn', { 'ignoreChainWithDepth': 4 }],
+      'newline-per-chained-call':          ['warn', { ignoreChainWithDepth: 4 }],
       'no-caller':                         'warn',
       'no-cond-assign':                    ['warn', 'except-parens'],
       'no-console':                        'warn',
@@ -114,7 +114,7 @@ module.exports = [
       'padded-blocks':                     ['warn', 'never'],
       'prefer-arrow-callback':             'warn',
       'prefer-template':                   'warn',
-      'quote-props':                       'warn',
+      'quote-props':                       ['warn', 'consistent-as-needed'],
       'rest-spread-spacing':               'warn',
       'semi':                                ['warn', 'always'],
       'space-before-function-paren':       ['warn', 'never'],
@@ -125,59 +125,59 @@ module.exports = [
       'yield-star-spacing':                ['warn', 'both'],
 
       'key-spacing':              ['warn', {
-        'align': {
-          'beforeColon': false,
-          'afterColon':  true,
-          'on':          'value',
-          'mode':        'minimum'
+        align: {
+          beforeColon: false,
+          afterColon:  true,
+          on:          'value',
+          mode:        'minimum'
         },
-        'multiLine': {
-          'beforeColon': false,
-          'afterColon':  true
+        multiLine: {
+          beforeColon: false,
+          afterColon:  true
         },
       }],
 
       'object-curly-newline':          ['warn', {
-        'ObjectExpression':  {
-          'multiline':     true,
-          'minProperties': 3
+        ObjectExpression:  {
+          multiline:     true,
+          minProperties: 3
         },
-        'ObjectPattern':     {
-          'multiline':     true,
-          'minProperties': 4
+        ObjectPattern:     {
+          multiline:     true,
+          minProperties: 4
         },
-        'ImportDeclaration': {
-          'multiline':     true,
-          'minProperties': 5
+        ImportDeclaration: {
+          multiline:     true,
+          minProperties: 5
         },
-        'ExportDeclaration': {
-          'multiline':     true,
-          'minProperties': 3
+        ExportDeclaration: {
+          multiline:     true,
+          minProperties: 3
         }
       }],
 
       'padding-line-between-statements': [
         'warn',
         {
-          'blankLine': 'always',
-          'prev':      '*',
-          'next':      'return',
+          blankLine: 'always',
+          prev:      '*',
+          next:      'return',
         },
         {
-          'blankLine': 'always',
-          'prev':      'function',
-          'next':      'function',
+          blankLine: 'always',
+          prev:      'function',
+          next:      'function',
         },
         // This configuration would require blank lines after every sequence of variable declarations
         {
-          'blankLine': 'always',
-          'prev':      ['const', 'let', 'var'],
-          'next':      '*'
+          blankLine: 'always',
+          prev:      ['const', 'let', 'var'],
+          next:      '*'
         },
         {
-          'blankLine': 'any',
-          'prev':      ['const', 'let', 'var'],
-          'next':      ['const', 'let', 'var']
+          blankLine: 'any',
+          prev:      ['const', 'let', 'var'],
+          next:      ['const', 'let', 'var']
         }
       ],
 
@@ -185,16 +185,16 @@ module.exports = [
         'warn',
         'single',
         {
-          'avoidEscape':           true,
-          'allowTemplateLiterals': true
+          avoidEscape:           true,
+          allowTemplateLiterals: true
         },
       ],
 
       'space-unary-ops': [
         'warn',
         {
-          'words':    true,
-          'nonwords': false,
+          words:    true,
+          nonwords: false,
         }
       ],
 
@@ -209,8 +209,8 @@ module.exports = [
     },
   },
   {
-    'files': ['**/*.js'],
-    'rules': {
+    files: ['**/*.js'],
+    rules: {
       // FIXME: The following is disabled due to new linter and old JS code. These should all be enabled and underlying issues fixed
       'prefer-regex-literals':                'off',
       'vue/component-definition-name-casing': 'off',

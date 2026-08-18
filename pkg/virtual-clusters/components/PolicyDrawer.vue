@@ -9,8 +9,8 @@ import PolicyEditor from '../edit/k3k.io.virtualclusterpolicy/index.vue';
 import type { K3kPolicy, ParentClusterType } from '../types/k3k';
 
 const props = withDefaults(defineProps<{ policy?: K3kPolicy, parentCluster?: ParentClusterType }>(), {
-  'policy':        () => ({}),
-  'parentCluster': null,
+  policy:        () => ({}),
+  parentCluster: null,
 });
 
 const VIEW = _VIEW;

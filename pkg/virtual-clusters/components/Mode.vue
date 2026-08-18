@@ -4,35 +4,35 @@ import RadioGroup from '@components/Form/Radio/RadioGroup.vue';
 import { _CREATE } from '@shell/config/query-params';
 
 export const MODES = {
-  'SHARED':  'shared',
-  'VIRTUAL': 'virtual'
+  SHARED:  'shared',
+  VIRTUAL: 'virtual'
 };
 
 export default {
-  'name': 'CRUK3KMode',
+  name: 'CRUK3KMode',
 
-  'emits': ['update:k3k-mode'],
+  emits: ['update:k3k-mode'],
 
-  'props': {
-    'mode': {
-      'type':    String,
-      'default': _CREATE
+  props: {
+    mode: {
+      type:    String,
+      default: _CREATE
     },
 
-    'k3kMode': {
-      'type':    String,
-      'default': MODES.SHARED
+    k3kMode: {
+      type:    String,
+      default: MODES.SHARED
     }
   },
 
-  'components': { RadioGroup },
+  components: { RadioGroup },
 
   data() {
-    return { 'modes': MODES };
+    return { modes: MODES };
   },
 
-  'computed': {
-    ...mapGetters({ 't': 'i18n/t' }),
+  computed: {
+    ...mapGetters({ t: 'i18n/t' }),
 
     isCreate() {
       return this.mode === _CREATE;
