@@ -4,6 +4,7 @@ const vuePlugin = require('eslint-plugin-vue');
 const vueParser = require('vue-eslint-parser');
 const tsParser = require('@typescript-eslint/parser');
 const tsPlugin = require('@typescript-eslint/eslint-plugin');
+const cypressPlugin = require('eslint-plugin-cypress/flat');
 
 module.exports = [
   {
@@ -28,6 +29,7 @@ module.exports = [
       'assets/fonts',
       'shell/pkg/import.js',
       'shell/types/shell/index.d.ts',
+      'cypress/globals.d.ts',
       'dist/',
       'coverage/',
       'build/',
@@ -216,6 +218,17 @@ module.exports = [
       'vue/component-definition-name-casing': 'off',
       'no-unreachable-loop':                  'off',
       'computed-property-spacing':            'off',
+    },
+  },
+  {
+    files:           ['cypress/**/*.ts', 'cypress.config.ts'],
+    plugins:         { cypress: cypressPlugin },
+    rules:           cypressPlugin.configs.recommended.rules,
+    languageOptions: {
+      globals: {
+        ...cypressPlugin.configs.recommended.languageOptions.globals,
+        ...globals.mocha,
+      },
     },
   },
 ];
