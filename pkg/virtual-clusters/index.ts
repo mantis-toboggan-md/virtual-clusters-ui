@@ -1,5 +1,5 @@
 import { importTypes } from '@rancher/auto-import';
-import { IPlugin, ModelExtensionConstructor, PanelLocation } from '@shell/core/types';
+import { IPlugin, ModelExtensionConstructor, PanelLocation, TabLocation } from '@shell/core/types';
 import { k3kProvisioner } from './provisioner';
 import './assets/styles/index.scss';
 import { VClusterModelExtension } from './model-extension/provisioning.cattle.io.cluster';
@@ -81,4 +81,12 @@ export default function(plugin: IPlugin): void {
 
   plugin.addPanel(PanelLocation.RESOURCE_LIST, { resource: [K3K.POLICY, K3K.CLUSTER] },
     { component: () => import('./components/K3kVersionBanner.vue') });
+
+  // Registered for all provisioning clusters: the tab-matching LocationConfig can't inspect
+  // the k3k.io.cluster's spec.mode, so HcpDetailTab self-gates on that field once mounted.
+  plugin.addTab(TabLocation.RESOURCE_DETAIL_PAGE, { resource: ['provisioning.cattle.io.cluster'] }, {
+    name:      'hcp',
+    labelKey:  'k3k.tabs.hcp',
+    component: () => import('./components/HcpDetailTab.vue')
+  });
 }

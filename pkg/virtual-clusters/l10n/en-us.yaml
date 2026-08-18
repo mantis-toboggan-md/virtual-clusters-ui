@@ -157,7 +157,12 @@ k3k:
     label: Virtual cluster mode
     shared: Shared
     virtual: Virtual
+    hcp: HCP
     tooltip: By default virtual clusters are provisioned using the shared mode. You can use the virtual mode for more advanced isolation.
+  tabs:
+    hcp: HCP
+  hcp:
+    placeholder: HCP tab content coming soon.
   agents:
     label: Agents
     number:
