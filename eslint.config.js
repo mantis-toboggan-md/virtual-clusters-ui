@@ -29,7 +29,6 @@ module.exports = [
       'assets/fonts',
       'shell/pkg/import.js',
       'shell/types/shell/index.d.ts',
-      'cypress/globals.d.ts',
       'dist/',
       'coverage/',
       'build/',
