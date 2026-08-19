@@ -3,20 +3,18 @@ set -e
 
 # ---------------------------------------------------------------------------
 # Bring up a k3d cluster and import it into the Rancher instance started by
-# e2e-k3s-start.sh, as a generic (imported) cluster - entirely scripted, no
-# browser involved:
+# e2e-k3s-start.sh, as a generic (imported) cluster 
 #   1. POST /v3/clusters creates the management.cattle.io.cluster directly -
-#      for a generic import there is no separate provisioning.cattle.io
-#      resource, Norman's `cluster` type IS the management cluster (see
+#      this mirrors our genric import cluster UI (see
 #      @rancher/shell pkg/imported/components/CruImported.vue)
-#   2. its returned `id` (e.g. c-m-xxxxx) is the management cluster name
-#   3. the registration command lives on
+#   2. the registration command lives on
 #      /v1/management.cattle.io.clusterregistrationtoken, namespaced by that
-#      management cluster name
-#   4. running that command against the target cluster's kubeconfig
+#      management cluster name (id from step 1)
+#   3. running that command against the target cluster's kubeconfig
 #      registers it with Rancher
 #
-# NOTE: step 3's exact field (status.insecureCommand on the v1 resource) is
+# //TODO nb right place to get insecureCommand or should it be from spec?
+# NOTE: step 2's exact field (status.insecureCommand on the v1 resource) is
 # inferred, not confirmed against a live cluster - rancher/dashboard's own
 # UI reads the equivalent field from the older Norman
 # /v3/clusterregistrationtokens API instead, so there is no in-repo
@@ -43,7 +41,7 @@ for i in $(seq 1 60); do
   TOKEN=$(curl -sk -X POST "${TEST_BASE_URL}/v3-public/localProviders/local?action=login" \
     -H "Content-Type: application/json" \
     -d "{\"username\":\"admin\",\"password\":\"${CATTLE_BOOTSTRAP_PASSWORD}\"}" \
-    | python3 -c "import sys,json; print(json.load(sys.stdin).get('token',''))" 2>/dev/null || echo "")
+    | jq -r '.token // empty' 2>/dev/null || echo "")
   [ -n "$TOKEN" ] && break
   echo "  Login not ready yet... ($i/60)"
   sleep 5
@@ -53,13 +51,13 @@ if [ -z "$TOKEN" ]; then
   exit 1
 fi
 
-echo "Creating the generic cluster '${CLUSTER_NAME}'.........."
+echo "Creating the norman cluster '${CLUSTER_NAME}'.........."
 CLUSTER_RESP=$(curl -sk -X POST "${TEST_BASE_URL}/v3/clusters" \
   -H "Authorization: Bearer ${TOKEN}" \
   -H "Content-Type: application/json" \
   -d "{\"type\":\"cluster\",\"name\":\"${CLUSTER_NAME}\",\"agentEnvVars\":[],\"importedConfig\":{},\"labels\":{},\"annotations\":{\"rancher.io/imported-cluster-version-management\":\"system-default\"}}")
 
-MGMT_CLUSTER_NAME=$(echo "$CLUSTER_RESP" | python3 -c "import sys,json; print(json.load(sys.stdin)['id'])")
+MGMT_CLUSTER_NAME=$(echo "$CLUSTER_RESP" | jq -r '.id')
 echo "Management cluster name: ${MGMT_CLUSTER_NAME}"
 
 echo "Fetching the registration command.........."
@@ -68,7 +66,7 @@ for i in $(seq 1 60); do
   TOKEN_RESP=$(curl -sk -H "Authorization: Bearer ${TOKEN}" \
     "${TEST_BASE_URL}/v1/management.cattle.io.clusterregistrationtoken/${MGMT_CLUSTER_NAME}")
 
-  COUNT=$(echo "$TOKEN_RESP" | python3 -c "import sys,json; print(len(json.load(sys.stdin).get('data',[])))" 2>/dev/null || echo 0)
+  COUNT=$(echo "$TOKEN_RESP" | jq '.data | length' 2>/dev/null || echo 0)
 
   if [ "$COUNT" = "0" ]; then
     # No token exists yet for this cluster - create one.
@@ -77,11 +75,7 @@ for i in $(seq 1 60); do
       -H "Content-Type: application/json" \
       -d "{\"type\":\"management.cattle.io.clusterregistrationtoken\",\"metadata\":{\"generateName\":\"${MGMT_CLUSTER_NAME}-\",\"namespace\":\"${MGMT_CLUSTER_NAME}\"},\"spec\":{\"clusterName\":\"${MGMT_CLUSTER_NAME}\"}}" > /dev/null
   else
-    REGISTRATION_COMMAND=$(echo "$TOKEN_RESP" | python3 -c "
-import sys, json
-data = json.load(sys.stdin).get('data', [])
-print((data[0].get('status') or {}).get('insecureCommand', '') if data else '')
-" 2>/dev/null || echo "")
+    REGISTRATION_COMMAND=$(echo "$TOKEN_RESP" | jq -r '.data[0].status.insecureCommand // empty' 2>/dev/null || echo "")
   fi
 
   [ -n "$REGISTRATION_COMMAND" ] && break
@@ -100,7 +94,7 @@ KUBECONFIG="$K3D_KUBECONFIG" bash -c "$REGISTRATION_COMMAND"
 echo "Waiting for '${CLUSTER_NAME}' to become active.........."
 for i in $(seq 1 60); do
   STATE=$(curl -sk -H "Authorization: Bearer ${TOKEN}" "${TEST_BASE_URL}/v3/clusters/${MGMT_CLUSTER_NAME}" \
-    | python3 -c "import sys,json; print(json.load(sys.stdin).get('state',''))" 2>/dev/null || echo "")
+    | jq -r '.state // empty' 2>/dev/null || echo "")
   if [ "$STATE" = "active" ]; then
     echo "Cluster is active"
     exit 0

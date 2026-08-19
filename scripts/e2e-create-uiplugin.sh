@@ -6,10 +6,7 @@ set -e
 # the Steve API - a scriptable stand-in for the UI-driven "Developer Load"
 # dialog (@rancher/shell shell/dialog/DeveloperLoadExtensionDialog.vue).
 # Mirrors the exact resource shape that dialog creates
-# (POST /v1/catalog.cattle.io.uiplugin), including the ui-extensions-version
-# metadata annotation - without it Rancher's plugin loader rejects the
-# extension with "apiAnnotationMissing" regardless of prime status (see
-# shell/config/uiplugins.js shouldNotLoadPlugin).
+# (POST /v1/catalog.cattle.io.uiplugin)
 # ---------------------------------------------------------------------------
 
 TEST_BASE_URL=${TEST_BASE_URL:-https://127.0.0.1.sslip.io}
@@ -17,8 +14,12 @@ CATTLE_BOOTSTRAP_PASSWORD=${CATTLE_BOOTSTRAP_PASSWORD:-password}
 EXTENSION_SERVER_PORT=${EXTENSION_SERVER_PORT:-8080}
 EXTENSION_NAME=virtual-clusters
 
-PKG_VERSION=$(python3 -c "import json; print(json.load(open('pkg/virtual-clusters/package.json'))['version'])")
-EXTENSIONS_VERSION_RANGE=$(python3 -c "import json; print(json.load(open('pkg/virtual-clusters/package.json'))['rancher']['annotations']['catalog.cattle.io/ui-extensions-version'])")
+PKG_VERSION=$(jq -r '.version' pkg/virtual-clusters/package.json)
+EXTENSIONS_VERSION_RANGE=$(jq -r '.rancher.annotations["catalog.cattle.io/ui-extensions-version"]' pkg/virtual-clusters/package.json)
+# build-pkg names the output dir/bundle "<pkg>-<version>" (see
+# @rancher/shell scripts/build-pkg.sh), so both the CRD name and the served
+# bundle path need that combined name, not the bare package name.
+NAME_WITH_VERSION="${EXTENSION_NAME}-${PKG_VERSION}"
 
 echo "Building the extension.........."
 yarn build-pkg "$EXTENSION_NAME"
@@ -28,7 +29,7 @@ PORT="$EXTENSION_SERVER_PORT" nohup node node_modules/@rancher/shell/scripts/ser
 sleep 3
 curl -s "http://127.0.0.1:${EXTENSION_SERVER_PORT}/" | head -20
 
-EXTENSION_URL="http://127.0.0.1:${EXTENSION_SERVER_PORT}"
+EXTENSION_ENDPOINT="http://127.0.0.1:${EXTENSION_SERVER_PORT}/${NAME_WITH_VERSION}/${NAME_WITH_VERSION}.umd.min.js"
 
 echo "Logging in to Rancher.........."
 TOKEN=""
@@ -36,7 +37,7 @@ for i in $(seq 1 60); do
   TOKEN=$(curl -sk -X POST "${TEST_BASE_URL}/v3-public/localProviders/local?action=login" \
     -H "Content-Type: application/json" \
     -d "{\"username\":\"admin\",\"password\":\"${CATTLE_BOOTSTRAP_PASSWORD}\"}" \
-    | python3 -c "import sys,json; print(json.load(sys.stdin).get('token',''))" 2>/dev/null || echo "")
+    | jq -r '.token // empty' 2>/dev/null || echo "")
   [ -n "$TOKEN" ] && break
   sleep 5
 done
@@ -51,20 +52,22 @@ curl -sk -X POST "${TEST_BASE_URL}/v1/catalog.cattle.io.uiplugin" \
   -H "Content-Type: application/json" \
   -d "{
     \"type\": \"catalog.cattle.io.uiplugin\",
-    \"metadata\": { \"name\": \"${EXTENSION_NAME}\", \"namespace\": \"cattle-ui-plugin-system\" },
+    \"metadata\": { \"name\": \"${NAME_WITH_VERSION}\", \"namespace\": \"cattle-ui-plugin-system\" },
     \"spec\": {
       \"plugin\": {
-        \"name\": \"${EXTENSION_NAME}\",
+        \"name\": \"${EXTENSION_NAME}-developer-load\",
         \"version\": \"${PKG_VERSION}\",
-        \"endpoint\": \"${EXTENSION_URL}\",
+        \"endpoint\": \"${EXTENSION_ENDPOINT}\",
         \"noCache\": true,
         \"noAuth\": true,
         \"metadata\": {
-          \"catalog.cattle.io/ui-extensions-version\": \"${EXTENSIONS_VERSION_RANGE}\"
+          \"catalog.cattle.io/ui-extensions-version\": \"${EXTENSIONS_VERSION_RANGE}\",
+          \"developer\": \"true\",
+          \"direct\": \"true\"
         }
       }
     }
   }"
 
 echo
-echo "Extension registered, served at ${EXTENSION_URL}"
+echo "Extension registered, served at ${EXTENSION_ENDPOINT}"

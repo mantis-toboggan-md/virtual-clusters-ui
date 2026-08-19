@@ -14,7 +14,7 @@ for i in $(seq 1 60); do
   TOKEN=$(curl -sk -X POST "${TEST_BASE_URL}/v3-public/localProviders/local?action=login" \
     -H "Content-Type: application/json" \
     -d "{\"username\":\"admin\",\"password\":\"${CATTLE_BOOTSTRAP_PASSWORD}\"}" \
-    | python3 -c "import sys,json; print(json.load(sys.stdin).get('token',''))" 2>/dev/null || echo "")
+    | jq -r '.token // empty' 2>/dev/null || echo "")
   if [ -n "$TOKEN" ]; then
     echo "Logged in after $i attempt(s)"
     break

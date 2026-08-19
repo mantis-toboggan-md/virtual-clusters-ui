@@ -3,8 +3,7 @@ set -e
 
 # ---------------------------------------------------------------------------
 # Stand up k3s + Rancher from the SUSE Prime alpha channel, pinned to a
-# specific minor line. The extension is annotated prime-only
-# (pkg/virtual-clusters/package.json: catalog.cattle.io/prime-only), so
+# specific minor line. The extension is annotated prime-only, so
 # Rancher must report RancherPrime=true or the extension never loads (see
 # @rancher/shell shell/config/uiplugins.js shouldNotLoadPlugin +
 # shell/config/version.js isRancherPrime). That means:
@@ -68,14 +67,13 @@ helm repo update
 # pinning a version here every row of the CI matrix would resolve to the
 # same newest alpha and the matrix would collapse to identical runs.
 RANCHER_CHART_VERSION=$(helm search repo $RANCHER_HELM_REPO_NAME/rancher --versions --devel -o json \
-  | python3 -c "
-import json, sys
-prefix = '$CHART_VERSION_PREFIX.'
-versions = sorted(e['version'] for e in json.load(sys.stdin) if e['version'].startswith(prefix))
-if not versions:
-    sys.exit('No chart version found on prefix $CHART_VERSION_PREFIX in $RANCHER_HELM_REPO_URL')
-print(versions[-1])
-")
+  | jq -r --arg prefix "${CHART_VERSION_PREFIX}." --arg repo "$RANCHER_HELM_REPO_URL" '
+      [.[] | select(.version | startswith($prefix))] as $matches
+      | if ($matches | length) == 0
+        then error("No chart version found on prefix \($prefix) in \($repo)")
+        else ($matches | sort_by(.version) | last | .version)
+        end
+    ')
 echo "Resolved chart version: ${RANCHER_CHART_VERSION}"
 
 echo "Installing Rancher.........."
