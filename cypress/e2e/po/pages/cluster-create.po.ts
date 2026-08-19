@@ -7,8 +7,6 @@ export class ClusterCreatePo {
     return cy.visit(ClusterCreatePo.url(clusterId));
   }
 
-  // SelectIconGrid derives the testid from the card's rendered label, not
-  // its stable provider id, so this selects on the (translated) label text.
   providerCard(label: string) {
     return cy.get(`[data-testid="cluster-manager-create-grid-${ label }"]`);
   }

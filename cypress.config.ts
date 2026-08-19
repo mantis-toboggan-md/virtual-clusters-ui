@@ -10,7 +10,14 @@ if (!process.env.TEST_BASE_URL) {
   throw new Error('TEST_BASE_URL must be set to the Rancher instance to test against');
 }
 
-const baseUrl = process.env.TEST_BASE_URL.replace(/\/$/, '');
+// TEST_BASE_URL is the Rancher instance itself (also used bare, as the API
+// root, by the e2e shell scripts) - the UI is canonically served under
+// /dashboard, so normalize it here rather than in every page object/spec.
+let baseUrl = process.env.TEST_BASE_URL.replace(/\/$/, '');
+
+if (!baseUrl.endsWith('/dashboard')) {
+  baseUrl += '/dashboard';
+}
 
 export default defineConfig({
   // The served extension is plain HTTP while Rancher runs on HTTPS.
