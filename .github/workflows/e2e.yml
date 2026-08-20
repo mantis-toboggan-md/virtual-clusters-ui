@@ -34,7 +34,7 @@ jobs:
           - { chartVersionPrefix: "2.14", kubeVersion: "v1.35.5+k3s1" }
         role:
           - { username: "admin", tag: "@adminUser" }
-          - { username: "standard_user", tag: "@standardUser" }
+          - { username: "standard-user", tag: "@standardUser" }
     name: "Rancher ${{ matrix.version.chartVersionPrefix }} / ${{ matrix.role.tag }}"
     steps:
       - name: Checkout
@@ -83,6 +83,8 @@ jobs:
         
         # create a project and ns in the imported cluster, then add a standard user with the two k3k roles (see pkg/virtual-clusters/resources)
       - name: Bootstrap Standard User
+        env:
+          STANDARD_USER: ${{ matrix.role.username }}
         run: ./scripts/e2e-bootstrap-user.sh
 
       - name: Run Cypress
