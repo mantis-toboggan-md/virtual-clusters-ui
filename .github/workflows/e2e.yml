@@ -84,7 +84,7 @@ jobs:
         # create a project and ns in the imported cluster, then add a standard user with the two k3k roles (see pkg/virtual-clusters/resources)
       - name: Bootstrap Standard User
         env:
-          STANDARD_USER: ${{ matrix.role.username }}
+          STANDARD_USER: 'standard-user'
         run: ./scripts/e2e-bootstrap-user.sh
 
       - name: Run Cypress
