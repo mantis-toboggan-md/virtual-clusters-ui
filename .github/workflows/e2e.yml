@@ -43,15 +43,25 @@ jobs:
           BRANCH="${{ github.event_name == 'pull_request' && github.base_ref || github.ref_name }}"
           # workflow_dispatch's rancher_version input narrows the matrix to a single
           # row, so a fix can be iterated on without paying for the full matrix every time.
-          MATRIX=$(jq -c --arg branch "$BRANCH" --arg version "$RANCHER_VERSION_INPUT" '
+          VERSIONS=$(jq -c --arg branch "$BRANCH" --arg version "$RANCHER_VERSION_INPUT" '
             (.[$branch] // error("no rancher-versions.json entry for branch \($branch)")) as $all
             | if $version != "" then ($all | map(select(.chartVersionPrefix == $version))) else $all end
           ' rancher-versions.json)
 
-          if [ "$(echo "$MATRIX" | jq 'length')" = "0" ]; then
+          if [ "$(echo "$VERSIONS" | jq 'length')" = "0" ]; then
             echo "::error::rancher_version '${RANCHER_VERSION_INPUT}' has no entry in rancher-versions.json for branch '${BRANCH}'"
             exit 1
           fi
+
+          # Create cartesian product of versions × roles
+          MATRIX=$(echo "$VERSIONS" | jq -c '
+            . as $versions
+            | [
+              { username: "admin", tag: "@adminUser" },
+              { username: "standard_user", tag: "@standardUser" }
+            ] as $roles
+            | [$versions[] as $v | $roles[] as $r | ($v + $r)]
+          ')
 
           echo "Testing against: ${MATRIX}"
           echo "matrix=${MATRIX}" >> "$GITHUB_OUTPUT"
@@ -67,10 +77,7 @@ jobs:
       max-parallel: 3
       matrix:
         include: ${{ fromJson(needs.resolve-matrix.outputs.matrix) }}
-        role:
-          - { username: 'admin', tag: '@adminUser' }
-          - { username: 'standard_user', tag: '@standardUser' }
-    name: "Rancher ${{ matrix.chartVersionPrefix }} / ${{ matrix.role.tag }}"
+    name: "Rancher ${{ matrix.chartVersionPrefix }} / ${{ matrix.tag }}"
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
@@ -114,15 +121,15 @@ jobs:
 
       - name: Run Cypress
         env:
-          TEST_USERNAME: ${{ matrix.role.username }}
-          GREP_TAGS: ${{ matrix.role.tag }}
+          TEST_USERNAME: ${{ matrix.username }}
+          GREP_TAGS: ${{ matrix.tag }}
         run: yarn e2e:ci
 
       - name: Upload Cypress artifacts
         if: failure()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: cypress-artifacts-${{ matrix.chartVersionPrefix }}-${{ matrix.role.tag }}
+          name: cypress-artifacts-${{ matrix.chartVersionPrefix }}-${{ matrix.tag }}
           path: |
             cypress/screenshots
             cypress/videos
