@@ -29,7 +29,14 @@ export default class CruK3kPo extends PagePo {
     return new AsyncButtonPo('[data-testid="install-k3k-button"]', this.self());
   }
 
-  waitForLoad(): Cypress.Chainable {
-    return this.self().should('exist').should('be.visible');
+  // the host cluster select's data-testid lands on the inner v-select (LabeledSelect
+  // has inheritAttrs: false), but the loading spinner is a sibling of v-select under
+  // the outer .labeled-select wrapper, so we have to search from there instead
+  // TODO nb add to dashboard instead?
+  waitForHostClusterLoad(): Cypress.Chainable {
+    return this.hostClusterSelect().self()
+      .closest('.labeled-select')
+      .find('.icon-spinner', { timeout: 20000 })
+      .should('not.exist');
   }
 }

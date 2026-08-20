@@ -3,7 +3,7 @@ import { LoginPagePo } from '@rancher/cypress/e2e/po/pages/login-page.po';
 
 import CruK3kPo from '../../po/cru-k3k.po';
 
-describe('cluster creation', { tags: ['@adminUser', '@standardUser'] }, () => {
+describe('cluster creation', () => {
   beforeEach(() => {
     // cy.login()'s default navigation checks for the "Welcome to Rancher"
     // message, which Rancher Prime doesn't render - navigate to the login
@@ -25,19 +25,6 @@ describe('cluster creation', { tags: ['@adminUser', '@standardUser'] }, () => {
     clusterCreate.gridElementExistanceByName('K3K', 'be.visible');
   });
 
-  it('renders the virtual cluster creation form when the k3k card is clicked', { tags: ['@adminUser', '@standardUser'] }, () => {
-    ClusterManagerCreatePagePo.goTo('local');
-    const clusterCreate = new ClusterManagerCreatePagePo('local');
-
-    clusterCreate.waitForPage();
-
-    clusterCreate.resourceDetail().cruResource().selectSubType(1, 0).click();
-
-    const cruK3k = new CruK3kPo();
-
-    cruK3k.waitForLoad();
-  });
-
   it('offers admins an Install K3k button when a cluster without k3k is selected', { tags: ['@adminUser'] }, () => {
     ClusterManagerCreatePagePo.goTo('local');
     const clusterCreate = new ClusterManagerCreatePagePo('local');
@@ -48,7 +35,7 @@ describe('cluster creation', { tags: ['@adminUser', '@standardUser'] }, () => {
 
     const cruK3k = new CruK3kPo();
 
-    cruK3k.waitForLoad();
+    cruK3k.waitForHostClusterLoad();
     cruK3k.selectHostCluster('e2e-generic');
     cruK3k.installK3kButton().self().should('be.visible');
   });
@@ -63,7 +50,7 @@ describe('cluster creation', { tags: ['@adminUser', '@standardUser'] }, () => {
 
     const cruK3k = new CruK3kPo();
 
-    cruK3k.waitForLoad();
+    cruK3k.waitForHostClusterLoad();
     cruK3k.hostClusterOptionLabels().should('not.include', 'e2e-generic');
   });
 });

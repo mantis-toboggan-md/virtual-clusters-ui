@@ -91,66 +91,19 @@
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/userpreferences?exclude=metadata.managedFields
                 Status: 200</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Socket opened (state=connecting, id=1)</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
-                Worker to be destroyed,
-                not done yet</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
-                Worker to be destroyed,
-                not done yet</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Socket opened (state=connecting, id=2)</pre></p>
+<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
+                Worker to be destroyed,
+                not done yet</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/counts?exclude=metadata.managedFields
                 Status: 200</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
-                Worker to be destroyed,
-                not done yet</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
-                Worker to be destroyed,
-                not done yet</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
-                Worker to be destroyed,
-                not done yet</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
-                Worker to be destroyed,
-                not done yet</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
-                Worker to be destroyed,
-                not done yet</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/namespaces?exclude=metadata.managedFields
                 Status: 200</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
                 Worker to be destroyed,
                 not done yet</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
-                Worker to be destroyed,
-                not done yet</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.fleetworkspaces?exclude=metadata.managedFields
                 Status: 200</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
-                Worker to be destroyed,
-                not done yet</pre></p>
-<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">PUT https://16.147.92.28.sslip.io/v1/userpreferences/user-fnfqx
-                Status: 200</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
-                Worker to be destroyed,
-                not done yet</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
-                Worker to be destroyed,
-                not done yet</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
-                Worker to be destroyed,
-                not done yet</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
-                Worker to be destroyed,
-                not done yet</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
-                Worker to be destroyed,
-                not done yet</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
-                Worker to be destroyed,
-                not done yet</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
-                Worker to be destroyed,
-                not done yet</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
                 Worker to be destroyed,
                 done</pre></p>
@@ -159,6 +112,8 @@
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [management] userpreference</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Loading ECM cluster...</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find: [management] management.cattle.io.cluster local</pre></p>
+<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">PUT https://16.147.92.28.sslip.io/v1/userpreferences/user-fnfqx
+                Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/userpreferences?pagesize=100000&amp;exclude=metadata.managedFields
                 Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/local?exclude=metadata.managedFields
@@ -166,13 +121,11 @@
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [cluster] schema</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">PUT https://16.147.92.28.sslip.io/v1/userpreferences/user-fnfqx
                 Status: 200</pre></p>
+<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/k8s/clusters/local/v1/schemas?pagesize=100000&amp;exclude=metadata.managedFields
+                Status: 200</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find: [management] management.cattle.io.cluster local</pre></p>
 <p><pre style="color:yellow;">     cons:warn❖</pre> <pre>All of namespace is not loaded yet</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Done loading management; isRancher=true; isMultiCluster=true</pre></p>
-<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/k8s/clusters/local/v1/schemas?pagesize=100000&amp;exclude=metadata.managedFields
-                Status: 200</pre></p>
-<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">PUT https://16.147.92.28.sslip.io/v1/userpreferences/user-fnfqx
-                Status: 200</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Socket connecting (id=3, url=wss://16.147.92.28.sslip.io/k8s/clusters/local/v1/subscribe)</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [management] management.cattle.io.project</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [cluster] count</pre></p>
@@ -186,19 +139,23 @@
                 Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/ui.cattle.io.navlinks?pagesize=100000&amp;exclude=metadata.managedFields
                 Status: 200</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Socket opened (state=connecting, id=3)</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Done loading cluster.</pre></p>
+<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">PUT https://16.147.92.28.sslip.io/v1/userpreferences/user-fnfqx
+                Status: 200</pre></p>
+<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [management] secret</pre></p>
+<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Socket opened (state=connecting, id=3)</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find Page: [management] catalog.cattle.io.app. Page: null. Revision: none. Size: null. Sort: </pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [management] management.cattle.io.rancherusernotification</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [rancher] authprovider</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find Page: [management] management.cattle.io.cluster. Page: 1. Revision: none. Size: 1. Sort: </pre></p>
+<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/secrets/cattle-scc-system?pagesize=100000&amp;exclude=metadata.managedFields
+                Status: 200</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find Page: [management] management.cattle.io.cluster. Page: 1. Revision: none. Size: 10. Sort: spec.internal, status.connected, spec.displayName</pre></p>
 <p><pre style="color:yellow;">     cons:warn❖</pre> <pre>[ui-context] invalid value: {}</pre></p>
 <p><pre style="color:yellow;">     cons:warn❖</pre> <pre>[ui-context] invalid value: {}</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [management] catalog.cattle.io.clusterrepo</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [management] management.cattle.io.nodedriver</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [management] management.cattle.io.kontainerdriver</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [management] secret</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/catalog.cattle.io.apps?pagesize=100000&amp;filter=metadata.name=%22rancher-csp-adapter%22,metadata.name=%22rancher-csp-billing-adapter%22&amp;exclude=metadata.managedFields
                 Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.rancherusernotifications?pagesize=100000&amp;exclude=metadata.managedFields
@@ -210,694 +167,6 @@
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters?page=1&amp;pagesize=10&amp;sort=-spec.internal,-status.connected,spec.displayName&amp;filter=metadata.labels[provider.cattle.io]!=harvester&amp;filter=status.provider!=harvester&amp;exclude=metadata.managedFields
                 Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/catalog.cattle.io.clusterrepos?pagesize=100000&amp;exclude=metadata.managedFields
-                Status: 200</pre></p>
-<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.nodedrivers?pagesize=100000&amp;exclude=metadata.managedFields
-                Status: 200</pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.kontainerdrivers?pagesize=100000&amp;exclude=metadata.managedFields
                 Status: 200</pre></p>
 <p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Loading index for repo,
                 rancher-charts,
@@ -917,8 +186,11 @@
 <p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Loading index for repo,
                 vc,
                 (11f3ccd0-96f5-4d21-a393-bccf05c281fd)</pre></p>
-<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/secrets/cattle-scc-system?pagesize=100000&amp;exclude=metadata.managedFields
+<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.nodedrivers?pagesize=100000&amp;exclude=metadata.managedFields
                 Status: 200</pre></p>
+<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.kontainerdrivers?pagesize=100000&amp;exclude=metadata.managedFields
+                Status: 200</pre></p>
+<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Ignoring event listener request to update &#039;top-level-menu-unpinned-clusters&#039; with revision &#039;1027906&#039; (newer cached revision &#039;1029339&#039;). </pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/catalog.cattle.io.clusterrepos/rancher-charts?link=index
                 Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/catalog.cattle.io.clusterrepos/rancher-partner-charts?link=index
@@ -931,10 +203,10 @@
                 Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/catalog.cattle.io.clusterrepos/vc?link=index
                 Status: 200</pre></p>
-<p><pre style="color:yellow;">     cons:warn❖</pre> <pre>[ui-context] invalid value: {}</pre></p>
-<p><pre style="color:yellow;">     cons:warn❖</pre> <pre>[ui-context] invalid value: {}</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://updates.rancher.io/rancher/prime/updates?dcv=v1&amp;s=360e7010f8ffe2c2b906250b2e961ed4&amp;u=51d3883542f745d5a316e319b3b4ab22&amp;uuid=e104eebb-84d2-4150-9189-450e8c00686b&amp;svt=prime&amp;v=v2.15.1&amp;dev=true&amp;p=true&amp;cc=2&amp;lkv=v1.34.10&amp;lcp=K3S&amp;lnc=1&amp;xkn=virtual-clusters&amp;xcc=1&amp;bl=en-US&amp;bs=1000x660&amp;ss=3840x2160&amp;ff-usc=true
                 Status: 200</pre></p>
+<p><pre style="color:yellow;">     cons:warn❖</pre> <pre>[ui-context] invalid value: {}</pre></p>
+<p><pre style="color:yellow;">     cons:warn❖</pre> <pre>[ui-context] invalid value: {}</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [management] provisioning.cattle.io.cluster</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [management] management.cattle.io.cluster</pre></p>
 <p><pre style="color:yellow;">     cons:warn❖</pre> <pre>[ui-context] invalid value: {}</pre></p>
@@ -964,6 +236,7 @@
                 Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/k8s/clusters/local/v1/schemas/k3k.io.cluster
                 Status: 200</pre></p>
+<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find Page: [management] management.cattle.io.cluster. Page: 1. Revision: 1029339. Size: 10. Sort: spec.internal, status.connected, spec.displayName</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/k8s/clusters/local/v1/schemas/catalog.cattle.io.clusterrepo
                 Status: 200</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Starting wait for,
@@ -972,6 +245,8 @@
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
                 The management.cattle.io.cluster c-gls6t to become available. It&#039;s possible the cluster was created. We suggest checking the clusters page before trying to create another.,
                 done immediately</pre></p>
+<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters?page=1&amp;pagesize=10&amp;sort=-spec.internal,-status.connected,spec.displayName&amp;filter=metadata.labels[provider.cattle.io]!=harvester&amp;filter=status.provider!=harvester&amp;exclude=metadata.managedFields&amp;revision=1029339
+                Status: 200</pre></p>
 <p><pre style="color:yellow;">        cy:xhr❖</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/k8s/clusters/c-gls6t/v1/schemaDefinitions/k3k.io.cluster
                 Status: 404</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/k8s/clusters/c-gls6t/v1/schemas/catalog.cattle.io.app
@@ -985,8 +260,8 @@
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/k8s/clusters/c-gls6t/v1/storage.k8s.io.storageclasses
                 Status: 200</pre></p>
 <p><pre style="color:darkcyan;">        cy:log✱</pre> <pre><b>Host Stats on Failure</b></pre></p>
-<p><pre style="color:darkcyan;">        cy:log✱</pre> <pre>Process CPU: 0.98%</pre></p>
-<p><pre style="color:darkcyan;">        cy:log✱</pre> <pre>Memory Usage: 16101.13MB (98.27%)</pre></p>
+<p><pre style="color:darkcyan;">        cy:log✱</pre> <pre>Process CPU: 2.73%</pre></p>
+<p><pre style="color:darkcyan;">        cy:log✱</pre> <pre>Memory Usage: 15400.88MB (94.00%)</pre></p>
 <br>
 <h2>cluster creation -&gt; does not allow standard users to select clusters without k3k installed</h2>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/rancherversion
@@ -1069,11 +344,16 @@
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
                 Worker to be destroyed,
                 not done yet</pre></p>
-<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/counts?exclude=metadata.managedFields
-                Status: 200</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Socket opened (state=connecting, id=1)</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Socket opened (state=connecting, id=2)</pre></p>
+<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/counts?exclude=metadata.managedFields
+                Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/namespaces?exclude=metadata.managedFields
+                Status: 200</pre></p>
+<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
+                Worker to be destroyed,
+                not done yet</pre></p>
+<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.fleetworkspaces?exclude=metadata.managedFields
                 Status: 200</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Wait for,
                 Worker to be destroyed,
@@ -1083,46 +363,41 @@
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [management] userpreference</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Loading ECM cluster...</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find: [management] management.cattle.io.cluster local</pre></p>
-<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.fleetworkspaces?exclude=metadata.managedFields
-                Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/userpreferences?pagesize=100000&amp;exclude=metadata.managedFields
                 Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/local?exclude=metadata.managedFields
                 Status: 200</pre></p>
-<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">PUT https://16.147.92.28.sslip.io/v1/userpreferences/user-fnfqx
-                Status: 200</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [cluster] schema</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">PUT https://16.147.92.28.sslip.io/v1/userpreferences/user-fnfqx
                 Status: 200</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find: [management] management.cattle.io.cluster local</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/k8s/clusters/local/v1/schemas?pagesize=100000&amp;exclude=metadata.managedFields
                 Status: 200</pre></p>
-<p><pre style="color:yellow;">     cons:warn❖</pre> <pre>All of namespace is not loaded yet</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Done loading management; isRancher=true; isMultiCluster=true</pre></p>
-<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">PUT https://16.147.92.28.sslip.io/v1/userpreferences/user-fnfqx
-                Status: 200</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [management] secret</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Socket connecting (id=3, url=wss://16.147.92.28.sslip.io/k8s/clusters/local/v1/subscribe)</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [management] management.cattle.io.project</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [cluster] count</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [cluster] namespace</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [cluster] ui.cattle.io.navlink</pre></p>
-<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/secrets/cattle-scc-system?pagesize=100000&amp;exclude=metadata.managedFields
-                Status: 200</pre></p>
-<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.project/local?pagesize=100000&amp;exclude=metadata.managedFields
-                Status: 200</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Socket opened (state=connecting, id=3)</pre></p>
+<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [management] management.cattle.io.project</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/counts?pagesize=100000&amp;exclude=metadata.managedFields
                 Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/namespaces?pagesize=100000&amp;exclude=metadata.managedFields
                 Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/ui.cattle.io.navlinks?pagesize=100000&amp;exclude=metadata.managedFields
                 Status: 200</pre></p>
+<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Socket opened (state=connecting, id=3)</pre></p>
+<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.project/local?pagesize=100000&amp;exclude=metadata.managedFields
+                Status: 200</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Done loading cluster.</pre></p>
+<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">PUT https://16.147.92.28.sslip.io/v1/userpreferences/user-fnfqx
+                Status: 200</pre></p>
+<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find: [management] management.cattle.io.cluster local</pre></p>
+<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Done loading management; isRancher=true; isMultiCluster=true</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find Page: [management] catalog.cattle.io.app. Page: null. Revision: none. Size: null. Sort: </pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [management] management.cattle.io.rancherusernotification</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [rancher] authprovider</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find Page: [management] management.cattle.io.cluster. Page: 1. Revision: none. Size: 1. Sort: </pre></p>
+<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">PUT https://16.147.92.28.sslip.io/v1/userpreferences/user-fnfqx
+                Status: 200</pre></p>
+<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [management] secret</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find Page: [management] management.cattle.io.cluster. Page: 1. Revision: none. Size: 10. Sort: spec.internal, status.connected, spec.displayName</pre></p>
 <p><pre style="color:yellow;">     cons:warn❖</pre> <pre>[ui-context] invalid value: {}</pre></p>
 <p><pre style="color:yellow;">     cons:warn❖</pre> <pre>[ui-context] invalid value: {}</pre></p>
@@ -1137,241 +412,11 @@
                 Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters?page=1&amp;pagesize=1&amp;filter=metadata.labels[provider.cattle.io]!=harvester&amp;filter=status.provider!=harvester&amp;exclude=metadata.managedFields
                 Status: 200</pre></p>
+<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/secrets/cattle-scc-system?pagesize=100000&amp;exclude=metadata.managedFields
+                Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters?page=1&amp;pagesize=10&amp;sort=-spec.internal,-status.connected,spec.displayName&amp;filter=metadata.labels[provider.cattle.io]!=harvester&amp;filter=status.provider!=harvester&amp;exclude=metadata.managedFields
                 Status: 200</pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Clearing queued item of type `management.cattle.io.cluster` from queue,
-                {
-                  &quot;action&quot;: &quot;dispatch&quot;,
-                  &quot;event&quot;: &quot;load&quot;,
-                  &quot;body&quot;: {
-                    &quot;id&quot;: &quot;c-gls6t&quot;,
-                    &quot;type&quot;: &quot;management.cattle.io.cluster&quot;,
-                    &quot;links&quot;: {
-                      &quot;log&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=log&quot;,
-                      &quot;patch&quot;: &quot;blocked&quot;,
-                      &quot;projects&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=projects&quot;,
-                      &quot;remove&quot;: &quot;blocked&quot;,
-                      &quot;schemas&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t?link=schemas&quot;,
-                      &quot;self&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters/c-gls6t&quot;,
-                      &quot;shell&quot;: &quot;wss://16.147.92.28.sslip.io/v3/clusters/c-gls6t?shell=true&quot;,
-                      &quot;subscribe&quot;: &quot;https://16.147.92.28.sslip.io/v1/management.cat ...
-                
-                ... remainder of log omitted ...
-                </pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/catalog.cattle.io.clusterrepos?pagesize=100000&amp;exclude=metadata.managedFields
-                Status: 200</pre></p>
-<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.nodedrivers?pagesize=100000&amp;exclude=metadata.managedFields
-                Status: 200</pre></p>
-<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.kontainerdrivers?pagesize=100000&amp;exclude=metadata.managedFields
                 Status: 200</pre></p>
 <p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Loading index for repo,
                 rancher-charts,
@@ -1391,9 +436,12 @@
 <p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Loading index for repo,
                 vc,
                 (11f3ccd0-96f5-4d21-a393-bccf05c281fd)</pre></p>
+<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.nodedrivers?pagesize=100000&amp;exclude=metadata.managedFields
+                Status: 200</pre></p>
+<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.kontainerdrivers?pagesize=100000&amp;exclude=metadata.managedFields
+                Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/catalog.cattle.io.clusterrepos/rancher-charts?link=index
                 Status: 200</pre></p>
-<p><pre style="color:darkcyan;">     cons:info✱</pre> <pre>Ignoring event listener request to update &#039;top-level-menu-unpinned-clusters&#039; with revision &#039;1028045&#039; (newer cached revision &#039;1029339&#039;). </pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/catalog.cattle.io.clusterrepos/rancher-partner-charts?link=index
                 Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/catalog.cattle.io.clusterrepos/rancher-rke2-charts?link=index
@@ -1406,11 +454,11 @@
                 Status: 200</pre></p>
 <p><pre style="color:yellow;">     cons:warn❖</pre> <pre>[ui-context] invalid value: {}</pre></p>
 <p><pre style="color:yellow;">     cons:warn❖</pre> <pre>[ui-context] invalid value: {}</pre></p>
+<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://updates.rancher.io/rancher/prime/updates?dcv=v1&amp;s=360e7010f8ffe2c2b906250b2e961ed4&amp;u=51d3883542f745d5a316e319b3b4ab22&amp;uuid=e104eebb-84d2-4150-9189-450e8c00686b&amp;svt=prime&amp;v=v2.15.1&amp;dev=true&amp;p=true&amp;cc=2&amp;lkv=v1.34.10&amp;lcp=K3S&amp;lnc=1&amp;xkn=virtual-clusters&amp;xcc=1&amp;bl=en-US&amp;bs=1000x660&amp;ss=3840x2160&amp;ff-usc=true
+                Status: 200</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [management] provisioning.cattle.io.cluster</pre></p>
 <p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find All: [management] management.cattle.io.cluster</pre></p>
 <p><pre style="color:yellow;">     cons:warn❖</pre> <pre>[ui-context] invalid value: {}</pre></p>
-<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://updates.rancher.io/rancher/prime/updates?dcv=v1&amp;s=360e7010f8ffe2c2b906250b2e961ed4&amp;u=51d3883542f745d5a316e319b3b4ab22&amp;uuid=e104eebb-84d2-4150-9189-450e8c00686b&amp;svt=prime&amp;v=v2.15.1&amp;dev=true&amp;p=true&amp;cc=2&amp;lkv=v1.34.10&amp;lcp=K3S&amp;lnc=1&amp;xkn=virtual-clusters&amp;xcc=1&amp;bl=en-US&amp;bs=1000x660&amp;ss=3840x2160&amp;ff-usc=true
-                Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/provisioning.cattle.io.clusters?pagesize=100000&amp;exclude=metadata.managedFields
                 Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters?pagesize=100000&amp;exclude=metadata.managedFields
@@ -1453,16 +501,13 @@
                 Status: 200</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/k8s/clusters/c-gls6t/v1/schemas/storage.k8s.io.storageclass
                 Status: 200</pre></p>
-<p><pre style="color:yellow;">        cy:xhr❖</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/k8s/clusters/c-gls6t/v1/catalog.cattle.io.apps/k3k-system/suse-virtual-cluster-engine
-                Status: 404</pre></p>
 <p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/k8s/clusters/c-gls6t/v1/storage.k8s.io.storageclasses
                 Status: 200</pre></p>
-<p><pre style="color:darkcyan;">      cons:log✱</pre> <pre>Find Page: [management] management.cattle.io.cluster. Page: 1. Revision: 1029339. Size: 10. Sort: spec.internal, status.connected, spec.displayName</pre></p>
-<p><pre style="color:lightgrey;">        cy:xhr➟</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/v1/management.cattle.io.clusters?page=1&amp;pagesize=10&amp;sort=-spec.internal,-status.connected,spec.displayName&amp;filter=metadata.labels[provider.cattle.io]!=harvester&amp;filter=status.provider!=harvester&amp;exclude=metadata.managedFields&amp;revision=1029339
-                Status: 200</pre></p>
+<p><pre style="color:yellow;">        cy:xhr❖</pre> <pre style="color:lightgrey;">GET https://16.147.92.28.sslip.io/k8s/clusters/c-gls6t/v1/catalog.cattle.io.apps/k3k-system/suse-virtual-cluster-engine
+                Status: 404</pre></p>
 <p><pre style="color:darkcyan;">        cy:log✱</pre> <pre><b>Host Stats on Failure</b></pre></p>
-<p><pre style="color:darkcyan;">        cy:log✱</pre> <pre>Process CPU: 4.54%</pre></p>
-<p><pre style="color:darkcyan;">        cy:log✱</pre> <pre>Memory Usage: 15832.32MB (96.63%)</pre></p>
+<p><pre style="color:darkcyan;">        cy:log✱</pre> <pre>Process CPU: 1.21%</pre></p>
+<p><pre style="color:darkcyan;">        cy:log✱</pre> <pre>Memory Usage: 16348.42MB (99.78%)</pre></p>
 <br>
 
 </body>
