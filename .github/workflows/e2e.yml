@@ -67,7 +67,10 @@ jobs:
       max-parallel: 3
       matrix:
         include: ${{ fromJson(needs.resolve-matrix.outputs.matrix) }}
-    name: "Rancher ${{ matrix.chartVersionPrefix }}"
+        role:
+          - { username: 'admin', tag: '@adminUser' }
+          - { username: 'standard_user', tag: '@standardUser' }
+    name: "Rancher ${{ matrix.chartVersionPrefix }} / ${{ matrix.role.tag }}"
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
@@ -111,14 +114,15 @@ jobs:
 
       - name: Run Cypress
         env:
-          TEST_USERNAME: admin
+          TEST_USERNAME: ${{ matrix.role.username }}
+          GREP_TAGS: ${{ matrix.role.tag }}
         run: yarn e2e:ci
 
       - name: Upload Cypress artifacts
         if: failure()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: cypress-artifacts-${{ matrix.chartVersionPrefix }}
+          name: cypress-artifacts-${{ matrix.chartVersionPrefix }}-${{ matrix.role.tag }}
           path: |
             cypress/screenshots
             cypress/videos
