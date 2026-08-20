@@ -175,6 +175,23 @@ if [ -z "$USER_ID" ]; then
 fi
 echo "User ID: ${USER_ID}"
 
+# Without this, login succeeds (a token is issued) but the dashboard's
+# post-login bootstrapping (fetching prefs/self-user/etc.) fails for a user
+# with no global permissions at all, leaving the login button stuck in its
+# error state. Every dashboard e2e spec that creates a standard user grants
+# this same baseline role (see cy.createUser's `globalRole: { role: 'user' }`
+# usage across rancher/dashboard's Cypress specs).
+echo "Setting base 'user' global role.........."
+GLOBAL_ROLE_RESP=$(curl -sk -X POST "${TEST_BASE_URL}/v3/globalrolebindings" \
+  -H "Authorization: Bearer ${TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d "{\"type\":\"globalRoleBinding\",\"globalRoleId\":\"user\",\"userId\":\"${USER_ID}\"}")
+
+if [ -z "$(echo "$GLOBAL_ROLE_RESP" | jq -r '.id // empty')" ]; then
+  echo "Failed to set global role binding. Response: ${GLOBAL_ROLE_RESP}"
+  exit 1
+fi
+
 echo "Fetching user principal ID.........."
 USER_PRINCIPAL_ID=""
 for i in $(seq 1 10); do
