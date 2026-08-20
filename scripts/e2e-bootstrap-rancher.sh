@@ -3,8 +3,10 @@ set -e
 
 # Accepts the EULA and sets the server URL, mirroring the bootstrap curl loop
 # rancher/dashboard runs in its own CI (scripts/e2e-extension-k3s-start.sh
-# callers) - retried because rancher-webhook can briefly be unavailable right
+# callers). This allows virtual clusters tests to skip the initial Rancher stetup flow, which is tested in the dashboard repo. 
+# This is retried because rancher-webhook can briefly be unavailable right
 # after boot, which otherwise makes login return no token.
+
 
 TEST_BASE_URL=${TEST_BASE_URL:-https://127.0.0.1.sslip.io}
 CATTLE_BOOTSTRAP_PASSWORD=${CATTLE_BOOTSTRAP_PASSWORD:-password}

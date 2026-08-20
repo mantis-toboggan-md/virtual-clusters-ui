@@ -5,19 +5,12 @@ on:
     branches: [main]
   push:
     branches: [main]
-  workflow_dispatch:
-    inputs:
-      rancher_version:
-        description: "Test a specific Rancher minor line only (e.g. 2.15). Leave empty for the full matrix."
-        required: false
-        type: string
-        default: ""
 
 concurrency:
   group: e2e-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
-# Neither job calls the GitHub API or pushes anything - explicit least-privilege
+# The e2e job doesn't call the GitHub API or push anything - explicit least-privilege
 # regardless of the org/repo default token permissions.
 permissions:
   contents: read
@@ -27,47 +20,7 @@ env:
   EXTENSION_SERVER_PORT: "8080"
 
 jobs:
-  resolve-matrix:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.resolve.outputs.matrix }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
-
-      - name: Resolve Rancher versions for this branch
-        id: resolve
-        env:
-          RANCHER_VERSION_INPUT: ${{ github.event.inputs.rancher_version }}
-        run: |
-          BRANCH="${{ github.event_name == 'pull_request' && github.base_ref || github.ref_name }}"
-          # workflow_dispatch's rancher_version input narrows the matrix to a single
-          # row, so a fix can be iterated on without paying for the full matrix every time.
-          VERSIONS=$(jq -c --arg branch "$BRANCH" --arg version "$RANCHER_VERSION_INPUT" '
-            (.[$branch] // error("no rancher-versions.json entry for branch \($branch)")) as $all
-            | if $version != "" then ($all | map(select(.chartVersionPrefix == $version))) else $all end
-          ' rancher-versions.json)
-
-          if [ "$(echo "$VERSIONS" | jq 'length')" = "0" ]; then
-            echo "::error::rancher_version '${RANCHER_VERSION_INPUT}' has no entry in rancher-versions.json for branch '${BRANCH}'"
-            exit 1
-          fi
-
-          # Create cartesian product of versions × roles
-          MATRIX=$(echo "$VERSIONS" | jq -c '
-            . as $versions
-            | [
-              { username: "admin", tag: "@adminUser" },
-              { username: "standard_user", tag: "@standardUser" }
-            ] as $roles
-            | [$versions[] as $v | $roles[] as $r | ($v + $r)]
-          ')
-
-          echo "Testing against: ${MATRIX}"
-          echo "matrix=${MATRIX}" >> "$GITHUB_OUTPUT"
-
   e2e:
-    needs: resolve-matrix
     runs-on: ubuntu-latest
     timeout-minutes: 45
     strategy:
@@ -76,8 +29,13 @@ jobs:
       # independent - capped to leave runner headroom for other workflows.
       max-parallel: 3
       matrix:
-        include: ${{ fromJson(needs.resolve-matrix.outputs.matrix) }}
-    name: "Rancher ${{ matrix.chartVersionPrefix }} / ${{ matrix.tag }}"
+        version:
+          - { chartVersionPrefix: "2.15", kubeVersion: "v1.36.2+k3s1" }
+          - { chartVersionPrefix: "2.14", kubeVersion: "v1.35.5+k3s1" }
+        role:
+          - { username: "admin", tag: "@adminUser" }
+          - { username: "standard_user", tag: "@standardUser" }
+    name: "Rancher ${{ matrix.version.chartVersionPrefix }} / ${{ matrix.role.tag }}"
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
@@ -106,8 +64,8 @@ jobs:
 
       - name: Start Rancher (Prime alpha, Helm on k3s)
         env:
-          CHART_VERSION_PREFIX: ${{ matrix.chartVersionPrefix }}
-          KUBE_VERSION: ${{ matrix.kubeVersion }}
+          CHART_VERSION_PREFIX: ${{ matrix.version.chartVersionPrefix }}
+          KUBE_VERSION: ${{ matrix.version.kubeVersion }}
         run: ./scripts/e2e-k3s-start.sh
 
       - name: Bootstrap Rancher
@@ -119,17 +77,20 @@ jobs:
       - name: Build, serve, and register the extension
         run: ./scripts/e2e-create-uiplugin.sh
 
+      - name: Bootstrap Standard User
+        run: ./scripts/e2e-bootstrap-user.sh
+
       - name: Run Cypress
         env:
-          TEST_USERNAME: ${{ matrix.username }}
-          GREP_TAGS: ${{ matrix.tag }}
+          TEST_USERNAME: ${{ matrix.role.username }}
+          GREP_TAGS: ${{ matrix.role.tag }}
         run: yarn e2e:ci
 
       - name: Upload Cypress artifacts
         if: failure()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: cypress-artifacts-${{ matrix.chartVersionPrefix }}-${{ matrix.tag }}
+          name: cypress-artifacts-${{ matrix.version.chartVersionPrefix }}-${{ matrix.role.tag }}
           path: |
             cypress/screenshots
             cypress/videos

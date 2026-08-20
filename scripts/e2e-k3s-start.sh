@@ -4,9 +4,7 @@ set -e
 # ---------------------------------------------------------------------------
 # Stand up k3s + Rancher from the SUSE Prime alpha channel, pinned to a
 # specific minor line. The extension is annotated prime-only, so
-# Rancher must report RancherPrime=true or the extension never loads (see
-# @rancher/shell shell/config/uiplugins.js shouldNotLoadPlugin +
-# shell/config/version.js isRancherPrime). That means:
+# Rancher setup is a little different than what is used in dashboard CI. 
 #   - the chart MUST come from the alpha channel, not the per-line optimus
 #     release-2.XX channels - those are community, not prime
 #   - the chart's own default server image must be left alone: no

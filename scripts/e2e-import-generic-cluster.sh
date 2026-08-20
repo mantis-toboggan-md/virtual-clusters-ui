@@ -13,7 +13,6 @@ set -e
 #   3. running that command against the target cluster's kubeconfig
 #      registers it with Rancher
 #
-# //TODO nb right place to get insecureCommand or should it be from spec?
 # NOTE: step 2's exact field (status.insecureCommand on the v1 resource) is
 # inferred, not confirmed against a live cluster - rancher/dashboard's own
 # UI reads the equivalent field from the older Norman
