@@ -49,17 +49,6 @@ role_json() {
 ADMIN_ROLE_JSON=$(role_json "$SCRIPT_DIR/../pkg/virtual-clusters/resources/virtual-cluster-admin-role.js")
 POLICY_ROLE_JSON=$(role_json "$SCRIPT_DIR/../pkg/virtual-clusters/resources/virtual-cluster-policy-read-role.js")
 
-PROJECT_ROLE=$(echo "$ADMIN_ROLE_JSON" | jq -r '.metadata.name // empty')
-CLUSTER_ROLE=$(echo "$POLICY_ROLE_JSON" | jq -r '.metadata.name // empty')
-
-if [ -z "$PROJECT_ROLE" ] || [ -z "$CLUSTER_ROLE" ]; then
-  echo "Failed to extract role names from role definition files"
-  exit 1
-fi
-
-echo "Using project role: ${PROJECT_ROLE}"
-echo "Using cluster role: ${CLUSTER_ROLE}"
-
 echo "Logging in as admin.........."
 TOKEN=""
 for i in $(seq 1 60); do
@@ -78,34 +67,49 @@ fi
 
 # The two roles below are normally created client-side, the first time the
 # extension loads for a logged-in admin (see createRoleIfNotFound in
-# pkg/virtual-clusters/index.ts) - not on install. Since these e2e runs never
-# load the UI as admin first, create them here via the same Norman /v3 API
-# the client ultimately writes through (management/create + .norman.save()
-# never actually touches /v1 - it's an in-memory proxy that's persisted only
-# via the norman-store object's own create/save).
-create_role_if_not_found() {
+# pkg/virtual-clusters/index.ts). We want to be able to create a standard user
+# and run tests without necessarily running admin tests first, so create the
+# roles here too if they're missing.
+#
+# RoleTemplate ids are server-generated (not derived from metadata.name), so
+# existence has to be checked - and the real id resolved - via the same
+# ui-role-name label the app itself matches on, not by guessing an id.
+find_role_id() {
+  local role_ui_name="$1"
+
+  curl -sk -G "${TEST_BASE_URL}/v1/management.cattle.io.roletemplates" \
+    -H "Authorization: Bearer ${TOKEN}" \
+    --data-urlencode "pagesize=100000" \
+    --data-urlencode "filter=metadata.labels[management.cattle.io/ui-role-name] IN (${role_ui_name})" \
+    --data-urlencode "exclude=metadata.managedFields" \
+    | jq -r '.data[0].id // empty'
+}
+
+# Echoes the resolved (pre-existing or newly created) role id on stdout -
+# all other output must go to stderr so it doesn't pollute that value when
+# callers capture it via $(...).
+ensure_role() {
   local role_json="$1"
-  local role_id
+  local role_ui_name
   local role_name
   local labels
+  local role_id
   local create_body
   local create_resp
 
-  role_id=$(echo "$role_json" | jq -r '.metadata.name')
+  role_ui_name=$(echo "$role_json" | jq -r '.metadata.labels["management.cattle.io/ui-role-name"]')
   role_name=$(echo "$role_json" | jq -r '.displayName')
   labels=$(echo "$role_json" | jq -c '.metadata.labels')
 
-  EXISTING=$(curl -sk "${TEST_BASE_URL}/v3/roletemplates/${role_id}" \
-    -H "Authorization: Bearer ${TOKEN}" \
-    -H "Content-Type: application/json")
-
-  if [ -n "$(echo "$EXISTING" | jq -r '.id // empty')" ]; then
-    echo "  RoleTemplate '${role_id}' already exists"
+  role_id=$(find_role_id "$role_ui_name")
+  if [ -n "$role_id" ]; then
+    echo "  RoleTemplate '${role_name}' already exists (id: ${role_id})" >&2
+    echo "$role_id"
     return
   fi
 
-  create_body=$(echo "$role_json" | jq -c --arg id "$role_id" --arg name "$role_name" --argjson labels "$labels" \
-    '{type: "roleTemplate", id: $id, name: $name, context, description, rules, labels: $labels}
+  create_body=$(echo "$role_json" | jq -c --arg name "$role_name" --argjson labels "$labels" \
+    '{type: "roleTemplate", name: $name, context, description, rules, labels: $labels}
      + (if .roleTemplateNames then {roleTemplateIds: .roleTemplateNames} else {} end)')
 
   create_resp=$(curl -sk -X POST "${TEST_BASE_URL}/v3/roletemplates" \
@@ -113,16 +117,25 @@ create_role_if_not_found() {
     -H "Content-Type: application/json" \
     -d "$create_body")
 
-  if [ -z "$(echo "$create_resp" | jq -r '.id // empty')" ]; then
-    echo "Failed to create RoleTemplate '${role_id}'. Response: ${create_resp}"
+  role_id=$(echo "$create_resp" | jq -r '.id // empty')
+  if [ -z "$role_id" ]; then
+    echo "Failed to create RoleTemplate '${role_name}'. Response: ${create_resp}" >&2
     exit 1
   fi
-  echo "  Created RoleTemplate '${role_id}'"
+  echo "  Created RoleTemplate '${role_name}' (id: ${role_id})" >&2
+  echo "$role_id"
 }
 
 echo "Ensuring required RoleTemplates exist.........."
-create_role_if_not_found "$ADMIN_ROLE_JSON"
-create_role_if_not_found "$POLICY_ROLE_JSON"
+PROJECT_ROLE=$(ensure_role "$ADMIN_ROLE_JSON")
+CLUSTER_ROLE=$(ensure_role "$POLICY_ROLE_JSON")
+
+if [ -z "$PROJECT_ROLE" ] || [ -z "$CLUSTER_ROLE" ]; then
+  echo "Failed to resolve role ids"
+  exit 1
+fi
+echo "Project role id: ${PROJECT_ROLE}"
+echo "Cluster role id: ${CLUSTER_ROLE}"
 
 echo "Creating project '${PROJECT_NAME}'.........."
 PROJECT_RESP=$(curl -sk -X POST "${TEST_BASE_URL}/v3/projects" \
