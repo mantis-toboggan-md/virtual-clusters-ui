@@ -61,22 +61,27 @@ jobs:
           HOST_IP=$(docker network inspect bridge --format '{{(index .IPAM.Config 0).Gateway}}')
           echo "Routing TEST_BASE_URL through the Docker bridge gateway: ${HOST_IP}"
           echo "TEST_BASE_URL=https://${HOST_IP}.sslip.io" >> "$GITHUB_ENV"
-
+        
+        # Install Rancher and wait for it to become available
       - name: Start Rancher (Prime alpha, Helm on k3s)
         env:
           CHART_VERSION_PREFIX: ${{ matrix.version.chartVersionPrefix }}
           KUBE_VERSION: ${{ matrix.version.kubeVersion }}
         run: ./scripts/e2e-k3s-start.sh
-
+        
+        # Navigate the initial setup flow: accept EULA, bootstrap password, set server URL
       - name: Bootstrap Rancher
         run: ./scripts/e2e-bootstrap-rancher.sh
-
+        
+        # create another cluster and import it, to use as the virtual host cluster
       - name: Import a k3d cluster as a generic cluster
         run: ./scripts/e2e-import-generic-cluster.sh
-
+        
+        # build the extension from this branch's code, load it into the UI using the 'Developer Load' mechanism
       - name: Build, serve, and register the extension
         run: ./scripts/e2e-create-uiplugin.sh
-
+        
+        # create a project and ns in the imported cluster, then add a standard user with the two k3k roles (see pkg/virtual-clusters/resources)
       - name: Bootstrap Standard User
         run: ./scripts/e2e-bootstrap-user.sh
 
