@@ -13,11 +13,18 @@ set -e
 
 TEST_BASE_URL=${TEST_BASE_URL:-https://127.0.0.1.sslip.io}
 CATTLE_BOOTSTRAP_PASSWORD=${CATTLE_BOOTSTRAP_PASSWORD:-password}
-DOWNSTREAM_CLUSTER_ID=${DOWNSTREAM_CLUSTER_ID:-e2e-generic}
 PROJECT_NAME=${PROJECT_NAME:-e2e-project}
 NAMESPACE_NAME=${NAMESPACE_NAME:-e2e-namespace}
 STANDARD_USER=${STANDARD_USER:-standard-user}
 STANDARD_USER_PASSWORD=${STANDARD_USER_PASSWORD:-$CATTLE_BOOTSTRAP_PASSWORD}
+
+# MGMT_CLUSTER_NAME is the management cluster's actual id (e.g. "c-m-xxxxxxxx"),
+# set by e2e-import-generic-cluster.sh - the norman cluster's display name
+# (CLUSTER_NAME there) is not a valid id for the API calls below.
+if [ -z "$MGMT_CLUSTER_NAME" ]; then
+  echo "MGMT_CLUSTER_NAME must be set to the downstream cluster's management cluster id"
+  exit 1
+fi
 
 # Get role names from role definition files
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -52,7 +59,7 @@ echo "Creating project '${PROJECT_NAME}'.........."
 PROJECT_RESP=$(curl -sk -X POST "${TEST_BASE_URL}/v3/projects" \
   -H "Authorization: Bearer ${TOKEN}" \
   -H "Content-Type: application/json" \
-  -d "{\"type\":\"project\",\"name\":\"${PROJECT_NAME}\",\"annotations\":{},\"labels\":{},\"clusterId\":\"${DOWNSTREAM_CLUSTER_ID}\",\"creatorId\":\"${DOWNSTREAM_CLUSTER_ID}://admin\",\"containerDefaultResourceLimit\":{},\"resourceQuota\":{},\"namespaceDefaultResourceQuota\":{}}")
+  -d "{\"type\":\"project\",\"name\":\"${PROJECT_NAME}\",\"annotations\":{},\"labels\":{},\"clusterId\":\"${MGMT_CLUSTER_NAME}\",\"creatorId\":\"${MGMT_CLUSTER_NAME}://admin\",\"containerDefaultResourceLimit\":{},\"resourceQuota\":{},\"namespaceDefaultResourceQuota\":{}}")
 
 PROJECT_ID=$(echo "$PROJECT_RESP" | jq -r '.id // empty')
 if [ -z "$PROJECT_ID" ]; then
@@ -131,7 +138,7 @@ echo "Setting '${CLUSTER_ROLE}' cluster role.........."
 CLUSTER_ROLE_RESP=$(curl -sk -X POST "${TEST_BASE_URL}/v3/clusterroletemplatebindings" \
   -H "Authorization: Bearer ${TOKEN}" \
   -H "Content-Type: application/json" \
-  -d "{\"type\":\"clusterRoleTemplateBinding\",\"clusterId\":\"${DOWNSTREAM_CLUSTER_ID}\",\"roleTemplateId\":\"${CLUSTER_ROLE}\",\"userPrincipalId\":\"${USER_PRINCIPAL_ID}\"}")
+  -d "{\"type\":\"clusterRoleTemplateBinding\",\"clusterId\":\"${MGMT_CLUSTER_NAME}\",\"roleTemplateId\":\"${CLUSTER_ROLE}\",\"userPrincipalId\":\"${USER_PRINCIPAL_ID}\"}")
 
 if [ -z "$(echo "$CLUSTER_ROLE_RESP" | jq -r '.id // empty')" ]; then
   echo "Failed to set cluster role binding. Response: ${CLUSTER_ROLE_RESP}"

@@ -58,6 +58,7 @@ CLUSTER_RESP=$(curl -sk -X POST "${TEST_BASE_URL}/v3/clusters" \
 
 MGMT_CLUSTER_NAME=$(echo "$CLUSTER_RESP" | jq -r '.id')
 echo "Management cluster name: ${MGMT_CLUSTER_NAME}"
+echo "MGMT_CLUSTER_NAME=${MGMT_CLUSTER_NAME}" >> "$GITHUB_ENV"
 
 echo "Fetching the registration command.........."
 REGISTRATION_COMMAND=""
