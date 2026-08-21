@@ -17,8 +17,8 @@ describe('cluster creation', () => {
   });
 
   it('shows a card for the k3k provisioner', { tags: ['@adminUser', '@standardUser'] }, () => {
-    ClusterManagerCreatePagePo.goTo('local');
-    const clusterCreate = new ClusterManagerCreatePagePo('local');
+    ClusterManagerCreatePagePo.goTo('_');
+    const clusterCreate = new ClusterManagerCreatePagePo(  );
 
     clusterCreate.waitForPage();
 
@@ -26,8 +26,8 @@ describe('cluster creation', () => {
   });
 
   it('offers admins an Install K3k button when a cluster without k3k is selected', { tags: ['@adminUser'] }, () => {
-    ClusterManagerCreatePagePo.goTo('local');
-    const clusterCreate = new ClusterManagerCreatePagePo('local');
+    ClusterManagerCreatePagePo.goTo('_');
+    const clusterCreate = new ClusterManagerCreatePagePo();
 
     clusterCreate.waitForPage();
 
@@ -41,8 +41,8 @@ describe('cluster creation', () => {
   });
 
   it('does not allow standard users to select clusters without k3k installed', { tags: ['@standardUser'] }, () => {
-    ClusterManagerCreatePagePo.goTo('local');
-    const clusterCreate = new ClusterManagerCreatePagePo('local');
+    ClusterManagerCreatePagePo.goTo( '_');
+    const clusterCreate = new ClusterManagerCreatePagePo();
 
     clusterCreate.waitForPage();
 
