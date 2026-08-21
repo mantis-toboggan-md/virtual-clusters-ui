@@ -7,9 +7,10 @@ set -e
 # Resources created:
 #   - A project in the downstream cluster
 #   - A namespace within that project
-#   - A standard user
-#   - Role bindings: 'virtual cluster admin' on the project
-#   - Role bindings: 'view virtual cluster policies' in the downstream cluster
+#   - A new user
+#   - Role binding: 'virtual cluster admin' on the project
+#   - Role binding: 'view virtual cluster policies' in the downstream cluster
+#   - Role binding: 'user' globally (standard user)
 
 TEST_BASE_URL=${TEST_BASE_URL:-https://127.0.0.1.sslip.io}
 CATTLE_BOOTSTRAP_PASSWORD=${CATTLE_BOOTSTRAP_PASSWORD:-password}
@@ -19,7 +20,7 @@ STANDARD_USER=${STANDARD_USER:-standard-user}
 STANDARD_USER_PASSWORD=${STANDARD_USER_PASSWORD:-$CATTLE_BOOTSTRAP_PASSWORD}
 
 # MGMT_CLUSTER_NAME is the management cluster's actual id (e.g. "c-m-xxxxxxxx"),
-# set by e2e-import-generic-cluster.sh - the norman cluster's display name
+# set by e2e-import-generic-cluster.sh when the Norman cluster object is created
 # (CLUSTER_NAME there) is not a valid id for the API calls below.
 if [ -z "$MGMT_CLUSTER_NAME" ]; then
   echo "MGMT_CLUSTER_NAME must be set to the downstream cluster's management cluster id"
@@ -71,9 +72,9 @@ fi
 # and run tests without necessarily running admin tests first, so create the
 # roles here too if they're missing.
 #
-# RoleTemplate ids are server-generated (not derived from metadata.name), so
-# existence has to be checked - and the real id resolved - via the same
-# ui-role-name label the app itself matches on, not by guessing an id.
+# RoleTemplate ids are server-generated, so in order to check existance
+# and get the role ID to use in rolebindings, we need to check a ui-role-name label
+# same mechanism that the UI extension relies on, including the use of the filter query param
 find_role_id() {
   local role_ui_name="$1"
 
