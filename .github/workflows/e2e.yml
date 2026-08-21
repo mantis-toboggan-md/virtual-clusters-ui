@@ -60,7 +60,7 @@ jobs:
           # TEST_BASE_URL through it instead of a loopback address.
           HOST_IP=$(docker network inspect bridge --format '{{(index .IPAM.Config 0).Gateway}}')
           echo "Routing TEST_BASE_URL through the Docker bridge gateway: ${HOST_IP}"
-          echo "TEST_BASE_URL=https://${HOST_IP}.sslip.io/dashboard" >> "$GITHUB_ENV"
+          echo "TEST_BASE_URL=https://${HOST_IP}.sslip.io" >> "$GITHUB_ENV"
           echo "API=https://${HOST_IP}.sslip.io" >> "$GITHUB_ENV"
 
         
