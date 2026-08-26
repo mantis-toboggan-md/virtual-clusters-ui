@@ -286,7 +286,7 @@ export default {
     policyOptions() {
       return [{
         label: this.t('k3k.policy.noneOption'),
-        value:   {}
+        value: {}
       }, ...this.policies.reduce((hasNs, p) => {
         const projectIds = (getProjectIds(p) || []);
 
@@ -295,7 +295,7 @@ export default {
         if (hasNamespaces) {
           hasNs.push({
             label: p?.metadata?.name,
-            value:   p
+            value: p
           });
         }
 

@@ -71,7 +71,7 @@ const defaultCluster = {
     name:      '',
     namespace: ''
   },
-  spec:       {
+  spec: {
     mode:        MODES.SHARED,
     agents:      0,
     persistence: {
@@ -309,17 +309,17 @@ export default {
       k3kCluster:                     {},
       modeOptions:                    [{
         label: t('k3k.mode.shared'),
-        value:   MODES.SHARED
+        value: MODES.SHARED
       }, {
         label: t('k3k.mode.virtual'),
-        value:   MODES.VIRTUAL
+        value: MODES.VIRTUAL
       }],
-      k3sVersions:                    [],
-      supportsTopology:               false, // k3k < 1.1.0 does not support fields configured in the 'Topology' tab
-      fvFormRuleSets:                 [
+      k3sVersions:      [],
+      supportsTopology: false, // k3k < 1.1.0 does not support fields configured in the 'Topology' tab
+      fvFormRuleSets:   [
         {
-          path:       'metadata.name',
-          rules:      ['required']
+          path:  'metadata.name',
+          rules: ['required']
         },
         {
           path:       'metadata.namespace',
@@ -464,7 +464,7 @@ export default {
       try {
         const shellImage = await this.$store.dispatch('management/find', {
           type: MANAGEMENT.SETTING,
-          id:     'shell-image'
+          id:   'shell-image'
         });
 
         if (shellImage?.value) {
@@ -476,7 +476,7 @@ export default {
         try {
           const registrySetting = await this.$store.dispatch('management/find', {
             type: MANAGEMENT.SETTING,
-            id:     SETTING.SYSTEM_DEFAULT_REGISTRY
+            id:   SETTING.SYSTEM_DEFAULT_REGISTRY
           });
           const registry = registrySetting?.value;
 

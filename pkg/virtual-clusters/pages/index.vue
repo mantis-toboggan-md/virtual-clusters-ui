@@ -28,8 +28,8 @@ export default {
       try {
         this.currentProvCluster = await this.$store.dispatch('management/find', {
           type: CAPI.RANCHER_CLUSTER,
-          id:     provClusterId,
-          opt:    { force: true }
+          id:   provClusterId,
+          opt:  { force: true }
         });
       } catch {}
 
@@ -69,14 +69,14 @@ export default {
       targetNamespace:    K3K_CHART_NAMESPACE,
       currentProvCluster: null,
       k3kInstalled:       false, // fetch will redirect away from this page if k3k is already installed. This variable tracks if k3k has been installed using the button on this page
-      managerUrl:                      this.$router.resolve({
+      managerUrl:         this.$router.resolve({
         name:   'c-cluster-product-resource',
         params: {
           product:  MGMT_NAME,
           resource: CAPI.RANCHER_CLUSTER
         }
       }).href,
-      managerUrlFiltered:                      this.$router.resolve({
+      managerUrlFiltered: this.$router.resolve({
         name:   'c-cluster-product-resource',
         params: {
           product:  MGMT_NAME,
@@ -99,7 +99,7 @@ export default {
         width="100"
         alt="k3k logo"
         src="../assets/icon-k3k.svg"
-      />
+      >
       <div>
         <h2>
           {{ t('k3k.landingPage.title') }}

@@ -69,10 +69,12 @@ export default function(plugin: IPlugin): void {
         }
       }
     } catch (e) {
-      const t = store.getters['i18n/t'];store.dispatch('notifications/add', {
-        level:         NotificationLevel.Error,
-        title:         t('k3k.errors.creatingRoles'),
-        message:       e,
+      const t = store.getters['i18n/t'];
+
+      store.dispatch('notifications/add', {
+        level:   NotificationLevel.Error,
+        title:   t('k3k.errors.creatingRoles'),
+        message: e,
       });
     }
   });

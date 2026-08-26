@@ -191,11 +191,11 @@ export default {
         ]) : [false, false, false];
 
         out.push({
-          isVirtual:            !!pCluster.metadata?.annotations?.[PARENT_CLUSTER],
-          isLocal:              pCluster.name === 'local',
-          isReady:              mgmt.isReady,
-          label:                this.getClusterDisplayName(pCluster),
-          value:                pCluster,
+          isVirtual: !!pCluster.metadata?.annotations?.[PARENT_CLUSTER],
+          isLocal:   pCluster.name === 'local',
+          isReady:   mgmt.isReady,
+          label:     this.getClusterDisplayName(pCluster),
+          value:     pCluster,
           k3kInstalled,
           canInstallK3k,
           canCreateK3kClusters,

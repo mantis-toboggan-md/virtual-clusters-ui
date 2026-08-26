@@ -27,8 +27,8 @@ export default {
     },
 
     typeOption: {
-      type:     Object,
-      default:  () => ({})
+      type:    Object,
+      default: () => ({})
     },
 
     value: {

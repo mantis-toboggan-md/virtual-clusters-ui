@@ -307,8 +307,7 @@ export default {
       :value="value"
       :create-namespace-override="true"
       :rules="{name:fvGetAndReportPathRules('name')}"
-    >
-    </NameNsDescription>
+    />
 
     <Tabbed
       :side-tabs="true"

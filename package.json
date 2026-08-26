@@ -31,7 +31,8 @@
     "@types/node": "25.3.3"
   },
   "resolutions": {
-    "**/webpack": "5"
+    "**/webpack": "5",
+    "typescript-eslint": "8.62.0"
   },
   "scripts": {
     "dev": "NODE_ENV=dev ./node_modules/.bin/vue-cli-service serve",
