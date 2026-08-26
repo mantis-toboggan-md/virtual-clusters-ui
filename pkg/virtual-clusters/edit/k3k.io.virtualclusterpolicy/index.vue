@@ -70,7 +70,7 @@ export default {
     if (!this.value.spec) {
       this.value.spec = {
         allowedMode: MODES.SHARED,
-        sync:          { storageClasses: { enabled: true } }
+        sync:        { storageClasses: { enabled: true } }
       };
     }
     const selectedCluster = this.parentCluster || this.$store.getters['currentCluster'];
@@ -92,7 +92,7 @@ export default {
   data() {
     return {
       errors:         [],
-      fvFormRuleSets:          [{
+      fvFormRuleSets: [{
         path:  'name',
         rules: ['required'],
       }],

@@ -6705,6 +6705,10 @@ eslint-plugin-jest@29.15.2:
   dependencies:
     "@typescript-eslint/utils" "^8.0.0"
 
+"eslint-plugin-local-rules@link:./eslint-plugin-local-rules":
+  version "0.0.0"
+  uid ""
+
 eslint-plugin-n@17.24.0, eslint-plugin-n@^17.23.2:
   version "17.24.0"
   resolved "https://registry.npmjs.org/eslint-plugin-n/-/eslint-plugin-n-17.24.0.tgz#b66fa05f7a6c1ba16768f0921b8974147dddd060"
