@@ -8,7 +8,7 @@ export class VClusterModelExtension implements IClusterModelExtension {
   constructor(private context: ModelExtensionContext) {}
 
   useFor(cluster: ICluster) {
-    return cluster?.metadata?.annotations[PROVIDER]  === 'k3k'
+    return cluster?.metadata?.annotations?.[PROVIDER] === 'k3k'
   }
 
   get detailTabs(): any {
@@ -29,7 +29,7 @@ export class VClusterModelExtension implements IClusterModelExtension {
   }
 
   provisionerDisplay(cluster: ICluster): string {
-    return cluster?.metadata?.annotations[PROVIDER];
+    return cluster?.metadata?.annotations?.[PROVIDER];
   }
 
   parentCluster(cluster: ICluster): string {
@@ -40,7 +40,7 @@ export class VClusterModelExtension implements IClusterModelExtension {
   async postDelete(cluster: ICluster): Promise<any> {
     const parentClusterId = cluster.metadata?.annotations?.[PARENT_CLUSTER];
     const namespace = cluster.metadata?.annotations?.[K3K_NAMESPACE];
-    const name =  cluster.metadata.name
+    const name =  cluster.metadata?.name
 
 
     if (parentClusterId && namespace) {

@@ -11,6 +11,7 @@ import versions from '@shell/utils/versions';
 import { isRancherPrime } from '@shell/config/version';
 import { NotificationLevel } from '@shell/types/notifications';
 import { K3K } from './types';
+import { isHcpCluster } from './utils/hcp';
 
 const createRoleIfNotFound = async(roleTemplate: any, store:any) => {
   const rolesMatching = await store.dispatch('management/findLabelSelector', {
@@ -82,11 +83,14 @@ export default function(plugin: IPlugin): void {
   plugin.addPanel(PanelLocation.RESOURCE_LIST, { resource: [K3K.POLICY, K3K.CLUSTER] },
     { component: () => import('./components/K3kVersionBanner.vue') });
 
-  // Registered for all provisioning clusters: the tab-matching LocationConfig can't inspect
-  // the k3k.io.cluster's spec.mode, so HcpDetailTab self-gates on that field once mounted.
+  // LocationConfig can only match on the route, so the HCP-only condition is expressed as an
+  // `enabled` predicate instead. spec.mode lives on the k3k.io.cluster in the host cluster,
+  // so this is an async lookup - isHcpCluster caches it.
   plugin.addTab(TabLocation.RESOURCE_DETAIL_PAGE, { resource: ['provisioning.cattle.io.cluster'] }, {
     name:      'hcp',
     labelKey:  'k3k.tabs.hcp',
+    // TODO switch to the TabEnabledContext type once @rancher/shell exports it
+    enabled:   ({ resource, $store }: any) => isHcpCluster($store, resource),
     component: () => import('./components/HcpDetailTab.vue')
   });
 }

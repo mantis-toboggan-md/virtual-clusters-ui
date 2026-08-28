@@ -2,12 +2,7 @@
 import { mapGetters } from 'vuex';
 import RadioGroup from '@components/Form/Radio/RadioGroup.vue';
 import { _CREATE } from '@shell/config/query-params';
-
-export const MODES = {
-  'SHARED':  'shared',
-  'VIRTUAL': 'virtual',
-  'HCP':     'hcp'
-};
+import { MODES } from '../utils/shared';
 
 export default {
   'name': 'CRUK3KMode',

@@ -1,53 +1,26 @@
-<script>
-import { mapGetters } from 'vuex';
-import { PROVIDER, PARENT_CLUSTER, K3K_NAMESPACE } from '../labels-annotations';
-import { MODES } from '../utils/shared';
+<script setup lang="ts">
+import { computed, ref, watch } from 'vue';
+import { useStore } from 'vuex';
+import { isHcpCluster } from '../utils/hcp';
 
-export default {
-  'name': 'HcpDetailTab',
+// Declared even though the content doesn't use it: Tabbed passes `resource` to every
+// extension tab component, and without a matching prop Vue would apply it to the root
+// element as a stray attribute.
+const props = defineProps<{ resource?: any }>();
 
-  'props': {
-    'resource': {
-      'type':     Object,
-      'required': true,
-    },
-  },
+const store = useStore();
+const t = computed(() => store.getters['i18n/t']);
 
-  async fetch() {
-    const annotations = this.resource?.metadata?.annotations || {};
+// Defensive only. The tab's `enabled` predicate already keeps this component off the page
+// for non-HCP clusters, but on a shell that predates Tab.enabled the tab is shown
+// unconditionally, so the content stays gated too. Costs nothing - it hits the same cache
+// the predicate populated.
+// TODO drop this once the minimum supported shell version has Tab.enabled.
+const isHcpMode = ref(false);
 
-    if (annotations[PROVIDER] !== 'k3k') {
-      return;
-    }
-
-    const namespace = annotations[K3K_NAMESPACE] || '';
-    const name = this.resource.metadata?.name;
-    const parentClusterId = annotations[PARENT_CLUSTER] || '';
-
-    if (!namespace || !name || !parentClusterId) {
-      return;
-    }
-
-    try {
-      const k3kCluster = await this.$store.dispatch('management/request', {
-        'url':    `/k8s/clusters/${ parentClusterId }/v1/k3k.io.clusters/${ namespace }/${ name }`,
-        'method': 'GET',
-      });
-
-      this.isHcpMode = k3kCluster?.spec?.mode === MODES.HCP;
-    } catch (e) {
-      this.isHcpMode = false;
-    }
-  },
-
-  data() {
-    return { 'isHcpMode': false };
-  },
-
-  'computed': {
-    ...mapGetters({ 't': 'i18n/t' }),
-  },
-};
+watch(() => props.resource, async(resource) => {
+  isHcpMode.value = await isHcpCluster(store, resource);
+}, { 'immediate': true });
 </script>
 
 <template>
