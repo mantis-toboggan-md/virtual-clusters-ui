@@ -8,10 +8,11 @@ import CopyCode from '@shell/components/CopyCode';
 import { LabeledInput } from '@components/Form/LabeledInput';
 import Checkbox from '@components/Form/Checkbox/Checkbox';
 import KeyValue from '@shell/components/form/KeyValue';
-import Taints from '@shell/components/form/Taints';
+import Select from '@shell/components/form/Select';
 import { _EDIT } from '@shell/config/query-params';
 
 const KUBE_API_PORT = 6443;
+const TAINT_EFFECTS = ['NoSchedule', 'PreferNoSchedule', 'NoExecute'];
 const LOOPBACK = ['127.0.0.1', 'localhost', '::1', '0.0.0.0'];
 
 const props = defineProps<{
@@ -43,9 +44,7 @@ const token = computed(() => {
 /**
  * The port serving the k3s supervisor, which is what an external agent joins
  * against. Prefer k3k's name for it, and fall back to matching the port itself
- * so a rename doesn't break us. Never match on the service port alone - k3k
- * fronts the supervisor on 443, and the sibling etcd port would rather not be
- * mistaken for it.
+ * so a rename doesn't break it
  */
 function findServerPort(svc: Record<string, any> | null) {
   const ports = svc?.spec?.ports || [];
@@ -177,7 +176,7 @@ const advancedArgs = computed(() => {
 
   taints.value.forEach((taint) => {
     if (taint?.key) {
-      args.push(`--node-taint ${ taint.key }=${ taint.value || '' }:${ taint.effect || 'NoSchedule' }`);
+      args.push(`--node-taint ${ taint.key }=${ taint.value || '' }:${ taint.effect || TAINT_EFFECTS[0] }`);
     }
   });
 
@@ -252,119 +251,160 @@ fetchAll();
     <div v-else-if="loading">
       {{ t('generic.loading') }}
     </div>
-    <div v-else>
+    <div
+      v-else
+      class="gap-md"
+    >
       <RcSection
         type="primary"
         mode="with-header"
         :expandable="false"
         :title="t('k3k.hcp.registration.title')"
       >
-        <p class="mb-10 text-muted">
-          {{ t('k3k.hcp.registration.description') }}
-        </p>
-        <!-- 1 span per argument so appended flags can be highlighted -->
-        <CopyCode class="registration-command">
-          <span>{{ baseCommand }}</span>
-          <span
-            v-for="(arg, i) in advancedArgs"
-            :key="i"
-            class="appended-arg"
-          >{{ arg }}</span>
-        </CopyCode>
+        <div class="gap-md">
+          <p class="text-muted">
+            {{ t('k3k.hcp.registration.description') }}
+          </p>
+          <!-- 1 span per argument so appended flags can be highlighted -->
+          <CopyCode class="registration-command">
+            <span>{{ baseCommand }}</span>
+            <span
+              v-for="(arg, i) in advancedArgs"
+              :key="i"
+              class="appended-arg"
+            >{{ arg }}</span>
+          </CopyCode>
+        </div>
       </RcSection>
 
       <RcSection
-        class="mt-20"
-        type="primary"
+        type="secondary"
         mode="with-header"
+        background="secondary"
         expandable
         :title="t('k3k.hcp.advanced.title')"
       >
-        <p class="mb-20 text-muted">
-          {{ t('k3k.hcp.advanced.description') }}
-        </p>
-        <div class="row mb-20">
-          <div class="col span-4">
+        <div class="gap-md">
+          <p class="text-muted">
+            {{ t('k3k.hcp.advanced.description') }}
+          </p>
+
+          <div class="node-inputs">
             <LabeledInput
               v-model:value="nodeName"
               :label="t('k3k.hcp.advanced.nodeName')"
               :mode="editMode"
             />
-          </div>
-          <div class="col span-4">
             <LabeledInput
               v-model:value="nodeExternalIp"
               :label="t('k3k.hcp.advanced.nodeExternalIp')"
               :mode="editMode"
             />
-          </div>
-          <div class="col span-4">
             <LabeledInput
               v-model:value="nodeIp"
               :label="t('k3k.hcp.advanced.nodeIp')"
               :mode="editMode"
             />
           </div>
+
+          <Checkbox
+            v-model:value="insecure"
+            :mode="editMode"
+            :label="t('k3k.hcp.advanced.insecure')"
+          />
+
+          <RcSection
+            type="secondary"
+            mode="with-header"
+            expandable
+            :title="t('k3k.hcp.advanced.labels.title')"
+          >
+            <div class="gap-md">
+              <p class="text-muted">
+                {{ t('k3k.hcp.advanced.labels.description') }}
+              </p>
+              <KeyValue
+                v-model:value="nodeLabels"
+                :mode="editMode"
+                :add-label="t('k3k.hcp.advanced.labels.add')"
+                add-icon="icon-plus"
+                :read-allowed="false"
+                use-rc-button
+              />
+            </div>
+          </RcSection>
+
+          <RcSection
+            type="secondary"
+            mode="with-header"
+            expandable
+            :title="t('k3k.hcp.advanced.taints.title')"
+          >
+            <div class="gap-md">
+              <p class="text-muted">
+                {{ t('k3k.hcp.advanced.taints.description') }}
+              </p>
+              <!--
+                KeyValue rather than the shell's Taints, which does not forward
+                useRcButton. The extra 'effect' column reproduces what Taints
+                configures for us.
+              -->
+              <KeyValue
+                v-model:value="taints"
+                :mode="editMode"
+                :as-map="false"
+                :read-allowed="false"
+                :protip="false"
+                :show-header="true"
+                :default-add-data="{ effect: TAINT_EFFECTS[0] }"
+                :extra-columns="['effect']"
+                :preserve-keys="['effect']"
+                :add-label="t('k3k.hcp.advanced.taints.add')"
+                add-icon="icon-plus"
+                use-rc-button
+              >
+                <template #label:effect>
+                  {{ t('tableHeaders.effect') }}
+                </template>
+                <template #col:effect="{ row, queueUpdate, i }">
+                  <Select
+                    v-model:value="row.effect"
+                    :data-testid="`taints-effect-row-${ i }`"
+                    :options="TAINT_EFFECTS"
+                    :mode="editMode"
+                    class="compact-select"
+                    @update:value="queueUpdate"
+                  />
+                </template>
+              </KeyValue>
+            </div>
+          </RcSection>
         </div>
-
-        <Checkbox
-          v-model:value="insecure"
-          class="mb-20"
-          :mode="editMode"
-          :label="t('k3k.hcp.advanced.insecure')"
-        />
-
-        <RcSection
-          type="secondary"
-          mode="with-header"
-          expandable
-          :title="t('k3k.hcp.advanced.labels.title')"
-        >
-          <p class="mb-10 text-muted">
-            {{ t('k3k.hcp.advanced.labels.description') }}
-          </p>
-          <KeyValue
-            v-model:value="nodeLabels"
-            :mode="editMode"
-            :add-label="t('k3k.hcp.advanced.labels.add')"
-            :read-allowed="false"
-          />
-        </RcSection>
-
-        <RcSection
-          class="mt-20"
-          type="secondary"
-          mode="with-header"
-          expandable
-          :title="t('k3k.hcp.advanced.taints.title')"
-        >
-          <p class="mb-10 text-muted">
-            {{ t('k3k.hcp.advanced.taints.description') }}
-          </p>
-          <Taints
-            v-model:value="taints"
-            :mode="editMode"
-          />
-        </RcSection>
       </RcSection>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.node-inputs {
+  display: flex;
+  gap: var(--gap-md);
+
+  > * {
+    flex: 1;
+  }
+}
+
 .registration-command {
   display: block;
   overflow-wrap: anywhere;
 
-  // The markup supplies no literal spaces between arguments, so space them here.
   span + span {
     margin-left: 0.5ch;
   }
 }
 
-// Draw attention to flags the advanced section just appended. inline-block gives
-// the line a break opportunity between arguments, which the margin-only spacing
-// would not otherwise provide, and nowrap keeps each flag with its value.
+// highlight the additional args user added via .node-inputs inputs
 .appended-arg {
   background-color: var(--accent-btn);
   border-radius: 2px;
@@ -375,8 +415,12 @@ fetchAll();
   white-space: nowrap;
 }
 
-// Taints renders its own 'Taints' heading, which duplicates the section title.
-:deep(.taints .key-value > .clearfix) {
-  display: none;
+.compact-select {
+  height: 40px;
+}
+
+// KeyValue hardcodes mr-5 on the add icon, which doubles up on RcButton's own gap.
+:deep([data-testid='add_row_item_button'] .icon) {
+  margin-right: 0;
 }
 </style>

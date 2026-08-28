@@ -19,6 +19,7 @@ k3k:
       taints:
         title: Taints
         description: Restrictions that prevent pods from scheduling on this node without a matching toleration.
+        add: Add Taint
   policy:
     label: Virtual Cluster Policy
     placeholder: Select a policy
