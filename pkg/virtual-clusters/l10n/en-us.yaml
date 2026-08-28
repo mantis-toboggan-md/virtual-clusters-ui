@@ -1,6 +1,24 @@
 k3k:
   group: Create a Virtual Cluster
   label: K3K
+  hcp:
+    registration:
+      title: Registration command
+      description: Run this command on each of the existing Linux machines you want to register. Since this is a virtual cluster in HCP mode, only worker nodes can be registered.
+    advanced:
+      title: Advanced command options
+      description: Additional control over how the node will be registered. These values will often need to be different for each registered node.
+      nodeName: Node name
+      nodeExternalIp: Node public IP
+      nodeIp: Node private IP
+      insecure: 'Insecure: Select this to skip TLS verification when downloading the install script.'
+      labels:
+        title: Node labels
+        description: Key/value pairs attached to the node to identify its attributes and target it for specific workload scheduling.
+        add: Add node label
+      taints:
+        title: Taints
+        description: Restrictions that prevent pods from scheduling on this node without a matching toleration.
   policy:
     label: Virtual Cluster Policy
     placeholder: Select a policy
@@ -161,8 +179,6 @@ k3k:
     tooltip: By default virtual clusters are provisioned using the shared mode. You can use the virtual mode for more advanced isolation.
   tabs:
     hcp: HCP
-  hcp:
-    placeholder: HCP tab content coming soon.
   agents:
     label: Agents
     number:

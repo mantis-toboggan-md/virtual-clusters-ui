@@ -27,7 +27,9 @@ import { allHash } from '@shell/utils/promise';
 import { CLUSTER_BADGE } from '@shell/config/labels-annotations';
 
 import { K3K } from '../../types';
-import { PROVIDER, PARENT_CLUSTER, PARENT_CLUSTER_DISPLAY, K3K_NAMESPACE } from '../../labels-annotations';
+import {
+  PROVIDER, PARENT_CLUSTER, PARENT_CLUSTER_DISPLAY, K3K_NAMESPACE, K3K_MODE
+} from '../../labels-annotations';
 import InstallK3k from '../InstallK3k.vue';
 import Networking from './Networking.vue';
 import Storage from './Storage.vue';
@@ -593,6 +595,8 @@ export default {
 
           this.value.metadata.annotations[PARENT_CLUSTER_DISPLAY] = this.parentCluster.displayName || this.parentCluster.name;
           this.value.metadata.annotations[K3K_NAMESPACE] = this.k3kCluster.metadata.namespace;
+          // lets the detail page gate mode-specific UI without having to fetch the k3k cluster
+          this.value.metadata.annotations[K3K_MODE] = this.k3kCluster.spec?.mode;
         } else {
           // save existing k3kCluster
           await cluster.$dispatch('request', {
@@ -829,7 +833,7 @@ export default {
         </div>
 
         <template
-          v-if="!hasPolicy"
+          v-if="!policy|| isEmpty(policy)"
         >
           <Mode
             v-model:k3k-mode="k3kCluster.spec.mode"
