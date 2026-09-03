@@ -1099,6 +1099,7 @@ export default {
           <Labels
             v-model:value="localValue"
             :mode="mode"
+            :use-rc="true"
           />
         </RcSection>
       </div>

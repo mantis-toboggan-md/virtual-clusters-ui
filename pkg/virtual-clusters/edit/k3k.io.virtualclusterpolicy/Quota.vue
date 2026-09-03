@@ -89,6 +89,8 @@ export default {
       :default-add-value="remainingTypes()[0] ? remainingTypes()[0].value : ''"
       :add-allowed="remainingTypes().length > 0"
       :mode="mode"
+      :use-rc-button="true"
+      add-icon="icon-plus"
       @remove="removeRow"
     >
       <template #columns="props">

@@ -310,7 +310,6 @@ export default {
 
     <RcSection
       type="primary"
-      :background="parentCluster ? 'primary' : 'secondary'"
       mode="with-header"
       :expandable="false"
       :title="t('k3k.policy.tabs.config')"
@@ -332,8 +331,6 @@ export default {
     </RcSection>
 
     <RcSection
-      type="secondary"
-      :background="parentCluster ? 'primary' : 'secondary'"
       mode="with-header"
       :expandable="true"
       :title="t('k3k.policy.tabs.resourceSync')"
@@ -351,8 +348,6 @@ export default {
     </RcSection>
 
     <RcSection
-      type="secondary"
-      :background="parentCluster ? 'primary' : 'secondary'"
       :expandable="true"
       mode="with-header"
       :title="t('k3k.policy.tabs.resourceAllocation')"
@@ -385,9 +380,7 @@ export default {
 
     <RcSection
       v-if="supportsTopology"
-      type="secondary"
       :expandable="true"
-      :background="parentCluster ? 'primary' : 'secondary'"
       mode="with-header"
       :title="t('k3k.policy.tabs.topology')"
     >
@@ -399,8 +392,6 @@ export default {
     </RcSection>
 
     <RcSection
-      type="secondary"
-      :background="parentCluster ? 'primary' : 'secondary'"
       :expandable="true"
       mode="with-header"
       :title="t('k3k.policy.tabs.advanced')"
@@ -493,8 +484,6 @@ export default {
     </RcSection>
 
     <RcSection
-      type="secondary"
-      :background="parentCluster ? 'primary' : 'secondary'"
       :expandable="true"
       mode="with-header"
       :title="t('generic.labelsAndAnnotations', {}, true)"
@@ -502,6 +491,7 @@ export default {
       <Labels
         :mode="mode"
         :value="value"
+        :use-rc-button="true"
       />
     </RcSection>
   </CruResource>
