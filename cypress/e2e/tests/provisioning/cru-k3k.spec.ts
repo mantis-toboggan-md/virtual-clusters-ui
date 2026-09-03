@@ -1,21 +1,12 @@
 import ClusterManagerCreatePagePo from '@rancher/cypress/e2e/po/edit/provisioning.cattle.io.cluster/create/cluster-create.po';
-import { LoginPagePo } from '@rancher/cypress/e2e/po/pages/login-page.po';
 
 import CruK3kPo from '../../po/cru-k3k.po';
+import { login } from '../../utils/login';
+
+const HOST_CLUSTER = 'e2e-generic';
 
 describe('cluster creation', () => {
-  beforeEach(() => {
-    // cy.login()'s default navigation checks for the "Welcome to Rancher"
-    // message, which Rancher Prime doesn't render - navigate to the login
-    // page ourselves and pass skipNavigation instead.
-    // TODO nb https://github.com/rancher/virtual-clusters-ui/issues/205
-    LoginPagePo.goTo();
-    const loginPage = new LoginPagePo();
-
-    loginPage.checkIsCurrentPage();
-
-    cy.login(undefined, undefined, false, true);
-  });
+  beforeEach(() => login());
 
   it('shows a card for the k3k provisioner', { tags: ['@adminUser', '@standardUser'] }, () => {
     ClusterManagerCreatePagePo.goTo('_');
@@ -27,36 +18,15 @@ describe('cluster creation', () => {
   });
 
   it('offers admins an Install K3k button when a cluster without k3k is selected', { tags: ['@adminUser'] }, () => {
-    ClusterManagerCreatePagePo.goTo('_');
-    const clusterCreate = new ClusterManagerCreatePagePo();
+    const cruK3k = CruK3kPo.goToCreate();
 
-    clusterCreate.waitForPage();
-
-    // TODO nb https://github.com/rancher/virtual-clusters-ui/issues/205
-    clusterCreate.resourceDetail().cruResource().selectSubType(1, 0).click();
-
-    const cruK3k = new CruK3kPo();
-
-    // TODO nb https://github.com/rancher/virtual-clusters-ui/issues/205
-    cruK3k.waitForHostClusterLoad();
-    cruK3k.selectHostCluster('e2e-generic');
+    cruK3k.selectHostCluster(HOST_CLUSTER);
     cruK3k.installK3kButton().self().should('be.visible');
   });
 
   it('does not allow standard users to select clusters without k3k installed', { tags: ['@standardUser'] }, () => {
-    ClusterManagerCreatePagePo.goTo( '_');
-    const clusterCreate = new ClusterManagerCreatePagePo();
+    const cruK3k = CruK3kPo.goToCreate();
 
-    clusterCreate.waitForPage();
-
-    // TODO nb https://github.com/rancher/virtual-clusters-ui/issues/205
-    clusterCreate.resourceDetail().cruResource().selectSubType(1, 0).click();
-
-
-    const cruK3k = new CruK3kPo();
-
-    // TODO nb https://github.com/rancher/virtual-clusters-ui/issues/205
-    cruK3k.waitForHostClusterLoad();
-    cruK3k.hostClusterOptionLabels().should('not.include', 'e2e-generic');
+    cruK3k.hostClusterOptionLabels().should('not.include', HOST_CLUSTER);
   });
 });

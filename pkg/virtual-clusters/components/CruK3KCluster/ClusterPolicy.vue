@@ -360,6 +360,7 @@ export default {
     <div class="rc-row">
       <div class="rc-content">
         <LabeledSelect
+          data-testid="k3k-policy-select"
           :value="isPolicySelected ? policy : (isNoneSelected ? t('k3k.policy.noneOption') : null)"
           :loading="showLoadingSpinner"
           :disabled="!hostClusterId || !k3kInstalled || !isCreate"
@@ -386,6 +387,7 @@ export default {
         <LabeledSelectWithCreate
           id="policy-namespace-create"
           :key="isPolicySelected"
+          data-testid="k3k-target-namespace"
           :value="targetNamespace"
           :loading="showLoadingSpinner"
           :mode="mode"
