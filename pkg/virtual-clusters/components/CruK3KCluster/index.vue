@@ -913,6 +913,8 @@ export default {
                 :initial-empty-row="true"
                 :read-allowed="false"
                 :add-label="t('k3k.agents.envVars.addLabel')"
+                add-icon="icon-plus"
+                use-rc-button
               />
             </RcSection>
             <RcSection
@@ -928,6 +930,8 @@ export default {
                 :read-allowed="false"
                 :initial-empty-row="true"
                 :add-label="t('k3k.servers.serverArgs.addLabel')"
+                add-icon="icon-plus"
+                use-rc-button
               />
             </RcSection>
           </div>
@@ -963,6 +967,8 @@ export default {
                 :mode="mode"
                 :read-allowed="false"
                 :initial-empty-row="true"
+                add-icon="icon-plus"
+                use-rc-button
                 :add-label="t('k3k.agents.envVars.addLabel')"
               />
             </RcSection>
@@ -980,6 +986,8 @@ export default {
             :read-allowed="false"
             :title="t('k3k.nodeSelector.label')"
             :add-label="t('k3k.nodeSelector.addLabel')"
+            add-icon="icon-plus"
+            use-rc-button
           >
             <template #title>
               <h3>{{ t('k3k.nodeSelector.label') }}</h3>

@@ -53,11 +53,13 @@ const updateAgentPodAffinity = (value: { affinity: AffinityValue }) => {
         <NodeAffinity
           :value="serverAffinity?.nodeAffinity || {}"
           :mode="mode"
+          :use-rc="true"
           @update:value="updateServerNodeAffinity"
         />
         <PodAffinity
           :value="{affinity: serverAffinity}"
           :mode="mode"
+          :use-rc="true"
           @update="updateServerPodAffinity"
         />
       </div>
@@ -72,11 +74,13 @@ const updateAgentPodAffinity = (value: { affinity: AffinityValue }) => {
         <NodeAffinity
           :value="agentAffinity?.nodeAffinity || {}"
           :mode="mode"
+          :use-rc="true"
           @update:value="updateAgentNodeAffinity"
         />
         <PodAffinity
           :value="{affinity: agentAffinity}"
           :mode="mode"
+          :use-rc="true"
           @update="updateAgentPodAffinity"
         />
       </div>

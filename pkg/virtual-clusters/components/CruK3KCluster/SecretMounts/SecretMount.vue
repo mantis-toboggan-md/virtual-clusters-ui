@@ -56,7 +56,7 @@ const roleOptions: { label: string; value: SecretMountRole }[] = [
     />
   </div>
   <div class="rc-row half">
-    <div class="rc-content">
+    <div>
       <LabeledInput
         :value="mountPath"
         label-key="k3k.secretMounts.mountPath.label"
@@ -73,7 +73,7 @@ const roleOptions: { label: string; value: SecretMountRole }[] = [
     </div>
   </div>
   <div class="rc-row half">
-    <div class="rc-content">
+    <div>
       <LabeledInput
         :value="subPath"
         label-key="k3k.secretMounts.subPath.label"
@@ -115,6 +115,7 @@ const roleOptions: { label: string; value: SecretMountRole }[] = [
 <style scoped>
 .input-description {
     font-size: 12px;
+    margin-top:4px;
 }
 
 :deep(.radio-group h4),:deep(.radio-group.label){

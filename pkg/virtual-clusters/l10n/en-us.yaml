@@ -223,7 +223,8 @@ k3k:
     label: Cluster DNS
     placeholder: "10.43.0.10"
   tlsSANs:
-    label: TLS Alternate Names
+    title: Certificates
+    label: TLS Subject Alternative Names
   k3sVersion:
     label: K3s Version
     default: Same k8s version as host

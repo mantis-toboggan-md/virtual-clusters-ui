@@ -175,7 +175,7 @@ export default {
       mode="with-header"
       :expandable="true"
       :expanded="true"
-      :title="t('k3k.tlsSANs.label')"
+      :title="t('k3k.tlsSANs.title')"
     >
       <div class="rc-row">
         <ArrayList
@@ -185,6 +185,9 @@ export default {
           :initial-empty-row="true"
           :rules="rules.tlsSANs || []"
           :required="rules.tlsSANs && rules.tlsSANs.length"
+          :title="t('k3k.tlsSANs.label')"
+          add-icon="icon-plus"
+          use-rc-button
           @update:value="e=>$emit('update:tlsSANs', e)"
         />
       </div>
@@ -222,6 +225,7 @@ export default {
           </div>
           <div
             v-if="expose.ingress"
+            class="mmb-4"
           >
             <RcSection
               type="secondary"
@@ -274,6 +278,7 @@ export default {
           </div>
           <div
             v-if="expose.loadbalancer"
+            class="mmb-4"
           >
             <RcSection
               type="secondary"
@@ -282,13 +287,22 @@ export default {
             >
               <div class="rc-content">
                 <div class="rc-row">
-                  <LabeledInput
-                    v-model:value.number="expose.loadbalancer.serverPort"
-                    type="number"
-                    label-key="k3k.expose.loadbalancer.serverPort.label"
-                    :placeholder="t('k3k.expose.loadbalancer.serverPort.placeholder')"
-                    :mode="mode"
-                  />
+                  <div>
+                    <LabeledInput
+                      v-model:value.number="expose.loadbalancer.serverPort"
+                      type="number"
+                      label-key="k3k.expose.loadbalancer.serverPort.label"
+                      :placeholder="t('k3k.expose.loadbalancer.serverPort.placeholder')"
+                      :mode="mode"
+                      class="mmb-1"
+                    />
+                    <t
+                      class="text-label"
+                      raw
+                      k="k3k.expose.loadbalancer.description"
+                    />
+                  </div>
+
                   <LabeledInput
                     v-model:value.number="expose.loadbalancer.etcdPort"
                     type="number"
@@ -297,11 +311,6 @@ export default {
                     :mode="mode"
                   />
                 </div>
-                <t
-                  class="text-label"
-                  raw
-                  k="k3k.expose.loadbalancer.description"
-                />
               </div>
             </RcSection>
           </div>
@@ -315,6 +324,7 @@ export default {
           </div>
           <div
             v-if="expose.nodePort"
+            class="mmb-4"
           >
             <RcSection
               type="secondary"
@@ -330,6 +340,7 @@ export default {
                       label-key="k3k.expose.loadbalancer.serverPort.label"
                       :placeholder="t('k3k.expose.nodePort.serverPort.placeholder')"
                       :mode="mode"
+                      class="mmb-1"
                     />
                     <t
                       raw
