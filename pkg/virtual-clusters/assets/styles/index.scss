@@ -7,15 +7,36 @@ BODY, .theme-light {
   --rc-section-action-color: #6C6C77;
 }
 
-BODY, .theme-dark {
-  --rc-section-background-primary: #161C24;
-  --rc-section-background-secondary: #262831;
-  --rc-section-action-color: #B6B6C3;
-}
+// BODY, .theme-dark {
+//   --rc-section-background-primary: #161C24;
+//   --rc-section-background-secondary: #262831;
+//   --rc-section-action-color: #B6B6C3;
+// }
 
-// medium gap spacing for rc section content - to be replaced by some global component and/or style rules in a later Rancher release
-.gap-md {
+// RcSection content - 16px gap (vs 24px between sections)
+.rc-content {
     display: flex;
     flex-direction: column;
     gap: var(--gap-md);
+}
+
+// space inputs evenly w/ 16px gap between
+.rc-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-md);
+  align-self: stretch;
+  &>* {
+    flex-grow: 1;
+    flex-basis: 50%;
+  }
+  // half-width children whose width lines up with 2-item rc-rows
+  &.half>* {
+    flex-grow: 0;
+    flex-basis: calc(50% - var(--gap));
+    min-width: 0;
+  }
+  .centered {
+    height: 100%;
+  }
 }

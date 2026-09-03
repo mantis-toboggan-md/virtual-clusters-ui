@@ -1,6 +1,6 @@
 <script>
 import { mapGetters } from 'vuex';
-import RadioGroup from '@components/Form/Radio/RadioGroup.vue';
+import RadioButton from '@components/Form/Radio/RadioButton.vue';
 import { _CREATE } from '@shell/config/query-params';
 
 export const MODES = {
@@ -26,7 +26,7 @@ export default {
     }
   },
 
-  'components': { RadioGroup },
+  'components': { RadioButton },
 
   data() {
     return { 'modes': MODES };
@@ -37,32 +37,63 @@ export default {
 
     isCreate() {
       return this.mode === _CREATE;
+    },
+
+    modeOptions() {
+      return Object.values(MODES);
     }
   }
 };
 </script>
 
 <template>
-  <div
-    class="row mb-20"
-  >
-    <div class="col span-9">
-      <RadioGroup
-        :disabled="!isCreate"
-        :value="k3kMode"
-        name="k3k-cluster-mode"
-        :row="true"
-        :mode="mode"
-        :options="[{label: t('k3k.mode.shared'), value: modes.SHARED},{label: t('k3k.mode.virtual'), value: modes.VIRTUAL},{label: t('k3k.mode.hcp'), value: modes.HCP} ]"
-        @update:value="e=>$emit('update:k3k-mode', e)"
+  <div class="rc-row">
+    <div>
+      <h3>{{ t('k3k.mode.label') }}</h3>
+      <h5 class="text-deemphasized">
+        {{ t('k3k.mode.tooltip') }}
+      </h5>
+      <div
+        role="radiogroup"
+        :aria-label="t('k3k.mode.label')"
+        class="radio-group"
       >
-        <template #label>
-          <h3>{{ t('k3k.mode.label') }}</h3>
-          <h5 class="text-deemphasized">
-            {{ t('k3k.mode.tooltip') }}
-          </h5>
-        </template>
-      </RadioGroup>
+        <RadioButton
+          v-for="option in modeOptions"
+          :key="option"
+          :val="option"
+          :value="k3kMode"
+          name="k3k-cluster-mode"
+          :mode="mode"
+          :disabled="!isCreate"
+          :label="t(`k3k.mode.${option}.label`)"
+          @update:value="e=>$emit('update:k3k-mode', e)"
+        >
+          <template #label>
+            <span class="text">{{ t(`k3k.mode.${option}.label`) }}</span>
+            <div class="text-deemphasized">
+              {{ t(`k3k.mode.${option}.description`) }}
+            </div>
+          </template>
+        </RadioButton>
+      </div>
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+
+  .text {
+    color: var(--body-text);
+  }
+
+  & :deep(.radio-container) {
+    padding-bottom: 0px;
+  }
+}
+
+</style>

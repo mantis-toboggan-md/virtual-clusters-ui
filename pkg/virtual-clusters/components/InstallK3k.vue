@@ -164,6 +164,10 @@ export default {
           this.$emit('update:parentCluster', value);
         });
       }
+    },
+
+    showingInstallationContent(){
+      return this.parentCluster && !isEmpty(this.parentCluster) && ((!this.k3kInstalled && this.isCreate) || this.didInstallK3k);
     }
   },
 
@@ -362,11 +366,11 @@ export default {
 </script>
 
 <template>
-  <div class="row">
-    <div
-      v-if="!showButtonOnly"
-      class="mmr-4 span-6"
-    >
+  <div
+    class="rc-row"
+    :class="{ half: !showingInstallationContent }"
+  >
+    <div v-if="!showButtonOnly">
       <LabeledSelect
         v-model:value="selectedParentOption"
         label-key="k3k.hostCluster.label"
@@ -381,7 +385,7 @@ export default {
     </div>
     <div
       v-if="parentCluster && !isEmpty(parentCluster) && !k3kInstalled && isCreate"
-      class="col span-6 centered text-label"
+      class="centered text-label"
     >
       <t
         v-if="!showButtonOnly"
@@ -398,7 +402,7 @@ export default {
     </div>
     <div
       v-else-if="parentCluster && !isEmpty(parentCluster) && didInstallK3k"
-      class="span-6 centered"
+      class="centered"
     >
       <span> <i class="icon icon-checkmark text-success mr-5" />{{ t('k3k.hostCluster.didInstall') }}</span>
     </div>

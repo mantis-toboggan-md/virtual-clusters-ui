@@ -315,7 +315,7 @@ export default {
       :expandable="false"
       :title="t('k3k.policy.tabs.config')"
     >
-      <div class="gap-md">
+      <div class="rc-content">
         <Projects
           ref="project-selector"
           :mode="mode"
@@ -357,7 +357,7 @@ export default {
       mode="with-header"
       :title="t('k3k.policy.tabs.resourceAllocation')"
     >
-      <div class="gap-md">
+      <div class="rc-content">
         <RcSection
           type="secondary"
           mode="with-header"
@@ -405,7 +405,7 @@ export default {
       mode="with-header"
       :title="t('k3k.policy.tabs.advanced')"
     >
-      <div class="gap-md">
+      <div class="rc-content">
         <Banner
           v-if="supportsTopology && hasNodeSelector"
           label-key="k3k.nodeSelector.warning"
@@ -413,27 +413,25 @@ export default {
         />
         <div
           v-if="showNodeSelector"
-          class="row"
+          class="rc-row"
         >
-          <div class="col span-12">
-            <KeyValue
-              v-model:value="value.spec.defaultNodeSelector"
-              :initial-empty-row="true"
-              :mode="mode"
-              :read-allowed="false"
-              :title="t('k3k.nodeSelector.label')"
-              :add-label="t('k3k.nodeSelector.addLabel')"
-            >
-              <template #title>
-                <h3>{{ t('k3k.nodeSelector.label') }}</h3>
-                <t
-                  class="text-deemphasized"
-                  raw
-                  k="k3k.nodeSelector.tooltip"
-                />
-              </template>
-            </KeyValue>
-          </div>
+          <KeyValue
+            v-model:value="value.spec.defaultNodeSelector"
+            :initial-empty-row="true"
+            :mode="mode"
+            :read-allowed="false"
+            :title="t('k3k.nodeSelector.label')"
+            :add-label="t('k3k.nodeSelector.addLabel')"
+          >
+            <template #title>
+              <h3>{{ t('k3k.nodeSelector.label') }}</h3>
+              <t
+                class="text-deemphasized"
+                raw
+                k="k3k.nodeSelector.tooltip"
+              />
+            </template>
+          </KeyValue>
         </div>
         <RcSection
           type="secondary"
@@ -441,21 +439,19 @@ export default {
           :expandable="true"
           :title="t('k3k.policy.security.label')"
         >
-          <div class="gap-md">
+          <div class="rc-content">
             <t
               class="text-deemphasized"
               k="k3k.policy.security.tooltip"
               raw
             />
-            <div class="row">
-              <div class="col span-6">
-                <LabeledSelect
-                  v-model:value="podSecurityAdmissionLevel"
-                  :mode="mode"
-                  :options="[noneOption,'privileged', 'baseline', 'restricted']"
-                  :label="t('cluster.rke2.defaultPodSecurityAdmissionConfigurationTemplateName.label')"
-                />
-              </div>
+            <div class="rc-row half">
+              <LabeledSelect
+                v-model:value="podSecurityAdmissionLevel"
+                :mode="mode"
+                :options="[noneOption,'privileged', 'baseline', 'restricted']"
+                :label="t('cluster.rke2.defaultPodSecurityAdmissionConfigurationTemplateName.label')"
+              />
             </div>
           </div>
         </RcSection>
@@ -466,7 +462,7 @@ export default {
           :expandable="true"
           :title="t('k3k.policy.isolation.label')"
         >
-          <div class="gap-md">
+          <div class="rc-content">
             <div>
               <t
                 class="text-deemphasized"

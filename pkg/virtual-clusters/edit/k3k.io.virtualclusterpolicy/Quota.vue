@@ -74,12 +74,12 @@ export default {
 };
 </script>
 <template>
-  <div>
-    <div class="headers mb-10">
-      <div class="mr-10">
+  <div class="rc-content">
+    <div class="headers">
+      <div>
         <label>{{ t('k3k.policy.quota.headers.resourceType') }}</label>
       </div>
-      <div class="mr-20">
+      <div>
         <label>{{ t('k3k.policy.quota.headers.clusterSetLimit') }}</label>
       </div>
     </div>
@@ -109,7 +109,8 @@ export default {
 .headers {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    // match the gap rc-row gives the QuotaRow columns below
+    gap: var(--gap-md);
     align-items: center;
     border-bottom: 1px solid var(--border);
     height: 30px;

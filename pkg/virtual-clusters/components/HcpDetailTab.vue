@@ -15,6 +15,7 @@ const KUBE_API_PORT = 6443;
 const TAINT_EFFECTS = ['NoSchedule', 'PreferNoSchedule', 'NoExecute'];
 const LOOPBACK = ['127.0.0.1', 'localhost', '::1', '0.0.0.0'];
 
+
 const props = defineProps<{
   resource: Record<string, any>;
 }>();
@@ -41,10 +42,10 @@ const token = computed(() => {
   return encoded ? base64Decode(encoded) : '';
 });
 
+
 /**
  * The port serving the k3s supervisor, which is what an external agent joins
- * against. Prefer k3k's name for it, and fall back to matching the port itself
- * so a rename doesn't break it
+ * against
  */
 function findServerPort(svc: Record<string, any> | null) {
   const ports = svc?.spec?.ports || [];
@@ -106,7 +107,7 @@ const serverUrl = computed(() => {
 /**
  * The version k3k runs the virtual cluster's control plane at: spec.version if
  * set, otherwise the host cluster's own version, which is what k3k falls back
- * to. Read from a host control plane node, since that is the version k3k sees.
+ * to
  */
 const controlPlaneVersion = computed(() => {
   if (k3kCluster.value?.spec?.version) {
@@ -122,14 +123,7 @@ const controlPlaneVersion = computed(() => {
   return (controlPlane || nodes.value[0])?.status?.nodeInfo?.kubeletVersion || '';
 });
 
-/**
- * The k3s version to install on the worker, so it matches the control plane.
- * The installer takes no version from the server it joins, and defaults to
- * latest stable - which would leave the kubelet ahead of the apiserver. Note
- * the cluster resource spells the suffix '-k3s1' while the installer wants
- * '+k3s1'. Only pin a k3s build; a non-k3s host version is not installable by
- * get.k3s.io, so leave it off rather than emit a command that cannot run.
- */
+
 const installVersion = computed(() => {
   const version = controlPlaneVersion.value.replace(/-k3s(\d+)$/, '+k3s$1');
 
@@ -137,8 +131,7 @@ const installVersion = computed(() => {
 });
 
 /**
- * Per-node values from the advanced section, appended to the command as k3s
- * agent flags. Everything here is optional and differs per worker.
+ * advanced section inputs, added as vars
  */
 const editMode = _EDIT;
 
@@ -150,8 +143,7 @@ const nodeLabels = ref<Record<string, string>>({});
 const taints = ref<Record<string, any>[]>([]);
 
 /**
- * The agent flags contributed by the advanced section, one per entry so the
- * template can style each appended flag individually.
+ * advanced section values encoded into a string of vars to append to the registration command
  */
 const advancedArgs = computed(() => {
   const args: string[] = [];
@@ -168,6 +160,7 @@ const advancedArgs = computed(() => {
     args.push(`--node-ip ${ nodeIp.value }`);
   }
 
+
   Object.entries(nodeLabels.value).forEach(([key, value]) => {
     if (key) {
       args.push(`--node-label ${ key }=${ value || '' }`);
@@ -183,11 +176,6 @@ const advancedArgs = computed(() => {
   return args;
 });
 
-/**
- * Everything up to the point the advanced flags are appended. Agent flags are
- * passed through the installer with 'sh -s -', so only switch to that form
- * once there is something to pass.
- */
 const baseCommand = computed(() => {
   if (!serverUrl.value || !token.value) {
     return '';
@@ -200,8 +188,9 @@ const baseCommand = computed(() => {
   ].filter((e) => !!e).join(' ');
 
   const curl = `curl -sfL${ insecure.value ? ' --insecure' : '' }`;
+  const install = `${ curl } https://get.k3s.io | ${ env } sh -${ advancedArgs.value.length ? 's -' : '' }`;
 
-  return `${ curl } https://get.k3s.io | ${ env } sh -${ advancedArgs.value.length ? 's -' : '' }`;
+  return install;
 });
 
 async function fetchParentResource(path: string) {
@@ -244,7 +233,7 @@ fetchAll();
   <div>
     <div
       v-if="errors.length"
-      class="text-error mb-20"
+      class="text-error"
     >
       {{ errors.join('. ') }}
     </div>
@@ -253,7 +242,7 @@ fetchAll();
     </div>
     <div
       v-else
-      class="gap-md"
+      class="rc-content"
     >
       <RcSection
         type="primary"
@@ -261,7 +250,7 @@ fetchAll();
         :expandable="false"
         :title="t('k3k.hcp.registration.title')"
       >
-        <div class="gap-md">
+        <div class="rc-content">
           <p class="text-muted">
             {{ t('k3k.hcp.registration.description') }}
           </p>
@@ -284,12 +273,12 @@ fetchAll();
         expandable
         :title="t('k3k.hcp.advanced.title')"
       >
-        <div class="gap-md">
+        <div class="rc-content">
           <p class="text-muted">
             {{ t('k3k.hcp.advanced.description') }}
           </p>
 
-          <div class="node-inputs">
+          <div class="rc-row">
             <LabeledInput
               v-model:value="nodeName"
               :label="t('k3k.hcp.advanced.nodeName')"
@@ -319,7 +308,7 @@ fetchAll();
             expandable
             :title="t('k3k.hcp.advanced.labels.title')"
           >
-            <div class="gap-md">
+            <div class="rc-content">
               <p class="text-muted">
                 {{ t('k3k.hcp.advanced.labels.description') }}
               </p>
@@ -340,15 +329,10 @@ fetchAll();
             expandable
             :title="t('k3k.hcp.advanced.taints.title')"
           >
-            <div class="gap-md">
+            <div class="rc-content">
               <p class="text-muted">
                 {{ t('k3k.hcp.advanced.taints.description') }}
               </p>
-              <!--
-                KeyValue rather than the shell's Taints, which does not forward
-                useRcButton. The extra 'effect' column reproduces what Taints
-                configures for us.
-              -->
               <KeyValue
                 v-model:value="taints"
                 :mode="editMode"
@@ -388,7 +372,7 @@ fetchAll();
 <style lang="scss" scoped>
 .node-inputs {
   display: flex;
-  gap: var(--gap-md);
+  gap: var(--rc-content);
 
   > * {
     flex: 1;
@@ -419,8 +403,7 @@ fetchAll();
   height: 40px;
 }
 
-// KeyValue hardcodes mr-5 on the add icon, which doubles up on RcButton's own gap.
-:deep([data-testid='add_row_item_button'] .icon) {
-  margin-right: 0;
+:deep(.key-value .footer .rc-button.btn-small) {
+  gap: 0px !important;
 }
 </style>

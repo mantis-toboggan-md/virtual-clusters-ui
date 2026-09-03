@@ -498,24 +498,22 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="rc-content">
     <h3>
       {{ t('k3k.policy.headers.projectsAndNamespaces') }}
     </h3>
     <h5 class="text-deemphasized">
       {{ t('k3k.policy.projects.subheader') }}
     </h5>
-    <div class="row mb-20">
-      <div class="col span-9">
-        <LabeledSelect
-          v-model:value="selectedProjects"
-          :label="t('k3k.policy.projects.label')"
-          class="project-select"
-          :mode="mode"
-          :options="sortedProjectOptions"
-          multiple
-        />
-      </div>
+    <div class="rc-row half">
+      <LabeledSelect
+        v-model:value="selectedProjects"
+        :label="t('k3k.policy.projects.label')"
+        class="project-select"
+        :mode="mode"
+        :options="sortedProjectOptions"
+        multiple
+      />
     </div>
     <ProjectStatusTable
       v-if="displayProjects.length && !isCreate"
@@ -571,7 +569,7 @@ export default {
           >
             <button
               v-if="hasErrors"
-              class="btn role-secondary mr-5"
+              class="btn role-secondary"
               @click="policy.goToEdit()"
             >
               {{ t('k3k.policy.projects.editPolicy') }}
@@ -619,6 +617,7 @@ export default {
 
    display: flex;
    justify-content: flex-end;
+   gap: var(--gap);
   }
 }
 

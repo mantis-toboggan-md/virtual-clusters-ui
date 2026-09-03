@@ -118,7 +118,7 @@ function mountTitle(mount: SecretMount): {name: string, path?: string} {
 <template>
   <div
     v-if="secretErrors.length"
-    class="banner bg-error mb-10"
+    class="banner bg-error"
   >
     {{ secretErrors.join('. ') }}
   </div>
@@ -148,7 +148,7 @@ function mountTitle(mount: SecretMount): {name: string, path?: string} {
           >&nbsp; — &nbsp;{{ mountTitle(mount).path }}</span>
         </span>
       </template>
-      <div class="gap-md">
+      <div class="rc-content">
         <SecretMountItem
           :mode="mode"
           :secret-name="mount.secretName || ''"

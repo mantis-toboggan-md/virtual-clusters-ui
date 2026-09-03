@@ -796,10 +796,11 @@ export default {
     <RcSection
       type="primary"
       mode="with-header"
+      background="primary"
       :expandable="false"
       :title="t('k3k.sections.basics')"
     >
-      <div class="gap-md">
+      <div class="rc-content">
         <InstallK3k
           v-model:parent-cluster="parentCluster"
           v-model:k3k-installed="k3kInstalled"
@@ -820,16 +821,14 @@ export default {
           :rules="{namespace:fvGetAndReportPathRules('metadata.namespace'), policy:fvGetAndReportPathRules('policyForValidation')}"
         />
 
-        <div class="row">
-          <div class="span-6">
-            <LabeledSelect
-              :value="k3kCluster.spec.version || defaultVersionLabel"
-              label-key="k3k.k3sVersion.label"
-              :options="k3sVersionOptions"
-              :mode="mode"
-              @update:value="updateVersion"
-            />
-          </div>
+        <div class="rc-row half">
+          <LabeledSelect
+            :value="k3kCluster.spec.version || defaultVersionLabel"
+            label-key="k3k.k3sVersion.label"
+            :options="k3sVersionOptions"
+            :mode="mode"
+            @update:value="updateVersion"
+          />
         </div>
 
         <template
@@ -858,249 +857,243 @@ export default {
           :mode="mode"
         />
       </RcSection>
+    </RcSection>
 
-      <RcSection
-        v-if="!policy || isEmpty(policy)"
-        type="secondary"
-        mode="with-header"
-        :expandable="true"
-        :title="t('k3k.policy.tabs.resourceSync')"
-      >
-        <Sync
-          v-if="isSharedMode"
-          v-model:ingresses="k3kCluster.spec.sync.ingresses"
-          v-model:priority-classes="k3kCluster.spec.sync.priorityClasses"
-          v-model:storage-classes="k3kCluster.spec.sync.storageClasses"
-          :mode="mode"
-          :context="SYNC_CONTEXT.cluster"
-        />
-        <NotAllowed v-else />
-      </RcSection>
+    <RcSection
+      v-if="!policy || isEmpty(policy)"
+      mode="with-header"
+      :expandable="true"
+      :title="t('k3k.policy.tabs.resourceSync')"
+    >
+      <Sync
+        v-if="isSharedMode"
+        v-model:ingresses="k3kCluster.spec.sync.ingresses"
+        v-model:priority-classes="k3kCluster.spec.sync.priorityClasses"
+        v-model:storage-classes="k3kCluster.spec.sync.storageClasses"
+        :mode="mode"
+        :context="SYNC_CONTEXT.cluster"
+      />
+      <NotAllowed v-else />
+    </RcSection>
 
-      <RcSection
-        type="secondary"
-        mode="with-header"
-        :expandable="true"
-        :title="t('k3k.sections.serverAndAgents')"
-      >
-        <div class="gap-md">
-          <RcSection
-            mode="with-header"
-            :expandable="true"
-            :expanded="true"
-            type="secondary"
-            :title="t('k3k.servers.label')"
-          >
-            <div class="gap-md">
-              <div class="row">
-                <div class="col span-3">
-                  <LabeledInput
-                    v-model:value.number="k3kCluster.spec.servers"
-                    label-key="k3k.servers.number.label"
-                    :mode="mode"
-                  />
-                </div>
-              </div>
-              <RcSection
-                mode="with-header"
-                :expandable="true"
-                :expanded="true"
-                type="secondary"
-                :title="t('k3k.servers.envVars.title')"
-              >
-                <KeyValue
-                  v-model:value="k3kCluster.spec.serverEnvs"
-                  key-name="name"
-                  :as-map="false"
-                  :mode="mode"
-                  :initial-empty-row="true"
-                  :read-allowed="false"
-                  :add-label="t('k3k.agents.envVars.addLabel')"
-                />
-              </RcSection>
-              <RcSection
-                mode="with-header"
-                :expandable="true"
-                :expanded="true"
-                type="secondary"
-                :title="t('k3k.servers.serverArgs.label')"
-              >
-                <ArrayList
-                  v-model:value="k3kCluster.spec.serverArgs"
-                  :mode="mode"
-                  :read-allowed="false"
-                  :initial-empty-row="true"
-                  :add-label="t('k3k.servers.serverArgs.addLabel')"
-                />
-              </RcSection>
+    <RcSection
+      class="mmb-2"
+      mode="with-header"
+      :expandable="true"
+      :title="t('k3k.sections.serverAndAgents')"
+    >
+      <div class="rc-content">
+        <RcSection
+          mode="with-header"
+          :expandable="true"
+          :expanded="true"
+          type="secondary"
+          :title="t('k3k.servers.label')"
+        >
+          <div class="rc-content">
+            <div class="rc-row half">
+              <LabeledInput
+                v-model:value.number="k3kCluster.spec.servers"
+                label-key="k3k.servers.number.label"
+                :mode="mode"
+              />
             </div>
-          </RcSection>
-
-          <RcSection
-            mode="with-header"
-            :expandable="true"
-            :expanded="true"
-            type="secondary"
-            :title="t('k3k.agents.label')"
-          >
-            <div class="gap-md">
-              <div class="row">
-                <div class="col span-3">
-                  <LabeledInput
-                    v-model:value.number="k3kCluster.spec.agents"
-                    label-key="k3k.agents.number.label"
-                    :mode="mode"
-                  />
-                </div>
-              </div>
-
-              <RcSection
-                mode="with-header"
-                :expandable="true"
-                :expanded="true"
-                type="secondary"
-                :title="t('k3k.agents.envVars.title')"
-              >
-                <KeyValue
-                  v-model:value="k3kCluster.spec.agentEnvs"
-                  key-name="name"
-                  :as-map="false"
-                  :mode="mode"
-                  :read-allowed="false"
-                  :initial-empty-row="true"
-                  :add-label="t('k3k.agents.envVars.addLabel')"
-                />
-              </RcSection>
-            </div>
-          </RcSection>
-
-          <div
-            v-if="!policy"
-            class="row"
-          >
-            <div class="col span-12">
+            <RcSection
+              mode="with-header"
+              :expandable="true"
+              :expanded="true"
+              type="secondary"
+              :title="t('k3k.servers.envVars.title')"
+            >
               <KeyValue
-                v-model:value="k3kCluster.spec.nodeSelector"
+                v-model:value="k3kCluster.spec.serverEnvs"
+                key-name="name"
+                :as-map="false"
+                :mode="mode"
                 :initial-empty-row="true"
+                :read-allowed="false"
+                :add-label="t('k3k.agents.envVars.addLabel')"
+              />
+            </RcSection>
+            <RcSection
+              mode="with-header"
+              :expandable="true"
+              :expanded="true"
+              type="secondary"
+              :title="t('k3k.servers.serverArgs.label')"
+            >
+              <ArrayList
+                v-model:value="k3kCluster.spec.serverArgs"
                 :mode="mode"
                 :read-allowed="false"
-                :title="t('k3k.nodeSelector.label')"
-                :add-label="t('k3k.nodeSelector.addLabel')"
-              >
-                <template #title>
-                  <h3>{{ t('k3k.nodeSelector.label') }}</h3>
-                  <t
-                    raw
-                    k="k3k.nodeSelector.tooltip"
-                  />
-                </template>
-              </KeyValue>
-            </div>
+                :initial-empty-row="true"
+                :add-label="t('k3k.servers.serverArgs.addLabel')"
+              />
+            </RcSection>
           </div>
-        </div>
-      </RcSection>
+        </RcSection>
 
-      <RcSection
-        v-if="!policy && supportsTopology"
-        type="secondary"
-        background="secondary"
-        mode="with-header"
-        :expandable="true"
-        :title="t('k3k.policy.tabs.topology')"
-      >
-        <PolicyAffinity
-          v-model:server-affinity="k3kCluster.spec.serverAffinity"
-          v-model:agent-affinity="k3kCluster.spec.agentAffinity"
-          :mode="mode"
-        />
-      </RcSection>
+        <RcSection
+          mode="with-header"
+          :expandable="true"
+          :expanded="true"
+          type="secondary"
+          :title="t('k3k.agents.label')"
+        >
+          <div class="rc-content">
+            <div class="rc-row half">
+              <LabeledInput
+                v-model:value.number="k3kCluster.spec.agents"
+                label-key="k3k.agents.number.label"
+                :mode="mode"
+              />
+            </div>
 
-      <RcSection
-        type="secondary"
-        background="secondary"
-        mode="with-header"
-        :expandable="true"
-        :title="t('k3k.sections.networking')"
-      >
-        <Networking
-          v-model:cluster-c-i-d-r="k3kCluster.spec.clusterCIDR"
-          v-model:service-c-i-d-r="k3kCluster.spec.serviceCIDR"
-          v-model:cluster-d-n-s="k3kCluster.spec.clusterDNS"
-          v-model:tls-s-a-ns="k3kCluster.spec.tlsSANs"
-          v-model:expose="k3kCluster.spec.expose"
-          :rules="k3kCluster.spec.expose?.ingress ? {tlsSANs: fvGetAndReportPathRules('spec.tlsSANs')} : {}"
-          :mode="mode"
-        />
-      </RcSection>
+            <RcSection
+              mode="with-header"
+              :expandable="true"
+              :expanded="true"
+              type="secondary"
+              :title="t('k3k.agents.envVars.title')"
+            >
+              <KeyValue
+                v-model:value="k3kCluster.spec.agentEnvs"
+                key-name="name"
+                :as-map="false"
+                :mode="mode"
+                :read-allowed="false"
+                :initial-empty-row="true"
+                :add-label="t('k3k.agents.envVars.addLabel')"
+              />
+            </RcSection>
+          </div>
+        </RcSection>
 
-      <RcSection
-        v-if="canManageMembers"
-        type="secondary"
-        background="secondary"
-        mode="with-header"
-        :expandable="true"
-        :title="t('cluster.tabs.memberRoles')"
-      >
-        <div class="gap-md">
-          <Banner
-            v-if="isEdit"
-            color="info"
-          >
-            {{ t('cluster.memberRoles.removeMessage') }}
-          </Banner>
-          <ClusterMembershipEditor
+        <div
+          v-if="!policy"
+          class="rc-row"
+        >
+          <KeyValue
+            v-model:value="k3kCluster.spec.nodeSelector"
+            :initial-empty-row="true"
             :mode="mode"
-            :parent-id="value.mgmt ? value.mgmt.id : null"
-            @membership-update="onMembershipUpdate"
-          />
-        </div>
-      </RcSection>
-
-      <RcSection
-        type="secondary"
-        background="secondary"
-        mode="with-header"
-        :expandable="true"
-        :title="t('k3k.sections.advanced')"
-      >
-        <div class="gap-md">
-          <RcSection
-            mode="with-header"
-            :expandable="true"
-            :expanded="true"
-            type="secondary"
-            :title="t('k3k.secretMounts.title')"
+            :read-allowed="false"
+            :title="t('k3k.nodeSelector.label')"
+            :add-label="t('k3k.nodeSelector.addLabel')"
           >
-            <template #counter>
-              <RcCounterBadge
-                :count="(k3kCluster?.spec?.secretMounts || []).length"
-                type="inactive"
+            <template #title>
+              <h3>{{ t('k3k.nodeSelector.label') }}</h3>
+              <t
+                raw
+                k="k3k.nodeSelector.tooltip"
               />
             </template>
-            <div class="gap-md">
-              <SecretMounts
-                :mode="mode"
-                :parent-cluster="parentCluster"
-                :target-namespace="k3kCluster.metadata.namespace"
-                :secret-mounts="k3kCluster.spec.secretMounts || []"
-                @update:secret-mounts="k3kCluster.spec.secretMounts = $event"
-              />
-            </div>
-          </RcSection>
-          <RcSection
-            mode="with-header"
-            :expandable="true"
-            :expanded="false"
-            type="secondary"
-            :title="t('component.resource.detail.metadata.labelsAndAnnotations')"
-          >
-            <Labels
-              v-model:value="localValue"
-              :mode="mode"
-            />
-          </RcSection>
+          </KeyValue>
         </div>
-      </RcSection>
+      </div>
+    </RcSection>
+
+    <RcSection
+      v-if="!policy && supportsTopology"
+      class="mmb-2"
+
+      mode="with-header"
+      :expandable="true"
+      :title="t('k3k.policy.tabs.topology')"
+    >
+      <PolicyAffinity
+        v-model:server-affinity="k3kCluster.spec.serverAffinity"
+        v-model:agent-affinity="k3kCluster.spec.agentAffinity"
+        :mode="mode"
+      />
+    </RcSection>
+
+    <RcSection
+      class="mmb-2"
+
+      mode="with-header"
+      :expandable="true"
+      :title="t('k3k.sections.networking')"
+    >
+      <Networking
+        v-model:cluster-c-i-d-r="k3kCluster.spec.clusterCIDR"
+        v-model:service-c-i-d-r="k3kCluster.spec.serviceCIDR"
+        v-model:cluster-d-n-s="k3kCluster.spec.clusterDNS"
+        v-model:tls-s-a-ns="k3kCluster.spec.tlsSANs"
+        v-model:expose="k3kCluster.spec.expose"
+        :virtual-cluster-mode="k3kCluster.spec.mode"
+        :rules="k3kCluster.spec.expose?.ingress ? {tlsSANs: fvGetAndReportPathRules('spec.tlsSANs')} : {}"
+        :mode="mode"
+      />
+    </RcSection>
+
+    <RcSection
+      v-if="canManageMembers"
+      class="mmb-2"
+
+      mode="with-header"
+      :expandable="true"
+      :title="t('cluster.tabs.memberRoles')"
+    >
+      <div class="rc-content">
+        <Banner
+          v-if="isEdit"
+          color="info"
+        >
+          {{ t('cluster.memberRoles.removeMessage') }}
+        </Banner>
+        <ClusterMembershipEditor
+          :mode="mode"
+          :parent-id="value.mgmt ? value.mgmt.id : null"
+          @membership-update="onMembershipUpdate"
+        />
+      </div>
+    </RcSection>
+
+    <RcSection
+      class="mmb-2"
+
+      mode="with-header"
+      :expandable="true"
+      :title="t('k3k.sections.advanced')"
+    >
+      <div class="rc-content">
+        <RcSection
+          mode="with-header"
+          :expandable="true"
+          :expanded="true"
+          type="secondary"
+          :title="t('k3k.secretMounts.title')"
+        >
+          <template #counter>
+            <RcCounterBadge
+              :count="(k3kCluster?.spec?.secretMounts || []).length"
+              type="inactive"
+            />
+          </template>
+          <div class="rc-content">
+            <SecretMounts
+              :mode="mode"
+              :parent-cluster="parentCluster"
+              :target-namespace="k3kCluster.metadata.namespace"
+              :secret-mounts="k3kCluster.spec.secretMounts || []"
+              @update:secret-mounts="k3kCluster.spec.secretMounts = $event"
+            />
+          </div>
+        </RcSection>
+        <RcSection
+          mode="with-header"
+          :expandable="true"
+          :expanded="false"
+          type="secondary"
+          :title="t('component.resource.detail.metadata.labelsAndAnnotations')"
+        >
+          <Labels
+            v-model:value="localValue"
+            :mode="mode"
+          />
+        </RcSection>
+      </div>
     </RcSection>
   </CruResource>
 </template>

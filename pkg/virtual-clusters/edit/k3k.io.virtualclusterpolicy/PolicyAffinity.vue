@@ -42,14 +42,14 @@ const updateAgentPodAffinity = (value: { affinity: AffinityValue }) => {
 </script>
 
 <template>
-  <div class="gap-md">
+  <div class="rc-content">
     <RcSection
       type="secondary"
       mode="with-header"
       :expandable="true"
       :title="t('k3k.policy.affinity.serverNodeScheduling')"
     >
-      <div class="gap-md">
+      <div class="rc-content">
         <NodeAffinity
           :value="serverAffinity?.nodeAffinity || {}"
           :mode="mode"
@@ -68,7 +68,7 @@ const updateAgentPodAffinity = (value: { affinity: AffinityValue }) => {
       :expandable="true"
       :title="t('k3k.policy.affinity.agentNodeScheduling')"
     >
-      <div class="gap-md">
+      <div class="rc-content">
         <NodeAffinity
           :value="agentAffinity?.nodeAffinity || {}"
           :mode="mode"

@@ -43,7 +43,7 @@ const roleOptions: { label: string; value: SecretMountRole }[] = [
 </script>
 
 <template>
-  <div class="col span-6">
+  <div class="rc-row half">
     <LabeledSelect
       :value="secretName"
       label-key="k3k.secretMounts.secretName.label"
@@ -55,8 +55,8 @@ const roleOptions: { label: string; value: SecretMountRole }[] = [
       @update:value="emit('update:secretName', $event)"
     />
   </div>
-  <div>
-    <div class="col span-6">
+  <div class="rc-row half">
+    <div class="rc-content">
       <LabeledInput
         :value="mountPath"
         label-key="k3k.secretMounts.mountPath.label"
@@ -64,16 +64,16 @@ const roleOptions: { label: string; value: SecretMountRole }[] = [
         :mode="mode"
         @update:value="emit('update:mountPath', $event)"
       />
-    </div>
-    <div class="input-description mmt-1">
-      <t
-        k="k3k.secretMounts.mountPath.description"
-        raw
-      />
+      <div class="input-description">
+        <t
+          k="k3k.secretMounts.mountPath.description"
+          raw
+        />
+      </div>
     </div>
   </div>
-  <div>
-    <div class="col span-6">
+  <div class="rc-row half">
+    <div class="rc-content">
       <LabeledInput
         :value="subPath"
         label-key="k3k.secretMounts.subPath.label"
@@ -81,16 +81,16 @@ const roleOptions: { label: string; value: SecretMountRole }[] = [
         :mode="mode"
         @update:value="emit('update:subPath', $event)"
       />
-    </div>
-    <div class="input-description mmt-1">
-      <t
-        k="k3k.secretMounts.subPath.description"
-        raw
-      />
+      <div class="input-description">
+        <t
+          k="k3k.secretMounts.subPath.description"
+          raw
+        />
+      </div>
     </div>
   </div>
 
-  <div class="col span-12">
+  <div class="rc-row">
     <RadioGroup
       :value="role || 'all'"
       label-key="k3k.secretMounts.role.label"

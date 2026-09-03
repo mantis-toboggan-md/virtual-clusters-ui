@@ -348,8 +348,8 @@ export default {
     color="error"
     :label="t('k3k.errors.loadingPolicies', {cluster:hostCluster?.displayName || hostCluster?.metadata?.name || '' })"
   />
-  <div>
-    <div class="mmb-2">
+  <div class="rc-content">
+    <div :style="{'margin-bottom': '-12px' }">
       <t
         k="k3k.policy.description"
         :raw="true"
@@ -357,10 +357,8 @@ export default {
       />
     </div>
 
-    <div class="row">
-      <div
-        class="mmr-4 span-6"
-      >
+    <div class="rc-row">
+      <div class="rc-content">
         <LabeledSelect
           :value="isPolicySelected ? policy : (isNoneSelected ? t('k3k.policy.noneOption') : null)"
           :loading="showLoadingSpinner"
@@ -384,8 +382,9 @@ export default {
           {{ t('k3k.policy.viewPolicy') }}
         </button>
       </div>
-      <div class="span-6">
+      <div>
         <LabeledSelectWithCreate
+          id="policy-namespace-create"
           :key="isPolicySelected"
           :value="targetNamespace"
           :loading="showLoadingSpinner"
@@ -420,5 +419,14 @@ export default {
   padding-left: 0px;
   min-height: 1em;
   line-height: 1em;
+}
+
+#policy-namespace-create {
+  & :deep(.v-select .vs--single) {
+    display: flex !important;
+    &>*{
+      flex-grow: 1 !important;
+    }
+  }
 }
 </style>

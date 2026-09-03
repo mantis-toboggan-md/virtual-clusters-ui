@@ -149,43 +149,43 @@ export default {
 </script>
 
 <template>
-  <div class="gap-md">
+  <div class="rc-content">
     <Banner
       v-if="storageClassErrors.length"
       color="error"
       :label="storageClassErrors.join('. ')"
     />
-    <div class="span-6">
-      <t
-        class="text-label  mmb-2 centered"
-        raw
-        k="k3k.storage.storageClass.description"
-      />
-      <LabeledSelect
-        :disabled="storageClassOptions.length === 1"
-        :value="storageClassName || t('k3k.storage.noneOption')"
-        :loading="loadingStorageClasses"
-        :mode="mode"
-        label-key="k3k.storage.storageClass.label"
-        :options="storageClassOptions"
-        @update:value="updateStorageClass"
-      />
+    <div class="rc-row half">
+      <div class="rc-content">
+        <t
+          class="text-label centered"
+          raw
+          k="k3k.storage.storageClass.description"
+        />
+        <LabeledSelect
+          :disabled="storageClassOptions.length === 1"
+          :value="storageClassName || t('k3k.storage.noneOption')"
+          :loading="loadingStorageClasses"
+          :mode="mode"
+          label-key="k3k.storage.storageClass.label"
+          :options="storageClassOptions"
+          @update:value="updateStorageClass"
+        />
+      </div>
     </div>
     <div
       v-if="storageClassName"
-      class=""
+      class="rc-row half"
     >
-      <div class="col span-3">
-        <UnitInput
-          :increment="1024"
-          :input-exponent="3"
-          output-modifier
-          :value="storageRequestSize || ''"
-          :mode="mode"
-          label-key="k3k.storage.storageRequestSize.label"
-          @update:value="$emit('update:storageRequestSize', $event)"
-        />
-      </div>
+      <UnitInput
+        :increment="1024"
+        :input-exponent="3"
+        output-modifier
+        :value="storageRequestSize || ''"
+        :mode="mode"
+        label-key="k3k.storage.storageRequestSize.label"
+        @update:value="$emit('update:storageRequestSize', $event)"
+      />
     </div>
   </div>
 </template>

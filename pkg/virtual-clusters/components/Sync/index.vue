@@ -101,17 +101,13 @@ export default {
 </script>
 
 <template>
-  <div class="row mb-10">
-    <div class="col span-12">
-      <t
-        class="text-deemphasized"
-        k="k3k.policy.synchronization.tooltip"
-        raw
-      />
-    </div>
-  </div>
-  <div class="row sync-simple">
-    <div class="col span-6 vertical-checkboxes">
+  <div class="rc-content">
+    <t
+      class="text-deemphasized"
+      k="k3k.policy.synchronization.tooltip"
+      raw
+    />
+    <div class="rc-content">
       <Checkbox
         v-model:value="ingressesEnabled"
         :mode="mode"
@@ -123,21 +119,15 @@ export default {
         :label="t('k3k.policy.synchronization.priorityClassCheckbox')"
       />
     </div>
+    <StorageClasses
+      v-if="isPolicyContext"
+      :enabled="storageClasses?.enabled || false"
+      :selector="storageClasses?.selector"
+      :mode="mode"
+      :parent-cluster="parentCluster"
+      @update:enabled="$emit('update:storageClasses', { ...storageClasses, enabled: $event })"
+      @update:selector="$emit('update:storageClasses', { ...storageClasses, selector: $event })"
+      @error="$emit('error', $event)"
+    />
   </div>
-  <StorageClasses
-    v-if="isPolicyContext"
-    :enabled="storageClasses?.enabled || false"
-    :selector="storageClasses?.selector"
-    :mode="mode"
-    :parent-cluster="parentCluster"
-    @update:enabled="$emit('update:storageClasses', { ...storageClasses, enabled: $event })"
-    @update:selector="$emit('update:storageClasses', { ...storageClasses, selector: $event })"
-    @error="$emit('error', $event)"
-  />
 </template>
-
-<style lang="scss" scoped>
-.sync-simple {
-  margin-bottom: 16px;
-}
-</style>

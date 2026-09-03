@@ -238,9 +238,9 @@ watch(storageClassSelector, (neu) => {
         class="mt-20 storage-selectors"
         type="secondary"
       >
-        <div class="row storage-row">
-          <div class="col span-8">
-            <div class="row text-muted">
+        <div class="rc-row storage-row">
+          <div class="rc-content">
+            <div class="text-muted">
               {{ t('k3k.policy.synchronization.storageClass.selectorsDescription') }}
             </div>
             <KeyValue
@@ -268,7 +268,7 @@ watch(storageClassSelector, (neu) => {
               </template>
             </KeyValue>
           </div>
-          <div class="col span-4">
+          <div class="selected-classes-col">
             <RcSection
               mode="with-header"
               :expandable="false"
@@ -339,7 +339,13 @@ watch(storageClassSelector, (neu) => {
 .storage-row {
   position: relative;
 
-  .col.span-4 {
+  // the selected-classes panel is taken out of flow, so hold the selector
+  // column at the width the old span-8 gave it
+  &>.rc-content {
+    flex: 0 1 66.66%;
+  }
+
+  .selected-classes-col {
     position: absolute;
     top: 0;
     bottom: 0;
