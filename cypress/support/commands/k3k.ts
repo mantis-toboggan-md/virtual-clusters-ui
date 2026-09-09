@@ -41,6 +41,7 @@ const openHostClusterShell = (clusterName: string): Kubectl => {
  *
  * The chart version installed is constrained to the major/minor of the extension version - see
  * `k3kChartVersion` in cypress.config.ts 
+ * TODO when running the std user test suite need to attempt login as admin to do this command and the uninstall
  *
  * @param clusterName name of the host cluster as shown in the cluster management list
  */

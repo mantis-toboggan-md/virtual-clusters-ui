@@ -102,14 +102,15 @@ export default {
 
 <template>
   <div class="rc-content">
-    <t
-      class="text-deemphasized"
-      k="k3k.policy.synchronization.tooltip"
-      raw
-    />
-    <div class="rc-content">
+    <div class="sync-simple-checkboxes">
+      <t
+        class="text-deemphasized mmb-3"
+        k="k3k.policy.synchronization.tooltip"
+        raw
+      />
       <Checkbox
         v-model:value="ingressesEnabled"
+        class="mmb-2"
         :mode="mode"
         :label="t('k3k.policy.synchronization.ingressCheckbox')"
       />
@@ -131,3 +132,10 @@ export default {
     />
   </div>
 </template>
+
+<style lang="scss" scoped>
+  .sync-simple-checkboxes {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

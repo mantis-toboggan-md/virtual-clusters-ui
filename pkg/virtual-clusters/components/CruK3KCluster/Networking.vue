@@ -26,32 +26,40 @@ export default {
       'type':    String,
       'default': _CREATE
     },
+
     'clusterCIDR': {
       'type':    String,
       'default': ''
     },
+
     'serviceCIDR': {
       'type':    String,
       'default': ''
     },
+
     'clusterDNS': {
       'type':    String,
       'default': ''
     },
+
     'tlsSANs': {
       'type':    Array,
       'default': () => []
     },
+
     'expose': {
       'type':    Object,
       'default': () => {
         return {};
       },
-      'virtualClusterMode': {
-        'type':    String,
-        'default': MODES.SHARED
-      }
+
     },
+
+    'virtualClusterMode': {
+      'type':    String,
+      'default': MODES.SHARED
+    },
+
     'rules': {
       'type':    Object,
       'default': () => {}
@@ -142,13 +150,14 @@ export default {
             @update:value="e=>$emit('update:clusterCIDR', e)"
           />
         </div>
-        <div class="rc-row">
+        <div class="rc-row half">
           <div>
             <LabeledInput
               :value="serviceCIDR"
               label-key="k3k.serviceCIDR.label"
               placeholder-key="k3k.serviceCIDR.placeholder"
               :mode="mode"
+              class="mmb-1"
               @update:value="e=>$emit('update:serviceCIDR', e)"
             />
             <t
@@ -157,6 +166,8 @@ export default {
               class="text-label"
             />
           </div>
+        </div>
+        <div class="rc-row half">
           <LabeledInput
             :value="clusterDNS"
             label-key="k3k.clusterDNS.label"
@@ -164,8 +175,6 @@ export default {
             :mode="mode"
             @update:value="e=>$emit('update:clusterDNS', e)"
           />
-        </div>
-        <div class="rc-row">
         </div>
       </div>
     </RcSection>
@@ -208,7 +217,7 @@ export default {
           k="k3k.expose.description"
         />
         <div>
-          <div class="mmb-3">
+          <div class="mmb-2">
             <RadioButton
               v-model:value="exposeMode"
               :val="exposeModes.NONE"
@@ -216,7 +225,7 @@ export default {
             />
           </div>
 
-          <div class="mmb-3">
+          <div class="mmb-2">
             <RadioButton
               v-model:value="exposeMode"
               :val="exposeModes.INGRESS"
@@ -239,14 +248,14 @@ export default {
                       v-model:value="expose.ingress.ingressClassName"
                       label-key="k3k.expose.ingress.ingressClassName.label"
                       :mode="mode"
+                      class="mmb-1"
                     />
-                    <div class="mmt-1">
-                      <t
-                        k="k3k.expose.ingress.ingressClassName.description"
-                        class="text-label"
-                        raw
-                      />
-                    </div>
+
+                    <t
+                      k="k3k.expose.ingress.ingressClassName.description"
+                      class="text-label"
+                      raw
+                    />
                   </div>
                 </div>
                 <div class="rc-row">
@@ -269,7 +278,7 @@ export default {
             </RcSection>
           </div>
 
-          <div class="mmb-3">
+          <div class="mmb-2">
             <RadioButton
               v-model:value="exposeMode"
               :label="t('k3k.expose.loadbalancer.label')"
@@ -315,7 +324,7 @@ export default {
             </RcSection>
           </div>
 
-          <div class="mmb-3">
+          <div class="mmb-2">
             <RadioButton
               v-model:value="exposeMode"
               :label="t('k3k.expose.nodePort.label')"

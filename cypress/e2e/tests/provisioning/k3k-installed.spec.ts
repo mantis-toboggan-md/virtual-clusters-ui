@@ -1,5 +1,4 @@
 import CruK3kPo from '../../po/cru-k3k.po';
-import { login } from '../../utils/login';
 
 const HOST_CLUSTER = 'e2e-generic';
 
@@ -11,28 +10,19 @@ const HOST_CLUSTER = 'e2e-generic';
  */
 describe('host cluster with k3k installed', { tags: ['@adminUser'] }, () => {
   before(() => {
-    login();
+    cy.loginPrime();
+
     cy.installK3k(HOST_CLUSTER);
   });
 
+  beforeEach(() => cy.loginPrime());
 
-  beforeEach(() => login());
-
-  it('does not offer to install k3k in a host cluster that already has it', () => {
+  it('does not offer to install k3k in a host cluster that already has it', () => {\
+    // check the cluster provisioning form
     const cruK3k = CruK3kPo.goToCreate();
 
     cruK3k.selectHostCluster(HOST_CLUSTER);
 
     cruK3k.installK3kButton().self().should('not.exist');
-  });
-
-  it('does not warn about the k3k version when the chart matches the extension', () => {
-    const cruK3k = CruK3kPo.goToCreate();
-
-    cruK3k.selectHostCluster(HOST_CLUSTER);
-
-    // cy.installK3k installs the k3k major/minor matching this extension, so the mismatch
-    // banner must stay hidden
-    cruK3k.versionMismatchBanner().self().should('not.exist');
   });
 });

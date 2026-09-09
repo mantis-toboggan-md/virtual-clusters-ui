@@ -134,7 +134,7 @@ function mountTitle(mount: SecretMount): {name: string, path?: string} {
     <RcSection
       type="secondary"
       :expandable="true"
-      :expanded="true"
+      :expanded="false"
       :title="mountTitle(mount)"
       mode="with-header"
       class="secret-mount"
@@ -194,7 +194,7 @@ function mountTitle(mount: SecretMount): {name: string, path?: string} {
 }
 
 .secret-mount :deep(.section-header .left-wrapper) {
-  overflow: hidden;
+  // overflow: hidden;
   min-width: 0;
   width: 0;
   flex: 1 1 0%;

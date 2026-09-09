@@ -331,6 +331,7 @@ export default {
     </RcSection>
 
     <RcSection
+      type="primary"
       mode="with-header"
       :expandable="true"
       :title="t('k3k.policy.tabs.resourceSync')"
@@ -348,6 +349,7 @@ export default {
     </RcSection>
 
     <RcSection
+      type="primary"
       :expandable="true"
       mode="with-header"
       :title="t('k3k.policy.tabs.resourceAllocation')"
@@ -380,6 +382,7 @@ export default {
 
     <RcSection
       v-if="supportsTopology"
+      type="primary"
       :expandable="true"
       mode="with-header"
       :title="t('k3k.policy.tabs.topology')"
@@ -392,6 +395,7 @@ export default {
     </RcSection>
 
     <RcSection
+      type="primary"
       :expandable="true"
       mode="with-header"
       :title="t('k3k.policy.tabs.advanced')"
@@ -430,15 +434,16 @@ export default {
           :expandable="true"
           :title="t('k3k.policy.security.label')"
         >
-          <div class="rc-content">
-            <t
-              class="text-deemphasized"
-              k="k3k.policy.security.tooltip"
-              raw
-            />
-            <div class="rc-row half">
+          <div class="rc-row half">
+            <div>
+              <t
+                class="text-deemphasized"
+                k="k3k.policy.security.tooltip"
+                raw
+              />
               <LabeledSelect
                 v-model:value="podSecurityAdmissionLevel"
+                class="mmt-1"
                 :mode="mode"
                 :options="[noneOption,'privileged', 'baseline', 'restricted']"
                 :label="t('cluster.rke2.defaultPodSecurityAdmissionConfigurationTemplateName.label')"
@@ -453,8 +458,8 @@ export default {
           :expandable="true"
           :title="t('k3k.policy.isolation.label')"
         >
-          <div class="rc-content">
-            <div>
+          <div>
+            <div class="mmb-3">
               <t
                 class="text-deemphasized"
                 k="k3k.policy.isolation.tooltip"
@@ -484,15 +489,18 @@ export default {
     </RcSection>
 
     <RcSection
+      type="primary"
       :expandable="true"
       mode="with-header"
       :title="t('generic.labelsAndAnnotations', {}, true)"
     >
-      <Labels
-        :mode="mode"
-        :value="value"
-        :use-rc-button="true"
-      />
+      <div class="rc-content">
+        <Labels
+          :mode="mode"
+          :value="value"
+          :use-rc="true"
+        />
+      </div>
     </RcSection>
   </CruResource>
 </template>

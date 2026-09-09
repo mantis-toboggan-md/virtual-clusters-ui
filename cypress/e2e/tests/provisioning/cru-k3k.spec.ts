@@ -1,12 +1,19 @@
 import ClusterManagerCreatePagePo from '@rancher/cypress/e2e/po/edit/provisioning.cattle.io.cluster/create/cluster-create.po';
 
 import CruK3kPo from '../../po/cru-k3k.po';
-import { login } from '../../utils/login';
 
 const HOST_CLUSTER = 'e2e-generic';
 
 describe('cluster creation', () => {
-  beforeEach(() => login());
+  before(()=>{
+    cy.loginPrime();
+
+    cy.uninstallK3k(HOST_CLUSTER);
+  })
+
+  beforeEach(() => {
+    cy.loginPrime();
+  });
 
   it('shows a card for the k3k provisioner', { tags: ['@adminUser', '@standardUser'] }, () => {
     ClusterManagerCreatePagePo.goTo('_');
