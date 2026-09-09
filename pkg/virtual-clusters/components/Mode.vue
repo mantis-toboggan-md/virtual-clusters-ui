@@ -92,7 +92,7 @@ export default {
   }
 
   & :deep(.radio-container) {
-    padding-bottom: 0px;
+     padding-bottom: 0px;
   }
 }
 

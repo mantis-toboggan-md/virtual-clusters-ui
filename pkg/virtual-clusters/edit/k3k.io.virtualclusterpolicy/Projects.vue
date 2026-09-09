@@ -499,21 +499,20 @@ export default {
 
 <template>
   <div class="rc-content">
-    <h3>
-      {{ t('k3k.policy.headers.projectsAndNamespaces') }}
-    </h3>
-    <h5 class="text-deemphasized">
-      {{ t('k3k.policy.projects.subheader') }}
-    </h5>
     <div class="rc-row half">
-      <LabeledSelect
-        v-model:value="selectedProjects"
-        :label="t('k3k.policy.projects.label')"
-        class="project-select"
-        :mode="mode"
-        :options="sortedProjectOptions"
-        multiple
-      />
+      <div>
+        <h5 class="text-deemphasized">
+          {{ t('k3k.policy.projects.subheader') }}
+        </h5>
+        <LabeledSelect
+          v-model:value="selectedProjects"
+          :label="t('k3k.policy.projects.label')"
+          class="project-select"
+          :mode="mode"
+          :options="sortedProjectOptions"
+          multiple
+        />
+      </div>
     </div>
     <ProjectStatusTable
       v-if="displayProjects.length && !isCreate"

@@ -27,7 +27,7 @@ k3k:
     description: Virtual clusters should be assigned to Virtual Cluster Policies. <br/>  <a href="https://documentation.suse.com/cloudnative/suse-virtual-clusters/latest/en/virtualclusterpolicy.html" target="_blank" rel="noopener noreferrer nofollow" href="" >Learn mode about virtual cluster policies <icon class="icon icon-external-link icon-sm"/></a>
     noneOption: No policy
     tabs:
-      config: Config
+      config: Configuration
       resourceSync: Resource Synchronization
       resourceAllocation: Resource Allocation
       advanced: Advanced
