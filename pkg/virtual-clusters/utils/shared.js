@@ -1,5 +1,5 @@
 export const MODES = {
-  'SHARED':  'shared',
-  'VIRTUAL': 'virtual',
-  'HCP':     'hcp'
+  SHARED:  'shared',
+  VIRTUAL: 'virtual',
+  HCP:     'hcp'
 };

@@ -9,11 +9,11 @@ import cloneDeep from 'lodash/cloneDeep';
 import { MODES } from '../Mode.vue';
 
 export default {
-  'name': 'K3kClusterNetworking',
+  name: 'K3kClusterNetworking',
 
-  'emits': ['update:clusterCIDR', 'update:serviceCIDR', 'update:clusterDNS', 'update:tlsSANs', 'update:expose'],
+  emits: ['update:clusterCIDR', 'update:serviceCIDR', 'update:clusterDNS', 'update:tlsSANs', 'update:expose'],
 
-  'components': {
+  components: {
     LabeledInput,
     ArrayList,
     RadioButton,
@@ -21,58 +21,58 @@ export default {
     RcSection
   },
 
-  'props': {
-    'mode': {
-      'type':    String,
-      'default': _CREATE
+  props: {
+    mode: {
+      type:    String,
+      default: _CREATE
     },
 
-    'clusterCIDR': {
-      'type':    String,
-      'default': ''
+    clusterCIDR: {
+      type:    String,
+      default: ''
     },
 
-    'serviceCIDR': {
-      'type':    String,
-      'default': ''
+    serviceCIDR: {
+      type:    String,
+      default: ''
     },
 
-    'clusterDNS': {
-      'type':    String,
-      'default': ''
+    clusterDNS: {
+      type:    String,
+      default: ''
     },
 
-    'tlsSANs': {
-      'type':    Array,
-      'default': () => []
+    tlsSANs: {
+      type:    Array,
+      default: () => []
     },
 
-    'expose': {
-      'type':    Object,
-      'default': () => {
+    expose: {
+      type:    Object,
+      default: () => {
         return {};
       },
 
     },
 
-    'virtualClusterMode': {
-      'type':    String,
-      'default': MODES.SHARED
+    virtualClusterMode: {
+      type:    String,
+      default: MODES.SHARED
     },
 
-    'rules': {
-      'type':    Object,
-      'default': () => {}
+    rules: {
+      type:    Object,
+      default: () => {}
     },
   },
 
   data() {
     let exposeMode;
     const exposeModes = {
-      'INGRESS':       'ingress',
-      'LOAD_BALANCER': 'loadbalancer',
-      'NODE_PORT':     'nodePort',
-      'NONE':          'none'
+      INGRESS:       'ingress',
+      LOAD_BALANCER: 'loadbalancer',
+      NODE_PORT:     'nodePort',
+      NONE:          'none'
     };
     // expose can have one of ingress, loadbalancer, or node port defined
     const { ingress, loadbalancer, nodePort } = this.expose;
@@ -93,7 +93,7 @@ export default {
     };
   },
 
-  'watch': {
+  watch: {
     exposeMode(neu) {
       const out = cloneDeep(this.expose || {});
 
@@ -122,8 +122,8 @@ export default {
     }
   },
 
-  'computed': {
-    isShared(){
+  computed: {
+    isShared() {
       return this.virtualClusterMode === MODES.SHARED;
     }
   }

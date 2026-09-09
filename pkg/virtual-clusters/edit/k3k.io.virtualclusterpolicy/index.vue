@@ -32,11 +32,11 @@ import { fieldIsSupported } from '../../utils/k3kInstalled';
 const CONTAINER_LIMIT_TYPE = 'Container';
 
 export default {
-  'name': 'CRUClusterPolicy',
+  name: 'CRUClusterPolicy',
 
-  'mixins': [CreateEditView, FormValidation],
+  mixins: [CreateEditView, FormValidation],
 
-  'components': {
+  components: {
     CruResource,
     Loading,
     NameNsDescription,
@@ -57,18 +57,18 @@ export default {
   },
 
   // provisioning cluster object - needed when the policy form is shown in a drawer during cluster creation
-  'props': {
-    'parentCluster': {
-      'type':    Object,
-      'default': null
+  props: {
+    parentCluster: {
+      type:    Object,
+      default: null
     },
   },
 
   async fetch() {
     if (!this.value.spec) {
       this.value.spec = {
-        'allowedMode': MODES.SHARED,
-        'sync':        { 'storageClasses': { 'enabled': true } }
+        allowedMode: MODES.SHARED,
+        sync:        { storageClasses: { enabled: true } }
       };
     }
     const selectedCluster = this.parentCluster || this.$store.getters['currentCluster'];
@@ -89,33 +89,33 @@ export default {
 
   data() {
     return {
-      'errors':         [],
-      'fvFormRuleSets': [{
-        'path':  'name',
-        'rules': ['required'],
+      errors:         [],
+      fvFormRuleSets: [{
+        path:  'name',
+        rules: ['required'],
       }],
-      'supportsTopology': false // Only k3k >= 1.1.0 supports the fields in the 'Topology' tab
+      supportsTopology: false // Only k3k >= 1.1.0 supports the fields in the 'Topology' tab
     };
   },
 
-  'computed': {
+  computed: {
     noneOption() {
       return this.t('generic.none');
     },
 
     // format limits to match project/namespace so we can use the same component
-    'defaultLimits': {
+    defaultLimits: {
       get() {
         const limit = (this.value.spec?.limit?.limits || []).find((l) => l.type === CONTAINER_LIMIT_TYPE) || {};
 
         const { max = {}, defaultRequest = {} } = limit;
 
         return {
-          'limitsCpu':      max.cpu,
-          'limitsMemory':   max.memory,
-          'limitsGpu':      max['nvidia.com/gpu'],
-          'requestsCpu':    defaultRequest.cpu,
-          'requestsMemory': defaultRequest.memory
+          limitsCpu:      max.cpu,
+          limitsMemory:   max.memory,
+          limitsGpu:      max['nvidia.com/gpu'],
+          requestsCpu:    defaultRequest.cpu,
+          requestsMemory: defaultRequest.memory
         };
       },
 
@@ -129,9 +129,9 @@ export default {
           this.value.spec.limit.limits = [];
         }
         const neu = {
-          'type':           CONTAINER_LIMIT_TYPE,
-          'max':            {},
-          'defaultRequest': {}
+          type:           CONTAINER_LIMIT_TYPE,
+          max:            {},
+          defaultRequest: {}
         };
 
         if (limitsCpu !== undefined) {
@@ -156,7 +156,7 @@ export default {
       }
     },
 
-    'quota': {
+    quota: {
       get() {
         return this.value?.spec?.quota?.hard || {};
       },
@@ -168,7 +168,7 @@ export default {
       }
     },
 
-    'podSecurityAdmissionLevel': {
+    podSecurityAdmissionLevel: {
       get() {
         return this.value.spec.podSecurityAdmissionLevel || this.noneOption;
       },
@@ -181,7 +181,7 @@ export default {
       }
     },
 
-    'ingresses': {
+    ingresses: {
       get() {
         return this.value?.spec?.sync?.ingresses || {};
       },
@@ -190,7 +190,7 @@ export default {
       }
     },
 
-    'priorityClasses': {
+    priorityClasses: {
       get() {
         return this.value?.spec?.sync?.priorityClasses || {};
       },
@@ -199,7 +199,7 @@ export default {
       }
     },
 
-    'storageClasses': {
+    storageClasses: {
       get() {
         return this.value?.spec?.sync?.storageClasses || {};
       },
@@ -221,7 +221,7 @@ export default {
     },
   },
 
-  'methods': {
+  methods: {
     annotatePolicyWithProjects(projects = []) {
       if (!projects.length) {
         this.value.setAnnotation([ANNOTATIONS.POLICY_ASSIGNED_TO], '');

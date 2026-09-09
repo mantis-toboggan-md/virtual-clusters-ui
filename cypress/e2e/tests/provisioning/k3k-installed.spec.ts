@@ -17,7 +17,7 @@ describe('host cluster with k3k installed', { tags: ['@adminUser'] }, () => {
 
   beforeEach(() => cy.loginPrime());
 
-  it('does not offer to install k3k in a host cluster that already has it', () => {\
+  it('does not offer to install k3k in a host cluster that already has it', () => {
     // check the cluster provisioning form
     const cruK3k = CruK3kPo.goToCreate();
 

@@ -4,36 +4,36 @@ import RadioButton from '@components/Form/Radio/RadioButton.vue';
 import { _CREATE } from '@shell/config/query-params';
 
 export const MODES = {
-  'SHARED':  'shared',
-  'VIRTUAL': 'virtual',
-  'HCP':     'hcp'
+  SHARED:  'shared',
+  VIRTUAL: 'virtual',
+  HCP:     'hcp'
 };
 
 export default {
-  'name': 'CRUK3KMode',
+  name: 'CRUK3KMode',
 
-  'emits': ['update:k3k-mode'],
+  emits: ['update:k3k-mode'],
 
-  'props': {
-    'mode': {
-      'type':    String,
-      'default': _CREATE
+  props: {
+    mode: {
+      type:    String,
+      default: _CREATE
     },
 
-    'k3kMode': {
-      'type':    String,
-      'default': MODES.SHARED
+    k3kMode: {
+      type:    String,
+      default: MODES.SHARED
     }
   },
 
-  'components': { RadioButton },
+  components: { RadioButton },
 
   data() {
-    return { 'modes': MODES };
+    return { modes: MODES };
   },
 
-  'computed': {
-    ...mapGetters({ 't': 'i18n/t' }),
+  computed: {
+    ...mapGetters({ t: 'i18n/t' }),
 
     isCreate() {
       return this.mode === _CREATE;

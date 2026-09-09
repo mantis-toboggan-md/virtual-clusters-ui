@@ -7,12 +7,12 @@ import { _VIEW } from '@shell/config/query-params';
 import { RcSection, RcSectionActions } from '@components/RcSection';
 import { RcButton } from '@components/RcButton';
 
-defineOptions({ 'name': 'K3kSecretMounts' });
+defineOptions({ name: 'K3kSecretMounts' });
 
 const DEFAULT_MOUNT = {
-  'secretName': '',
-  'mountPath':  '',
-  'role':       'all'
+  secretName: '',
+  mountPath:  '',
+  role:       'all'
 } as SecretMount;
 
 const store = useStore();
@@ -49,8 +49,8 @@ async function fetchSecrets() {
     const mgmtCluster = props.parentCluster.mgmt;
 
     const res = await store.dispatch('management/request', {
-      'url':    `/k8s/clusters/${ mgmtCluster.id }/v1/secrets/${ props.targetNamespace }`,
-      'method': 'GET',
+      url:    `/k8s/clusters/${ mgmtCluster.id }/v1/secrets/${ props.targetNamespace }`,
+      method: 'GET',
     });
 
     secrets.value = (res.data || []).map((s: any) => s.metadata.name);

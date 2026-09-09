@@ -195,8 +195,8 @@ const baseCommand = computed(() => {
 
 async function fetchParentResource(path: string) {
   return store.dispatch('management/request', {
-    'url':    `/k8s/clusters/${ parentClusterId.value }/v1/${ path }`,
-    'method': 'GET',
+    url:    `/k8s/clusters/${ parentClusterId.value }/v1/${ path }`,
+    method: 'GET',
   });
 }
 

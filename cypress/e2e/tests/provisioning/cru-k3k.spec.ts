@@ -5,11 +5,11 @@ import CruK3kPo from '../../po/cru-k3k.po';
 const HOST_CLUSTER = 'e2e-generic';
 
 describe('cluster creation', () => {
-  before(()=>{
+  before(() => {
     cy.loginPrime();
 
     cy.uninstallK3k(HOST_CLUSTER);
-  })
+  });
 
   beforeEach(() => {
     cy.loginPrime();

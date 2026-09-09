@@ -1,9 +1,7 @@
 import ClusterManagerListPagePo from '@rancher/cypress/e2e/po/pages/cluster-manager/cluster-manager-list.po';
 import Kubectl from '@rancher/cypress/e2e/po/components/kubectl.po';
 
-import {
-  K3K_CHART_NAME, K3K_CHART_NAMESPACE, K3K_REPO_NAME
-} from '../../../pkg/virtual-clusters/utils/k3k-chart';
+import { K3K_CHART_NAME, K3K_CHART_NAMESPACE, K3K_REPO_NAME } from '../../../pkg/virtual-clusters/utils/k3k-chart';
 
 const K3K_UPSTREAM_CHART_NAME = 'k3k';
 
@@ -40,7 +38,7 @@ const openHostClusterShell = (clusterName: string): Kubectl => {
  * Install k3k into the given host cluster via its kubectl shell.
  *
  * The chart version installed is constrained to the major/minor of the extension version - see
- * `k3kChartVersion` in cypress.config.ts 
+ * `k3kChartVersion` in cypress.config.ts
  * TODO when running the std user test suite need to attempt login as admin to do this command and the uninstall
  *
  * @param clusterName name of the host cluster as shown in the cluster management list

@@ -94,6 +94,6 @@ export default function(plugin: IPlugin): void {
     name:      'hcp',
     labelKey:  'k3k.tabs.hcp',
     component: () => import('./components/HcpDetailTab.vue'),
-    weight: 99
+    weight:    99
   });
 }
