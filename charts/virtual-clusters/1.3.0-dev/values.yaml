@@ -4,9 +4,9 @@ plugin:
   enabled: true
   versionOverride: ""
   endpoint: >-
-    https://raw.githubusercontent.com/https://github.com/mantis-toboggan-md/virtual-clusters-ui.git/main/extensions/virtual-clusters/1.3.0-dev
+    https://raw.githubusercontent.com/mantis-toboggan-md/virtual-clusters-ui/gh-pages/extensions/virtual-clusters/1.3.0-dev
   compressedEndpoint: >-
-    https://raw.githubusercontent.com/https://github.com/mantis-toboggan-md/virtual-clusters-ui.git/main/extensions/virtual-clusters/1.3.0-dev.tgz
+    https://raw.githubusercontent.com/mantis-toboggan-md/virtual-clusters-ui/gh-pages/extensions/virtual-clusters/1.3.0-dev.tgz
   noCache: false
   noAuth: false
   metadata:
