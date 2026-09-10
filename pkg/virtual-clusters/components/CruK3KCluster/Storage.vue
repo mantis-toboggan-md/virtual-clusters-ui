@@ -156,13 +156,14 @@ export default {
       :label="storageClassErrors.join('. ')"
     />
     <div class="rc-row half">
-      <div class="rc-content">
+      <div>
         <t
           class="text-label centered"
           raw
           k="k3k.storage.storageClass.description"
         />
         <LabeledSelect
+          class="mmt-1"
           :disabled="storageClassOptions.length === 1"
           :value="storageClassName || t('k3k.storage.noneOption')"
           :loading="loadingStorageClasses"

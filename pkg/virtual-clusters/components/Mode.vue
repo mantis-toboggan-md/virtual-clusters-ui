@@ -51,7 +51,10 @@ export default {
     <div>
       <h3>{{ t('k3k.mode.label') }}</h3>
       <h5 class="text-deemphasized">
-        {{ t('k3k.mode.tooltip') }}
+        <t
+          k="k3k.mode.tooltip"
+          :raw="true"
+        />
       </h5>
       <div
         role="radiogroup"

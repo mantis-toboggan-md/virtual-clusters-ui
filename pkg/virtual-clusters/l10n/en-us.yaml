@@ -105,8 +105,10 @@ k3k:
       ingressCheckbox: Ingresses
       priorityClassCheckbox: Priority Classes
       notAllowed:
-        title: Not available in virtual mode
-        description: In this mode, virtual clusters manage their own isolated resources. Switch to shared mode to synchronize resources between the host and virtual cluster. <br/> <a href="https://documentation.suse.com/cloudnative/suse-virtual-clusters/latest/en/architecture.html#_shared_mode" target="_blank" rel="noopener noreferrer nofollow" href="" >Learn mode about virtual cluster modes <icon class="icon icon-external-link icon-sm"/></a>
+        title: Not available in {mode} mode
+        description: 
+          virtual: In this mode, virtual clusters manage their own isolated resources. Switch to shared mode to synchronize resources between the host and virtual cluster. <br/> <a href="https://documentation.suse.com/cloudnative/suse-virtual-clusters/latest/en/architecture.html#_shared_mode" target="_blank" rel="noopener noreferrer nofollow" href="" >Learn mode about virtual cluster modes <icon class="icon icon-external-link icon-sm"/></a>
+          hcp: In this mode, worker nodes run standard k3s agents that have their own CNI and storage configured at install time. Switch to shared mode to synchronize resources between the host and virtual cluster. <br/> <a href="https://documentation.suse.com/cloudnative/suse-virtual-clusters/latest/en/architecture.html#_shared_mode" target="_blank" rel="noopener noreferrer nofollow" href="" >Learn mode about virtual cluster modes <icon class="icon icon-external-link icon-sm"/></a>
       storageClass:
         title: Storage Classes
         tooltip: In <code>shared</code> mode, by default all storage classes are synchronized from the host to the virtual cluster. You can disable that. You can also use label selectors to sync only a subset of storage classes.
@@ -183,7 +185,7 @@ k3k:
     hcp:
       label: HCP
       description: Bring your own worker nodes
-    tooltip: By default virtual clusters are provisioned using the shared mode. You can use the virtual mode for more advanced isolation.
+    tooltip: By default virtual clusters are provisioned using the shared mode. You can use the virtual mode for more advanced isolation. <br/> <a href="https://documentation.suse.com/cloudnative/suse-virtual-clusters/latest/en/architecture.html#_shared_mode" target="_blank" rel="noopener noreferrer nofollow">Learn mode about virtual cluster modes <icon class="icon icon-external-link icon-sm"/></a>
   tabs:
     hcp: HCP
   agents:

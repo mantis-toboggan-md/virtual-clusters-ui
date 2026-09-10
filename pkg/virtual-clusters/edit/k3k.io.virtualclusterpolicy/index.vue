@@ -345,7 +345,10 @@ export default {
         :parent-cluster="parentCluster"
         @error="errors.push($event)"
       />
-      <NotAllowed v-else />
+      <NotAllowed
+        v-else
+        :mode="value.spec.allowedMode"
+      />
     </RcSection>
 
     <RcSection

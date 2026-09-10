@@ -358,7 +358,7 @@ export default {
     </div>
 
     <div class="rc-row">
-      <div class="rc-content">
+      <div>
         <LabeledSelect
           data-testid="k3k-policy-select"
           :value="isPolicySelected ? policy : (isNoneSelected ? t('k3k.policy.noneOption') : null)"

@@ -873,7 +873,10 @@ export default {
         :mode="mode"
         :context="SYNC_CONTEXT.cluster"
       />
-      <NotAllowed v-else />
+      <NotAllowed
+        v-else
+        :mode="k3kCluster.spec.mode"
+      />
     </RcSection>
 
     <RcSection

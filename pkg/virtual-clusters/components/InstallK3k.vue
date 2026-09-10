@@ -21,11 +21,23 @@ import { PARENT_CLUSTER } from '../labels-annotations';
 const DOWNLOAD_MAX_RETRIES = 10;
 const RETRY_WAIT = 1000;
 const K3K_VALUES = {
+  server: {
+    image: {
+      registry:   'registry.rancher.com',
+      repository: 'rancher/k3s'
+    }
+  },
   agent: {
     shared: {
       image: {
         registry:   'registry.suse.com',
         repository: 'rancher/appco-k3k-kubelet'
+      }
+    },
+    virtual: {
+      image: {
+        registry:   'registry.rancher.com',
+        repository: 'rancher/k3s'
       }
     }
   },
