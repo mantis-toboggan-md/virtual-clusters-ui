@@ -383,8 +383,14 @@ export default {
     :class="{ half: !showingInstallationContent }"
   >
     <div v-if="!showButtonOnly">
+      <t
+        raw
+        k="k3k.hostCluster.description"
+        class="text-deemphasized"
+      />
       <LabeledSelect
         v-model:value="selectedParentOption"
+        class="mmt-1"
         data-testid="k3k-host-cluster-select"
         label-key="k3k.hostCluster.label"
         :mode="mode"

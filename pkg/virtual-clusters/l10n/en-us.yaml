@@ -177,7 +177,7 @@ k3k:
     createLabel: Create a new Namespace
   hostCluster:
     label: Host cluster
-    description: The host cluster where the virtual cluster will live.
+    description: The host cluster that the virtual cluster will run in.
     tooltip: The host must have the K3K helm chart installed
     notInstalled: The K3K controller must be installed in each cluster to be used as a host for virtual clusters. Follow manual installation instructions <a aria-label='link to the K3K github repository' href='https://github.com/rancher/K3K/tree/main?tab=readme-ov-file#install-the-K3K-controller' target="_blank" rel="noopener noreferrer nofollow">here</a> or click below to install the K3K chart with default values.
     installK3k: Install K3K
