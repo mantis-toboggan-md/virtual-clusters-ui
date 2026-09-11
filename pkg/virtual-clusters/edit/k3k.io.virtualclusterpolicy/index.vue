@@ -444,16 +444,15 @@ export default {
           :expanded="!isHcpMode"
           :title="t('k3k.policy.security.label')"
         >
-          <div
-            v-if="!isHcpMode"
-            class="rc-row half"
-          >
-            <div>
-              <t
-                class="text-deemphasized"
-                k="k3k.policy.security.tooltip"
-                raw
-              />
+          <div v-if="!isHcpMode">
+            <t
+              class="text-deemphasized"
+              k="k3k.policy.security.tooltip"
+              raw
+            />
+            <div
+              class="rc-row half mmt-1"
+            >
               <LabeledSelect
                 v-model:value="podSecurityAdmissionLevel"
                 class="mmt-1"
@@ -463,6 +462,7 @@ export default {
               />
             </div>
           </div>
+
           <NotAllowed
             v-else
             :mode="value.spec.allowedMode"
