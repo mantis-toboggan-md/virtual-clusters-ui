@@ -212,6 +212,10 @@ export default {
       return this.value?.spec?.allowedMode === MODES.SHARED;
     },
 
+    isHcpMode() {
+      return this.value?.spec?.allowedMode === MODES.HCP;
+    },
+
     hasNodeSelector() {
       return !isEmpty(this.value?.spec?.defaultNodeSelector || {});
     },
@@ -348,6 +352,7 @@ export default {
       <NotAllowed
         v-else
         :mode="value.spec.allowedMode"
+        section="synchronization"
       />
     </RcSection>
 
@@ -394,6 +399,7 @@ export default {
         v-model:server-affinity="value.spec.defaultServerAffinity"
         v-model:agent-affinity="value.spec.defaultAgentAffinity"
         :mode="mode"
+        :k3k-mode="value.spec.allowedMode"
       />
     </RcSection>
 
@@ -435,9 +441,13 @@ export default {
           type="secondary"
           mode="with-header"
           :expandable="true"
+          :expanded="!isHcpMode"
           :title="t('k3k.policy.security.label')"
         >
-          <div class="rc-row half">
+          <div
+            v-if="!isHcpMode"
+            class="rc-row half"
+          >
             <div>
               <t
                 class="text-deemphasized"
@@ -453,6 +463,11 @@ export default {
               />
             </div>
           </div>
+          <NotAllowed
+            v-else
+            :mode="value.spec.allowedMode"
+            section="security"
+          />
         </RcSection>
 
         <RcSection
@@ -460,8 +475,9 @@ export default {
           mode="with-header"
           :expandable="true"
           :title="t('k3k.policy.isolation.label')"
+          :expanded="!isHcpMode"
         >
-          <div>
+          <div v-if="!isHcpMode">
             <div class="mmb-3">
               <t
                 class="text-deemphasized"
@@ -487,6 +503,11 @@ export default {
               :label="t('k3k.policy.isolation.checkbox')"
             />
           </div>
+          <NotAllowed
+            v-else
+            :mode="value.spec.allowedMode"
+            section="isolation"
+          />
         </RcSection>
       </div>
     </RcSection>
@@ -496,6 +517,7 @@ export default {
       :expandable="true"
       mode="with-header"
       :title="t('generic.labelsAndAnnotations', {}, true)"
+      :expanded="false"
     >
       <div class="rc-content">
         <Labels

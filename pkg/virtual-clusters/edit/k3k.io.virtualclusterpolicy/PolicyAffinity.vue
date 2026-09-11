@@ -1,14 +1,26 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import NodeAffinity from '@shell/components/form/NodeAffinity';
 import PodAffinity from '@shell/components/form/PodAffinity';
 import { RcSection } from '@components/RcSection';
 import type { AffinityValue } from '../../types/k3k';
+import NotAllowed, { NOT_ALLOWED_SECTIONS } from '../../components/Sync/NotAllowed.vue';
+import { MODES } from '../../utils/shared';
 
 const props = defineProps<{
   serverAffinity?: AffinityValue;
   agentAffinity?: AffinityValue;
+  /** Form mode - create/edit/view */
   mode: string;
+  /** Virtual cluster mode - shared/virtual/hcp */
+  k3kMode?: string;
 }>();
+
+/**
+ * HCP worker nodes are registered externally, so there are no agent pods on the
+ * host for these host-level scheduling rules to apply to.
+ */
+const agentSchedulingAllowed = computed(() => props.k3kMode !== MODES.HCP);
 
 // eslint-disable-next-line func-call-spacing
 const emit = defineEmits<{
@@ -68,9 +80,13 @@ const updateAgentPodAffinity = (value: { affinity: AffinityValue }) => {
       type="secondary"
       mode="with-header"
       :expandable="true"
+      :expanded="agentSchedulingAllowed"
       :title="t('k3k.policy.affinity.agentNodeScheduling')"
     >
-      <div class="rc-content">
+      <div
+        v-if="agentSchedulingAllowed"
+        class="rc-content"
+      >
         <NodeAffinity
           :value="agentAffinity?.nodeAffinity || {}"
           :mode="mode"
@@ -84,6 +100,11 @@ const updateAgentPodAffinity = (value: { affinity: AffinityValue }) => {
           @update="updateAgentPodAffinity"
         />
       </div>
+      <NotAllowed
+        v-else
+        :mode="k3kMode"
+        :section="NOT_ALLOWED_SECTIONS.AGENT_SCHEDULING"
+      />
     </RcSection>
   </div>
 </template>
