@@ -10,7 +10,7 @@
 }
 
 // space inputs evenly w/ 16px gap between
-.rc-row {
+.input-row {
   display: flex;
   align-items: flex-start;
   gap: var(--gap-md);
@@ -19,27 +19,14 @@
     flex-grow: 1;
     flex-basis: 50%;
   }
-  // opt a single child out of sharing the row, keeping it aligned with the
-  // columns of a two-input row
+  // opt a single child out of using the entire row, instead matching the width of one input in a two-input row
   &>.half {
     flex-grow: 0;
     flex-basis: calc(50% - var(--gap));
     min-width: 0;
   }
+  //  vertically center content within the row
   .centered {
     height: 100%;
-  }
-}
-
-// A single input plus its description, stacked vertically. The description
-// spans the full row width while the input can be narrower
-.input-described {
-  display: flex;
-  flex-direction: column;
-  align-self: stretch;
-
-  // line up with the columns of a two-input `.rc-row`
-  &>.half {
-    width: calc(50% - var(--gap));
   }
 }

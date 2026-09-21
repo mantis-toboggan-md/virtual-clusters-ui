@@ -141,7 +141,7 @@ export default {
       :title="t('k3k.networking.addresses.label')"
     >
       <div class="rc-content">
-        <div class="rc-row">
+        <div class="input-row">
           <LabeledInput
             :value="clusterCIDR"
             label-key="k3k.clusterCIDR.label"
@@ -151,22 +151,24 @@ export default {
             @update:value="e=>$emit('update:clusterCIDR', e)"
           />
         </div>
-        <div class="input-described">
-          <LabeledInput
-            :value="serviceCIDR"
-            label-key="k3k.serviceCIDR.label"
-            placeholder-key="k3k.serviceCIDR.placeholder"
-            :mode="mode"
-            class="half mmb-1"
-            @update:value="e=>$emit('update:serviceCIDR', e)"
-          />
+        <div>
+          <div class="input-row">
+            <LabeledInput
+              :value="serviceCIDR"
+              label-key="k3k.serviceCIDR.label"
+              placeholder-key="k3k.serviceCIDR.placeholder"
+              :mode="mode"
+              class="half"
+              @update:value="e=>$emit('update:serviceCIDR', e)"
+            />
+          </div>
           <t
             v-if="isShared"
             k="k3k.serviceCIDR.tooltip"
             class="text-label"
           />
         </div>
-        <div class="rc-row">
+        <div class="input-row">
           <LabeledInput
             :value="clusterDNS"
             label-key="k3k.clusterDNS.label"
@@ -186,7 +188,7 @@ export default {
       :expanded="false"
       :title="t('k3k.tlsSANs.title')"
     >
-      <div class="rc-row">
+      <div class="input-row">
         <ArrayList
           :value="tlsSANs"
           :protip="false"
@@ -242,21 +244,22 @@ export default {
               :title="t('k3k.expose.ingress.label')"
             >
               <div class="rc-content">
-                <div class="input-described">
-                  <LabeledInput
-                    v-model:value="expose.ingress.ingressClassName"
-                    label-key="k3k.expose.ingress.ingressClassName.label"
-                    :mode="mode"
-                    class="half mmb-1"
-                  />
-
+                <div>
+                  <div class="input-row">
+                    <LabeledInput
+                      v-model:value="expose.ingress.ingressClassName"
+                      label-key="k3k.expose.ingress.ingressClassName.label"
+                      :mode="mode"
+                      class="half"
+                    />
+                  </div>
                   <t
                     k="k3k.expose.ingress.ingressClassName.description"
                     class="text-label"
                     raw
                   />
                 </div>
-                <div class="rc-row">
+                <div class="input-row">
                   <KeyValue
                     v-model:value="expose.ingress.annotations"
                     :mode="mode"
@@ -293,7 +296,7 @@ export default {
               :title="t('k3k.expose.loadbalancer.label')"
             >
               <div class="rc-content">
-                <div class="rc-row">
+                <div class="input-row">
                   <div>
                     <LabeledInput
                       v-model:value.number="expose.loadbalancer.serverPort"
@@ -339,7 +342,7 @@ export default {
               :title="t('k3k.expose.nodePort.label')"
             >
               <div class="rc-content">
-                <div class="rc-row">
+                <div class="input-row">
                   <div>
                     <LabeledInput
                       v-model:value.number="expose.nodePort.serverPort"

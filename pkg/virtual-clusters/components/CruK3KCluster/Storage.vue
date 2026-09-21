@@ -155,37 +155,35 @@ export default {
       color="error"
       :label="storageClassErrors.join('. ')"
     />
-    <div class="input-described">
+    <div>
       <t
-        class="text-label"
+        class="text-deemphasized"
         raw
         k="k3k.storage.storageClass.description"
       />
-      <LabeledSelect
-        class="half mmt-1"
-        :disabled="storageClassOptions.length === 1"
-        :value="storageClassName || t('k3k.storage.noneOption')"
-        :loading="loadingStorageClasses"
-        :mode="mode"
-        label-key="k3k.storage.storageClass.label"
-        :options="storageClassOptions"
-        @update:value="updateStorageClass"
-      />
-    </div>
-    <div
-      v-if="storageClassName"
-      class="rc-row"
-    >
-      <UnitInput
-        :increment="1024"
-        :input-exponent="3"
-        output-modifier
-        :value="storageRequestSize || ''"
-        :mode="mode"
-        class="half"
-        label-key="k3k.storage.storageRequestSize.label"
-        @update:value="$emit('update:storageRequestSize', $event)"
-      />
+      <div class="input-row mmt-1">
+        <LabeledSelect
+          class="half"
+          :disabled="storageClassOptions.length === 1"
+          :value="storageClassName || t('k3k.storage.noneOption')"
+          :loading="loadingStorageClasses"
+          :mode="mode"
+          label-key="k3k.storage.storageClass.label"
+          :options="storageClassOptions"
+          @update:value="updateStorageClass"
+        />
+        <UnitInput
+          v-if="storageClassName"
+          :increment="1024"
+          :input-exponent="3"
+          output-modifier
+          :value="storageRequestSize || ''"
+          :mode="mode"
+          class="half"
+          label-key="k3k.storage.storageRequestSize.label"
+          @update:value="$emit('update:storageRequestSize', $event)"
+        />
+      </div>
     </div>
   </div>
 </template>

@@ -317,7 +317,7 @@ export default {
     <RcSection
       type="primary"
       mode="with-header"
-      :expandable="false"
+      :expandable="true"
       :title="t('k3k.policy.tabs.config')"
     >
       <div class="rc-content">
@@ -419,7 +419,7 @@ export default {
         />
         <div
           v-if="showNodeSelector"
-          class="rc-row"
+          class="input-row"
         >
           <KeyValue
             v-model:value="value.spec.defaultNodeSelector"
@@ -446,22 +446,21 @@ export default {
           :expanded="!isHcpMode"
           :title="t('k3k.policy.security.label')"
         >
-          <div
-            v-if="!isHcpMode"
-            class="input-described"
-          >
+          <div v-if="!isHcpMode">
             <t
               class="text-deemphasized"
               k="k3k.policy.security.tooltip"
               raw
             />
-            <LabeledSelect
-              v-model:value="podSecurityAdmissionLevel"
-              class="half mmt-1"
-              :mode="mode"
-              :options="[noneOption,'privileged', 'baseline', 'restricted']"
-              :label="t('cluster.rke2.defaultPodSecurityAdmissionConfigurationTemplateName.label')"
-            />
+            <div class="input-row">
+              <LabeledSelect
+                v-model:value="podSecurityAdmissionLevel"
+                class="half"
+                :mode="mode"
+                :options="[noneOption,'privileged', 'baseline', 'restricted']"
+                :label="t('cluster.rke2.defaultPodSecurityAdmissionConfigurationTemplateName.label')"
+              />
+            </div>
           </div>
 
           <NotAllowed

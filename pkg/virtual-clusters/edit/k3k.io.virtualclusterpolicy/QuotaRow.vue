@@ -57,7 +57,7 @@ export default {
 };
 </script>
 <template>
-  <div class="rc-row">
+  <div class="input-row">
     <UnabeledSelect
       :value="type"
       :mode="mode"

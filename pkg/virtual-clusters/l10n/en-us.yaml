@@ -150,8 +150,8 @@ k3k:
     affinity:
       serverNodeScheduling: Server Scheduling
       agentNodeScheduling: Agent Scheduling
-      serverDescription: Add affinity and anti-affinity selectors for the server pods
-      agentDescription: Add affinity and anti-affinity selectors for the agent pods
+      serverDescription: Add affinity and anti-affinity selectors for the server pods.
+      agentDescription: Add affinity and anti-affinity selectors for the agent pods.
       nodeSelectors: Node Selectors
       podSelectors: Pod Selectors
     listView:

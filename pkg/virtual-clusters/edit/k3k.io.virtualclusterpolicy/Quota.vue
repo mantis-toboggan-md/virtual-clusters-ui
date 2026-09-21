@@ -111,7 +111,7 @@ export default {
 .headers {
     display: flex;
     flex-direction: row;
-    // match the gap rc-row gives the QuotaRow columns below
+    // match the gap input-row gives the QuotaRow columns below
     gap: var(--gap-md);
     align-items: center;
     border-bottom: 1px solid var(--border);

@@ -379,7 +379,7 @@ export default {
 
 <template>
   <div
-    class="rc-row"
+    class="input-row"
     :class="{ half: !showingInstallationContent }"
   >
     <div

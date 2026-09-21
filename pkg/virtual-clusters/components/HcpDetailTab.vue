@@ -278,7 +278,7 @@ fetchAll();
             {{ t('k3k.hcp.advanced.description') }}
           </p>
 
-          <div class="rc-row">
+          <div class="input-row">
             <LabeledInput
               v-model:value="nodeName"
               :label="t('k3k.hcp.advanced.nodeName')"

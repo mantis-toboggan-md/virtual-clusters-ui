@@ -791,7 +791,7 @@ export default {
       type="primary"
       mode="with-header"
       background="primary"
-      :expandable="false"
+      :expandable="true"
       :title="t('k3k.sections.basics')"
     >
       <div class="rc-content">
@@ -815,7 +815,7 @@ export default {
           :rules="{namespace:fvGetAndReportPathRules('metadata.namespace'), policy:fvGetAndReportPathRules('policyForValidation')}"
         />
 
-        <div class="rc-row">
+        <div class="input-row">
           <LabeledSelect
             :value="k3kCluster.spec.version || defaultVersionLabel"
             label-key="k3k.k3sVersion.label"
@@ -890,7 +890,7 @@ export default {
           :title="t('k3k.servers.label')"
         >
           <div class="rc-content">
-            <div class="rc-row count-input">
+            <div class="input-row count-input">
               <LabeledInput
                 v-model:value.number="k3kCluster.spec.servers"
                 label-key="k3k.servers.number.label"
@@ -947,7 +947,7 @@ export default {
             v-if="isSharedMode"
             class="rc-content"
           >
-            <div class="rc-row count-input">
+            <div class="input-row count-input">
               <LabeledInput
                 v-model:value.number="k3kCluster.spec.agents"
                 label-key="k3k.agents.number.label"
@@ -984,7 +984,7 @@ export default {
 
         <div
           v-if="!policy"
-          class="rc-row"
+          class="input-row"
         >
           <KeyValue
             v-model:value="k3kCluster.spec.nodeSelector"

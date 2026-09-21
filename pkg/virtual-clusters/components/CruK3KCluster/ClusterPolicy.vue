@@ -357,7 +357,7 @@ export default {
       />
     </div>
 
-    <div class="rc-row">
+    <div class="input-row">
       <div>
         <LabeledSelect
           data-testid="k3k-policy-select"
