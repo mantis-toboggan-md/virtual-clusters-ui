@@ -14,13 +14,13 @@ entries:
       catalog.cattle.io/ui-extensions-version: '>= 3.0.0 < 4.0.0'
     apiVersion: v2
     appVersion: 1.3.0-dev
-    created: "2026-09-18T16:47:24.42229-07:00"
+    created: "2026-09-21T09:30:02.525889-07:00"
     description: Virtual cluster provisioning using K3K
-    digest: 101bd3fa3b6abe44a400057c77c046ba6e2907262b3d610b10ee7c633507c457
+    digest: 7b9a5f120cce8eed919fd71b8e4ea39ff45a17afa5e43b8aebaf7af53b281a6a
     icon: https://raw.githubusercontent.com/rancher/virtual-clusters-ui/refs/heads/main/pkg/virtual-clusters/assets/icon-k3k.svg
     name: virtual-clusters
     type: application
     urls:
     - assets/virtual-clusters/virtual-clusters-1.3.0-dev.tgz
     version: 1.3.0-dev
-generated: "2026-09-18T16:47:24.422043-07:00"
+generated: "2026-09-21T09:30:02.525651-07:00"
