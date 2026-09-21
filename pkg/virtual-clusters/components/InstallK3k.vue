@@ -382,7 +382,10 @@ export default {
     class="rc-row"
     :class="{ half: !showingInstallationContent }"
   >
-    <div v-if="!showButtonOnly">
+    <div
+      v-if="!showButtonOnly"
+      class="half"
+    >
       <t
         raw
         k="k3k.hostCluster.description"

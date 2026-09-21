@@ -1,18 +1,3 @@
-// rc-section CSS custom properties for compatibility with Rancher dashboard versions <2.15
-// that do not include them in their theme stylesheets
-// TODO nb this can be removed once we stop supporting 2.14
-BODY, .theme-light {
-  --rc-section-background-primary: #FFFFFF;
-  --rc-section-background-secondary: #F4F5FA;
-  --rc-section-action-color: #6C6C77;
-}
-
-// BODY, .theme-dark {
-//   --rc-section-background-primary: #161C24;
-//   --rc-section-background-secondary: #262831;
-//   --rc-section-action-color: #B6B6C3;
-// }
-
 // RcSection content - 16px gap (vs 24px between sections)
 .rc-content {
     display: flex;
@@ -34,13 +19,27 @@ BODY, .theme-light {
     flex-grow: 1;
     flex-basis: 50%;
   }
-  // half-width children whose width lines up with 2-item rc-rows
-  &.half>* {
+  // opt a single child out of sharing the row, keeping it aligned with the
+  // columns of a two-input row
+  &>.half {
     flex-grow: 0;
     flex-basis: calc(50% - var(--gap));
     min-width: 0;
   }
   .centered {
     height: 100%;
+  }
+}
+
+// A single input plus its description, stacked vertically. The description
+// spans the full row width while the input can be narrower
+.input-described {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+
+  // line up with the columns of a two-input `.rc-row`
+  &>.half {
+    width: calc(50% - var(--gap));
   }
 }

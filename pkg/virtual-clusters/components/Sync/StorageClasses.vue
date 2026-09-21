@@ -102,18 +102,12 @@ const storageClassSelectorOptions = [
 ];
 
 const targetedStorageClasses = ref(null);
-const totalStorageClassCount = ref(0);
 const fetchingMatchingClasses = ref(false);
 const allClassesSelected = computed(() => {
   return Object.keys(storageClassSelector.value).length === 0;
 });
 
 const matchedCount = computed(() => {
-  if (allClassesSelected.value) {
-    return totalStorageClassCount.value;
-  }
-
-  // Fall back to total count while the debounced fetch is still pending
   return targetedStorageClasses.value?.length || 0;
 });
 
@@ -169,33 +163,18 @@ const updateMatchingResources = debounce(async() => {
   }
 }, 5);
 
-const fetchTotalStorageClassCount = async() => {
-  if (!targetMgmtId.value) {
-    totalStorageClassCount.value = 0;
-
-    return;
-  }
-
-  try {
-    const count = await store.dispatch('management/request', {
-      url:    `/k8s/clusters/${ targetMgmtId.value }/v1/counts/count`,
-      method: 'GET',
-    });
-
-    totalStorageClassCount.value = count?.counts?.[STORAGE_CLASS]?.summary?.count || 0;
-  } catch {
-    totalStorageClassCount.value = 0;
-  }
-};
-
 watch(useStorageClassSelector, (neu) => {
   if (neu) {
-    fetchTotalStorageClassCount();
+    updateMatchingResources();
   }
 }, { immediate: true });
 
-watch(storageClassSelector, (neu) => {
-  if (neu && Object.keys(neu).length > 0) {
+watch(storageClassSelector, (neu, old) => {
+  // only re-run the selector query when the selector actually changes
+  // this avoids loading indicators when a new empty row is added
+  const filled = (obj) => JSON.stringify(Object.fromEntries(Object.entries(obj || {}).filter(([k]) => k)));
+
+  if (filled(neu) !== filled(old)) {
     updateMatchingResources();
   }
 }, { immediate: true });
@@ -245,24 +224,11 @@ watch(storageClassSelector, (neu) => {
               :mode="mode"
               :key-placeholder="t('k3k.policy.synchronization.storageClass.selectorKeyPlaceholder')"
               :value-placeholder="t('k3k.policy.synchronization.storageClass.selectorValuePlaceholder')"
+              :add-label="t('k3k.policy.synchronization.storageClass.addSelectorLabel')"
               :read-allowed="false"
-            >
-              <template #add="{add}">
-                <RcButton
-                  v-if="!isView"
-                  size="small"
-                  variant="secondary"
-                  :class="[addClass]"
-                  data-testid="add_row_item_button"
-                  :disabled="loading || disabled || (keyOptions && filteredKeyOptions.length === 0)"
-                  :aria-label="t('generic.ariaLabel.addKeyValue')"
-                  left-icon="plus"
-                  @click="add()"
-                >
-                  {{ t('k3k.policy.synchronization.storageClass.addSelectorLabel') }}
-                </RcButton>
-              </template>
-            </KeyValue>
+              :use-rc-button="true"
+              add-icon="icon-plus"
+            />
           </div>
           <div class="selected-classes-col">
             <RcSection
@@ -282,11 +248,6 @@ watch(storageClassSelector, (neu) => {
                 v-if="fetchingMatchingClasses"
                 class="icon icon-spinner icon-spin icon-lg loading-spinner"
               />
-              <span
-                v-else-if="allClassesSelected"
-              >
-                {{ t('k3k.policy.synchronization.storageClass.addLabelsHint') }}
-              </span>
               <div
                 v-else
                 class="selected-classes-list"
@@ -334,25 +295,24 @@ watch(storageClassSelector, (neu) => {
 
 .storage-row {
   position: relative;
+  display: flex;
 
-  // the selected-classes panel is taken out of flow, so hold the selector
-  // column at the width the old span-8 gave it
-  &>.rc-content {
-    flex: 0 1 66.66%;
+  > .rc-content {
+    flex: 0 0 calc(66.66% - var(--gap-md) / 2);
+    min-width: 0;
   }
 
   .selected-classes-col {
     position: absolute;
     top: 0;
-    bottom: 0;
     right: 0;
-    width: 33.33%;
+    bottom: 0;
+    width: calc(33.33% - var(--gap-md) / 2);
     overflow-y: auto;
   }
 }
 
 .storage-selectors .selected-classes {
-  overflow-y: auto;
   position: relative;
 
   :deep(.title){

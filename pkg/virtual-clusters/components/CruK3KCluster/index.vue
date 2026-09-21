@@ -15,7 +15,6 @@ import { Banner } from '@components/Banner';
 import LabeledInput from '@components/Form/LabeledInput/LabeledInput.vue';
 import ClusterAppearance from '@shell/components/form/ClusterAppearance';
 import { RcSection } from '@components/RcSection';
-import { RcCounterBadge } from '@components/Pill';
 
 import ClusterMembershipEditor, { canViewClusterMembershipEditor } from '@shell/components/form/Members/ClusterMembershipEditor';
 import { CAPI, MANAGEMENT, NAMESPACE } from '@shell/config/types';
@@ -85,11 +84,7 @@ const defaultCluster = {
       storageClasses:
        { enabled: true }
     },
-    secretMounts: [{
-      secretName: '',
-      mountPath:  '',
-      role:       'all'
-    }]
+    secretMounts: []
   }
 };
   // map of fields in k3kCluster that are superceded by policy configuration, in the format k3kCluster key: policy key
@@ -141,7 +136,6 @@ export default {
     K3kVersionBanner,
     SecretMounts,
     RcSection,
-    RcCounterBadge,
     NotAllowed
   },
 
@@ -821,12 +815,13 @@ export default {
           :rules="{namespace:fvGetAndReportPathRules('metadata.namespace'), policy:fvGetAndReportPathRules('policyForValidation')}"
         />
 
-        <div class="rc-row half">
+        <div class="rc-row">
           <LabeledSelect
             :value="k3kCluster.spec.version || defaultVersionLabel"
             label-key="k3k.k3sVersion.label"
             :options="k3sVersionOptions"
             :mode="mode"
+            class="half"
             @update:value="updateVersion"
           />
         </div>
@@ -844,7 +839,7 @@ export default {
       <RcSection
         mode="with-header"
         :expandable="true"
-        :expanded="true"
+        :expanded="false"
         type="secondary"
         :title="t('k3k.storage.title')"
       >
@@ -905,7 +900,7 @@ export default {
             <RcSection
               mode="with-header"
               :expandable="true"
-              :expanded="true"
+              :expanded="false"
               type="secondary"
               :title="t('k3k.servers.envVars.title')"
             >
@@ -924,7 +919,7 @@ export default {
             <RcSection
               mode="with-header"
               :expandable="true"
-              :expanded="true"
+              :expanded="false"
               type="secondary"
               :title="t('k3k.servers.serverArgs.label')"
             >
@@ -963,7 +958,7 @@ export default {
             <RcSection
               mode="with-header"
               :expandable="true"
-              :expanded="true"
+              :expanded="false"
               type="secondary"
               :title="t('k3k.agents.envVars.title')"
             >
@@ -1016,7 +1011,6 @@ export default {
     <RcSection
       v-if="!policy && supportsTopology"
       class="mmb-2"
-
       mode="with-header"
       :expandable="true"
       :title="t('k3k.policy.tabs.topology')"
@@ -1031,7 +1025,6 @@ export default {
 
     <RcSection
       class="mmb-2"
-
       mode="with-header"
       :expandable="true"
       :title="t('k3k.sections.networking')"
@@ -1051,9 +1044,9 @@ export default {
     <RcSection
       v-if="canManageMembers"
       class="mmb-2"
-
       mode="with-header"
       :expandable="true"
+      :expanded="false"
       :title="t('cluster.tabs.memberRoles')"
     >
       <div class="rc-content">
@@ -1079,29 +1072,13 @@ export default {
       :title="t('k3k.sections.advanced')"
     >
       <div class="rc-content">
-        <RcSection
-          mode="with-header"
-          :expandable="true"
-          :expanded="true"
-          type="secondary"
-          :title="t('k3k.secretMounts.title')"
-        >
-          <template #counter>
-            <RcCounterBadge
-              :count="(k3kCluster?.spec?.secretMounts || []).length"
-              type="inactive"
-            />
-          </template>
-          <div class="rc-content">
-            <SecretMounts
-              :mode="mode"
-              :parent-cluster="parentCluster"
-              :target-namespace="k3kCluster.metadata.namespace"
-              :secret-mounts="k3kCluster.spec.secretMounts || []"
-              @update:secret-mounts="k3kCluster.spec.secretMounts = $event"
-            />
-          </div>
-        </RcSection>
+        <SecretMounts
+          :mode="mode"
+          :parent-cluster="parentCluster"
+          :target-namespace="k3kCluster.metadata.namespace"
+          :secret-mounts="k3kCluster.spec.secretMounts || []"
+          @update:secret-mounts="k3kCluster.spec.secretMounts = $event"
+        />
         <RcSection
           mode="with-header"
           :expandable="true"

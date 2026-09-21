@@ -305,6 +305,8 @@ export default {
     />
     <NameNsDescription
       v-if="!isView"
+      :name-col-span="4"
+      :description-col-span="8"
       :mode="mode"
       :namespaced="false"
       :value="value"
@@ -444,23 +446,22 @@ export default {
           :expanded="!isHcpMode"
           :title="t('k3k.policy.security.label')"
         >
-          <div v-if="!isHcpMode">
+          <div
+            v-if="!isHcpMode"
+            class="input-described"
+          >
             <t
               class="text-deemphasized"
               k="k3k.policy.security.tooltip"
               raw
             />
-            <div
-              class="rc-row half mmt-1"
-            >
-              <LabeledSelect
-                v-model:value="podSecurityAdmissionLevel"
-                class="mmt-1"
-                :mode="mode"
-                :options="[noneOption,'privileged', 'baseline', 'restricted']"
-                :label="t('cluster.rke2.defaultPodSecurityAdmissionConfigurationTemplateName.label')"
-              />
-            </div>
+            <LabeledSelect
+              v-model:value="podSecurityAdmissionLevel"
+              class="half mmt-1"
+              :mode="mode"
+              :options="[noneOption,'privileged', 'baseline', 'restricted']"
+              :label="t('cluster.rke2.defaultPodSecurityAdmissionConfigurationTemplateName.label')"
+            />
           </div>
 
           <NotAllowed
@@ -509,22 +510,21 @@ export default {
             section="isolation"
           />
         </RcSection>
-      </div>
-    </RcSection>
-
-    <RcSection
-      type="primary"
-      :expandable="true"
-      mode="with-header"
-      :title="t('generic.labelsAndAnnotations', {}, true)"
-      :expanded="false"
-    >
-      <div class="rc-content">
-        <Labels
-          :mode="mode"
-          :value="value"
-          :use-rc="true"
-        />
+        <RcSection
+          type="secondary"
+          :expandable="true"
+          mode="with-header"
+          :title="t('generic.labelsAndAnnotations', {}, true)"
+          :expanded="false"
+        >
+          <div class="rc-content">
+            <Labels
+              :mode="mode"
+              :value="value"
+              :use-rc="true"
+            />
+          </div>
+        </RcSection>
       </div>
     </RcSection>
   </CruResource>

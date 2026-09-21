@@ -6,6 +6,10 @@ plugin/virtual-clusters-1.3.0-dev.umd.min.142.js
 plugin/virtual-clusters-1.3.0-dev.umd.min.142.js.map
 plugin/virtual-clusters-1.3.0-dev.umd.min.185.js
 plugin/virtual-clusters-1.3.0-dev.umd.min.185.js.map
+plugin/virtual-clusters-1.3.0-dev.umd.min.312.js
+plugin/virtual-clusters-1.3.0-dev.umd.min.312.js.map
+plugin/virtual-clusters-1.3.0-dev.umd.min.340.js
+plugin/virtual-clusters-1.3.0-dev.umd.min.340.js.map
 plugin/virtual-clusters-1.3.0-dev.umd.min.343.js
 plugin/virtual-clusters-1.3.0-dev.umd.min.343.js.map
 plugin/virtual-clusters-1.3.0-dev.umd.min.37.js
@@ -18,14 +22,10 @@ plugin/virtual-clusters-1.3.0-dev.umd.min.66.js
 plugin/virtual-clusters-1.3.0-dev.umd.min.66.js.map
 plugin/virtual-clusters-1.3.0-dev.umd.min.692.js
 plugin/virtual-clusters-1.3.0-dev.umd.min.692.js.map
-plugin/virtual-clusters-1.3.0-dev.umd.min.855.js
-plugin/virtual-clusters-1.3.0-dev.umd.min.855.js.map
-plugin/virtual-clusters-1.3.0-dev.umd.min.877.js
-plugin/virtual-clusters-1.3.0-dev.umd.min.877.js.map
+plugin/virtual-clusters-1.3.0-dev.umd.min.769.js
+plugin/virtual-clusters-1.3.0-dev.umd.min.769.js.map
 plugin/virtual-clusters-1.3.0-dev.umd.min.963.js
 plugin/virtual-clusters-1.3.0-dev.umd.min.963.js.map
-plugin/virtual-clusters-1.3.0-dev.umd.min.979.js
-plugin/virtual-clusters-1.3.0-dev.umd.min.979.js.map
 plugin/virtual-clusters-1.3.0-dev.umd.min.formatters.js
 plugin/virtual-clusters-1.3.0-dev.umd.min.formatters.js.map
 plugin/virtual-clusters-1.3.0-dev.umd.min.js

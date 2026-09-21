@@ -43,7 +43,7 @@ const roleOptions: { label: string; value: SecretMountRole }[] = [
 </script>
 
 <template>
-  <div class="rc-row half">
+  <div class="input-described">
     <LabeledSelect
       :value="secretName"
       label-key="k3k.secretMounts.secretName.label"
@@ -52,42 +52,39 @@ const roleOptions: { label: string; value: SecretMountRole }[] = [
       :loading="loadingSecrets"
       :mode="mode"
       :reduce="(s: string) => s"
+      class="half"
       @update:value="emit('update:secretName', $event)"
     />
   </div>
-  <div class="rc-row half">
-    <div>
-      <LabeledInput
-        :value="mountPath"
-        label-key="k3k.secretMounts.mountPath.label"
-        placeholder-key="k3k.secretMounts.mountPath.placeholder"
-        :mode="mode"
-        @update:value="emit('update:mountPath', $event)"
-      />
-      <div class="input-description">
-        <t
-          k="k3k.secretMounts.mountPath.description"
-          raw
-        />
-      </div>
-    </div>
+  <div class="input-described">
+    <LabeledInput
+      :value="mountPath"
+      label-key="k3k.secretMounts.mountPath.label"
+      placeholder-key="k3k.secretMounts.mountPath.placeholder"
+      :mode="mode"
+      class="half mmb-1"
+      @update:value="emit('update:mountPath', $event)"
+    />
+    <t
+      k="k3k.secretMounts.mountPath.description"
+      class="text-label"
+      raw
+    />
   </div>
-  <div class="rc-row half">
-    <div>
-      <LabeledInput
-        :value="subPath"
-        label-key="k3k.secretMounts.subPath.label"
-        placeholder-key="k3k.secretMounts.subPath.placeholder"
-        :mode="mode"
-        @update:value="emit('update:subPath', $event)"
-      />
-      <div class="input-description">
-        <t
-          k="k3k.secretMounts.subPath.description"
-          raw
-        />
-      </div>
-    </div>
+  <div class="input-described">
+    <LabeledInput
+      :value="subPath"
+      label-key="k3k.secretMounts.subPath.label"
+      placeholder-key="k3k.secretMounts.subPath.placeholder"
+      :mode="mode"
+      class="half mmb-1"
+      @update:value="emit('update:subPath', $event)"
+    />
+    <t
+      k="k3k.secretMounts.subPath.description"
+      class="text-label"
+      raw
+    />
   </div>
 
   <div class="rc-row">
@@ -113,11 +110,6 @@ const roleOptions: { label: string; value: SecretMountRole }[] = [
 </template>
 
 <style scoped>
-.input-description {
-    font-size: 12px;
-    margin-top:4px;
-}
-
 :deep(.radio-group h4),:deep(.radio-group.label){
     margin-bottom: 8px;
 }

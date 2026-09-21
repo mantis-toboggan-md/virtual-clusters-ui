@@ -141,38 +141,38 @@ export default {
       :title="t('k3k.networking.addresses.label')"
     >
       <div class="rc-content">
-        <div class="rc-row half">
+        <div class="rc-row">
           <LabeledInput
             :value="clusterCIDR"
             label-key="k3k.clusterCIDR.label"
             placeholder-key="k3k.clusterCIDR.placeholder"
             :mode="mode"
+            class="half"
             @update:value="e=>$emit('update:clusterCIDR', e)"
           />
         </div>
-        <div class="rc-row half">
-          <div>
-            <LabeledInput
-              :value="serviceCIDR"
-              label-key="k3k.serviceCIDR.label"
-              placeholder-key="k3k.serviceCIDR.placeholder"
-              :mode="mode"
-              class="mmb-1"
-              @update:value="e=>$emit('update:serviceCIDR', e)"
-            />
-            <t
-              v-if="isShared"
-              k="k3k.serviceCIDR.tooltip"
-              class="text-label"
-            />
-          </div>
+        <div class="input-described">
+          <LabeledInput
+            :value="serviceCIDR"
+            label-key="k3k.serviceCIDR.label"
+            placeholder-key="k3k.serviceCIDR.placeholder"
+            :mode="mode"
+            class="half mmb-1"
+            @update:value="e=>$emit('update:serviceCIDR', e)"
+          />
+          <t
+            v-if="isShared"
+            k="k3k.serviceCIDR.tooltip"
+            class="text-label"
+          />
         </div>
-        <div class="rc-row half">
+        <div class="rc-row">
           <LabeledInput
             :value="clusterDNS"
             label-key="k3k.clusterDNS.label"
             placeholder-key="k3k.clusterDNS.placeholder"
             :mode="mode"
+            class="half"
             @update:value="e=>$emit('update:clusterDNS', e)"
           />
         </div>
@@ -183,7 +183,7 @@ export default {
       type="secondary"
       mode="with-header"
       :expandable="true"
-      :expanded="true"
+      :expanded="false"
       :title="t('k3k.tlsSANs.title')"
     >
       <div class="rc-row">
@@ -207,7 +207,7 @@ export default {
       type="secondary"
       mode="with-header"
       :expandable="true"
-      :expanded="true"
+      :expanded="false"
       :title="t('k3k.expose.label')"
     >
       <div class="rc-content">
@@ -242,21 +242,19 @@ export default {
               :title="t('k3k.expose.ingress.label')"
             >
               <div class="rc-content">
-                <div class="rc-row half">
-                  <div>
-                    <LabeledInput
-                      v-model:value="expose.ingress.ingressClassName"
-                      label-key="k3k.expose.ingress.ingressClassName.label"
-                      :mode="mode"
-                      class="mmb-1"
-                    />
+                <div class="input-described">
+                  <LabeledInput
+                    v-model:value="expose.ingress.ingressClassName"
+                    label-key="k3k.expose.ingress.ingressClassName.label"
+                    :mode="mode"
+                    class="half mmb-1"
+                  />
 
-                    <t
-                      k="k3k.expose.ingress.ingressClassName.description"
-                      class="text-label"
-                      raw
-                    />
-                  </div>
+                  <t
+                    k="k3k.expose.ingress.ingressClassName.description"
+                    class="text-label"
+                    raw
+                  />
                 </div>
                 <div class="rc-row">
                   <KeyValue

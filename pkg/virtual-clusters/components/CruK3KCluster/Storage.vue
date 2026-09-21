@@ -155,28 +155,26 @@ export default {
       color="error"
       :label="storageClassErrors.join('. ')"
     />
-    <div class="rc-row half">
-      <div>
-        <t
-          class="text-label centered"
-          raw
-          k="k3k.storage.storageClass.description"
-        />
-        <LabeledSelect
-          class="mmt-1"
-          :disabled="storageClassOptions.length === 1"
-          :value="storageClassName || t('k3k.storage.noneOption')"
-          :loading="loadingStorageClasses"
-          :mode="mode"
-          label-key="k3k.storage.storageClass.label"
-          :options="storageClassOptions"
-          @update:value="updateStorageClass"
-        />
-      </div>
+    <div class="input-described">
+      <t
+        class="text-label"
+        raw
+        k="k3k.storage.storageClass.description"
+      />
+      <LabeledSelect
+        class="half mmt-1"
+        :disabled="storageClassOptions.length === 1"
+        :value="storageClassName || t('k3k.storage.noneOption')"
+        :loading="loadingStorageClasses"
+        :mode="mode"
+        label-key="k3k.storage.storageClass.label"
+        :options="storageClassOptions"
+        @update:value="updateStorageClass"
+      />
     </div>
     <div
       v-if="storageClassName"
-      class="rc-row half"
+      class="rc-row"
     >
       <UnitInput
         :increment="1024"
@@ -184,6 +182,7 @@ export default {
         output-modifier
         :value="storageRequestSize || ''"
         :mode="mode"
+        class="half"
         label-key="k3k.storage.storageRequestSize.label"
         @update:value="$emit('update:storageRequestSize', $event)"
       />

@@ -62,18 +62,35 @@ const updateAgentPodAffinity = (value: { affinity: AffinityValue }) => {
       :title="t('k3k.policy.affinity.serverNodeScheduling')"
     >
       <div class="rc-content">
-        <NodeAffinity
-          :value="serverAffinity?.nodeAffinity || {}"
-          :mode="mode"
-          :use-rc="true"
-          @update:value="updateServerNodeAffinity"
-        />
-        <PodAffinity
-          :value="{affinity: serverAffinity}"
-          :mode="mode"
-          :use-rc="true"
-          @update="updateServerPodAffinity"
-        />
+        <p class="text-deemphasized">
+          {{ t('k3k.policy.affinity.serverDescription') }}
+        </p>
+        <RcSection
+          type="secondary"
+          mode="with-header"
+          :expandable="true"
+          :title="t('k3k.policy.affinity.nodeSelectors')"
+        >
+          <NodeAffinity
+            :value="serverAffinity?.nodeAffinity || {}"
+            :mode="mode"
+            :use-rc="true"
+            @update:value="updateServerNodeAffinity"
+          />
+        </RcSection>
+        <RcSection
+          type="secondary"
+          mode="with-header"
+          :expandable="true"
+          :title="t('k3k.policy.affinity.podSelectors')"
+        >
+          <PodAffinity
+            :value="{affinity: serverAffinity}"
+            :mode="mode"
+            :use-rc="true"
+            @update="updateServerPodAffinity"
+          />
+        </RcSection>
       </div>
     </RcSection>
     <RcSection
@@ -87,18 +104,35 @@ const updateAgentPodAffinity = (value: { affinity: AffinityValue }) => {
         v-if="agentSchedulingAllowed"
         class="rc-content"
       >
-        <NodeAffinity
-          :value="agentAffinity?.nodeAffinity || {}"
-          :mode="mode"
-          :use-rc="true"
-          @update:value="updateAgentNodeAffinity"
-        />
-        <PodAffinity
-          :value="{affinity: agentAffinity}"
-          :mode="mode"
-          :use-rc="true"
-          @update="updateAgentPodAffinity"
-        />
+        <p class="text-deemphasized">
+          {{ t('k3k.policy.affinity.agentDescription') }}
+        </p>
+        <RcSection
+          type="secondary"
+          mode="with-header"
+          :expandable="true"
+          :title="t('k3k.policy.affinity.nodeSelectors')"
+        >
+          <NodeAffinity
+            :value="agentAffinity?.nodeAffinity || {}"
+            :mode="mode"
+            :use-rc="true"
+            @update:value="updateAgentNodeAffinity"
+          />
+        </RcSection>
+        <RcSection
+          type="secondary"
+          mode="with-header"
+          :expandable="true"
+          :title="t('k3k.policy.affinity.podSelectors')"
+        >
+          <PodAffinity
+            :value="{affinity: agentAffinity}"
+            :mode="mode"
+            :use-rc="true"
+            @update="updateAgentPodAffinity"
+          />
+        </RcSection>
       </div>
       <NotAllowed
         v-else
