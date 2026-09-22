@@ -452,7 +452,7 @@ export default {
               k="k3k.policy.security.tooltip"
               raw
             />
-            <div class="input-row">
+            <div class="input-row mmt-1">
               <LabeledSelect
                 v-model:value="podSecurityAdmissionLevel"
                 class="half"

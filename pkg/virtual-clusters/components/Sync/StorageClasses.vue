@@ -279,20 +279,6 @@ watch(storageClassSelector, (neu, old) => {
   gap: 16px;
 }
 
-.storage-selectors :deep(.rc-status-badge.none) {
-  color: var(--body-text)
-}
-
-.theme-dark .storage-selectors :deep(.rc-status-badge.none) {
-  background: var(--rc-inactive-background);
-  border-color: var(--rc-inactive-border);
-}
-
-.theme-light .storage-selectors :deep(.rc-status-badge.none) {
-  background: var(--card-badge-text);
-  border-color: var(--card-badge-text);
-}
-
 .storage-row {
   position: relative;
   display: flex;
