@@ -1,4 +1,7 @@
-import { isRancherPrime } from '@shell/config/version';
+// import { isRancherPrime } from '@shell/config/version';
+
+// prime-only restriction disabled
+const isRancherPrime = () => true;
 
 export async function init($plugin:any, store:any) {
   const { configureType } = $plugin.DSL(store, 'manager');

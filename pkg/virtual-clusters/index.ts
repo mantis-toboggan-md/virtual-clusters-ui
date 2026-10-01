@@ -1,16 +1,22 @@
 import { importTypes } from '@rancher/auto-import';
-import { IPlugin, ModelExtensionConstructor, PanelLocation } from '@shell/core/types';
+import {
+  IPlugin, ModelExtensionConstructor, PanelLocation, EditableRelatedResourcesLocation, EditableRelatedResource
+} from '@shell/core/types';
 import { k3kProvisioner } from './provisioner';
 import './assets/styles/index.scss';
 import { VClusterModelExtension } from './model-extension/provisioning.cattle.io.cluster';
 import virtualClusterRouting from './routes.js';
 import virtualClusterAdminRole from './resources/virtual-cluster-admin-role.js';
 import virtualClusterPolicyAdminRole from './resources/virtual-cluster-policy-read-role.js';
-import { MANAGEMENT, SCHEMA } from '@shell/config/types';
+import { CAPI, MANAGEMENT, SCHEMA } from '@shell/config/types';
 import versions from '@shell/utils/versions';
-import { isRancherPrime } from '@shell/config/version';
+// import { isRancherPrime } from '@shell/config/version';
 import { NotificationLevel } from '@shell/types/notifications';
 import { K3K } from './types';
+import { fetchVirtualClusterResources } from './utils/related-resources';
+
+// prime-only restriction disabled
+const isRancherPrime = () => true;
 
 const createRoleIfNotFound = async(roleTemplate: any, store:any) => {
   const rolesMatching = await store.dispatch('management/findLabelSelector', {
@@ -81,4 +87,18 @@ export default function(plugin: IPlugin): void {
 
   plugin.addPanel(PanelLocation.RESOURCE_LIST, { resource: [K3K.POLICY, K3K.CLUSTER] },
     { component: () => import('./components/K3kVersionBanner.vue') });
+
+  // not defined in rancher versions without the multi-resource yaml editor
+  if (typeof plugin.addEditableRelatedResources === 'function') {
+    plugin.addEditableRelatedResources(
+      EditableRelatedResourcesLocation.RESOURCE_YAML,
+      { resource: [CAPI.RANCHER_CLUSTER] },
+      {
+        fetchExtensionEditableRelatedResources: async(cluster: any, relatedResources: EditableRelatedResource[]) => [
+          ...relatedResources,
+          ...await fetchVirtualClusterResources(cluster),
+        ]
+      }
+    );
+  }
 }

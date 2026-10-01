@@ -1,7 +1,10 @@
 import { IClusterProvisioner, ClusterProvisionerContext } from '@shell/core/types';
 import { mapDriver } from '@shell/store/plugins';
 import CruK3KCluster from './components/CruK3KCluster/index.vue';
-import { isRancherPrime } from '@shell/config/version';
+// import { isRancherPrime } from '@shell/config/version';
+
+// prime-only restriction disabled
+const isRancherPrime = () => true;
 
 export class k3kProvisioner implements IClusterProvisioner {
   static ID = 'k3k';

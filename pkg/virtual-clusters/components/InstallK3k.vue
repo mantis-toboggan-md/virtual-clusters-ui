@@ -37,7 +37,7 @@ const K3K_VALUES = {
   }
 };
 
-const INCLUDE_LOCAL = process.env.dev;
+// const INCLUDE_LOCAL = process.env.dev;
 
 export default {
   name: 'K3kHostClusterAndInstallk3k',
@@ -131,7 +131,7 @@ export default {
 
     parentClusterOptions() {
       const out = this.allParentClusterOptions.filter((opt) => {
-        if (opt.isVirtual || !opt.isReady || (!INCLUDE_LOCAL && opt.isLocal)) {
+        if (opt.isVirtual || !opt.isReady /* || (!INCLUDE_LOCAL && opt.isLocal) */) {
           return false;
         }
 

@@ -5,9 +5,12 @@ import { NAME as PRODUCT_NAME } from '../config/k3k-explorer-product';
 import InstallK3k from '../components/InstallK3k.vue';
 import { K3K_CHART_NAMESPACE, K3K_CHART_NAME, verifyK3kIsInstalled, verifyUserCanInstallK3k } from '../utils/k3kInstalled';
 import Loading from '@shell/components/Loading';
-import { isRancherPrime } from '@shell/config/version';
+// import { isRancherPrime } from '@shell/config/version';
 import { NAME as MGMT_NAME } from '@shell/config/product/manager';
 import { PARENT_CLUSTER } from '../labels-annotations';
+
+// prime-only restriction disabled
+const isRancherPrime = () => true;
 
 export default {
   name: 'K3kExplorerLandingPage',
@@ -23,7 +26,7 @@ export default {
       const currentCluster = this.$store.getters['currentCluster'];
       const provClusterId = currentCluster.provClusterId;
 
-      this.isLocal = currentCluster.id === 'local';
+      // this.isLocal = currentCluster.id === 'local';
 
       try {
         this.currentProvCluster = await this.$store.dispatch('management/find', {
