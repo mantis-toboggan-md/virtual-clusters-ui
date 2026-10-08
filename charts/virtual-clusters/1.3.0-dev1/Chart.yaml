@@ -8,12 +8,11 @@ annotations:
   catalog.cattle.io/display-name: Virtual Clusters
   catalog.cattle.io/ui-extensions-version: '>= 3.0.0 < 4.0.0'
   catalog.cattle.io/rancher-version: '>=2.13.0'
-  catalog.cattle.io/prime-only: 'true'
 apiVersion: v2
-appVersion: 1.3.0-dev
+appVersion: 1.3.0-dev1
 description: Virtual cluster provisioning using K3K
 name: virtual-clusters
 type: application
-version: 1.3.0-dev
+version: 1.3.0-dev1
 icon: >-
   https://raw.githubusercontent.com/rancher/virtual-clusters-ui/refs/heads/main/pkg/virtual-clusters/assets/icon-k3k.svg
