@@ -18,7 +18,7 @@ export default {
   },
 
   async fetch() {
-    this.isPrime = isRancherPrime();
+    this.isPrime = true;
     if (this.isPrime) {
       const currentCluster = this.$store.getters['currentCluster'];
       const provClusterId = currentCluster.provClusterId;

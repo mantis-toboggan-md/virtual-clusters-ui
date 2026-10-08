@@ -3,7 +3,7 @@ import { isRancherPrime } from '@shell/config/version';
 export async function init($plugin:any, store:any) {
   const { configureType } = $plugin.DSL(store, 'manager');
 
-  if (isRancherPrime()) {
+  if (true) {
     configureType('provisioning.cattle.io.cluster', {
       listGroups: [
         {

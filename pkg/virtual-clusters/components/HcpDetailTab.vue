@@ -44,8 +44,7 @@ const token = computed(() => {
 
 
 /**
- * The port serving the k3s supervisor, which is what an external agent joins
- * against
+ * The port serving the k3s supervisor
  */
 function findServerPort(svc: Record<string, any> | null) {
   const ports = svc?.spec?.ports || [];
@@ -68,14 +67,11 @@ const serverPort = computed(() => {
 });
 
 /**
- * An HCP virtual cluster's apiserver runs inside the host cluster, so the
- * kubeconfig's server URL is in-cluster and unreachable from an external
- * worker. Resolve an externally reachable host instead:
- *
+ * Attempt to resolve an externally reachable host by the follolwing means, in order:
+ * 
  * 1. A LoadBalancer address, if the cluster is exposed that way.
  * 2. spec.tlsSANs - HCP mode requires at least one non-loopback host the
- *    external workers can reach, and only hosts in the SANs will pass the
- *    agent's TLS verification.
+ *    external workers can reach
  * 3. A host cluster node's external (then internal) address, as a last resort.
  */
 const serverHost = computed(() => {
