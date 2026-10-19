@@ -16,7 +16,8 @@ import LabeledInput from '@components/Form/LabeledInput/LabeledInput.vue';
 import ClusterAppearance from '@shell/components/form/ClusterAppearance';
 import { RcSection } from '@components/RcSection';
 
-import ClusterMembershipEditor, { canViewClusterMembershipEditor } from '@shell/components/form/Members/ClusterMembershipEditor';
+import ClusterMembershipEditor from '@shell/components/form/Members/ClusterMembershipEditor';
+import { useClusterMembership, saveRoleBindings } from '@shell/composables/useClusterMembership';
 import { CAPI, MANAGEMENT, NAMESPACE } from '@shell/config/types';
 import { SETTING } from '@shell/config/settings';
 import CreateEditView from '@shell/mixins/create-edit-view';
@@ -159,6 +160,10 @@ export default {
   },
 
   name: 'CruK3KCluster',
+
+  setup() {
+    return useClusterMembership();
+  },
 
   async fetch() {
     const hash = {};
@@ -372,10 +377,6 @@ export default {
       return this.mode === _CREATE;
     },
 
-    canManageMembers() {
-      return canViewClusterMembershipEditor(this.$store);
-    },
-
     k3sVersionOptions() {
       const out = (this.k3sVersions?.data || []).map((d) => d.version.replace('+', '-')).reverse();
 
@@ -408,16 +409,10 @@ export default {
   },
 
   methods: {
-    onMembershipUpdate(update) {
-      this['membershipUpdate'] = update;
-    },
-
     async saveRoleBindings() {
       await this.value.waitForMgmt();
 
-      if (this.membershipUpdate.save) {
-        await this.membershipUpdate.save(this.value.mgmt.id);
-      }
+      return saveRoleBindings(this.membershipUpdate, this.value.mgmt.id);
     },
 
     updateName({ name }) {
@@ -1059,6 +1054,7 @@ export default {
         <ClusterMembershipEditor
           :mode="mode"
           :parent-id="value.mgmt ? value.mgmt.id : null"
+          :pending-update="membershipUpdate"
           @membership-update="onMembershipUpdate"
         />
       </div>
