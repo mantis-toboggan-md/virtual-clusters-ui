@@ -13,9 +13,9 @@ entries:
       catalog.cattle.io/ui-extensions-version: '>= 3.0.0 < 4.0.0'
     apiVersion: v2
     appVersion: 1.3.0-dev3
-    created: "2026-10-20T09:35:22.417128-07:00"
+    created: "2026-10-20T09:45:01.062091-07:00"
     description: Virtual cluster provisioning using K3K
-    digest: ba5ba7251aec5d403431ed10fb607e2e7510792aaf56e106635b0ddab184d41f
+    digest: ba4dfb694456f0c6d2fcffea900b3a28d6e0ad19de4ee996beb7310c54575a03
     icon: https://raw.githubusercontent.com/rancher/virtual-clusters-ui/refs/heads/main/pkg/virtual-clusters/assets/icon-k3k.svg
     name: virtual-clusters
     type: application
@@ -35,7 +35,7 @@ entries:
       catalog.cattle.io/ui-extensions-version: '>= 3.0.0 < 4.0.0'
     apiVersion: v2
     appVersion: 1.3.0-dev2
-    created: "2026-10-20T09:35:22.416986-07:00"
+    created: "2026-10-20T09:45:01.061975-07:00"
     description: Virtual cluster provisioning using K3K
     digest: a78a4b8aa200a6f2d6910393e63a993cdaad640ecaf1824ffcc19f119042a0a8
     icon: https://raw.githubusercontent.com/rancher/virtual-clusters-ui/refs/heads/main/pkg/virtual-clusters/assets/icon-k3k.svg
@@ -57,7 +57,7 @@ entries:
       catalog.cattle.io/ui-extensions-version: '>= 3.0.15 < 4.0.0'
     apiVersion: v2
     appVersion: 1.3.0-dev1
-    created: "2026-10-20T09:35:22.416836-07:00"
+    created: "2026-10-20T09:45:01.061852-07:00"
     description: Virtual cluster provisioning using K3K
     digest: a3dfdd828fda6c95ce604d0007476c428858d1e0bd85348c94975649b210e45e
     icon: https://raw.githubusercontent.com/rancher/virtual-clusters-ui/refs/heads/main/pkg/virtual-clusters/assets/icon-k3k.svg
@@ -79,7 +79,7 @@ entries:
       catalog.cattle.io/ui-extensions-version: '>= 3.0.0 < 4.0.0'
     apiVersion: v2
     appVersion: 1.3.0-dev
-    created: "2026-10-20T09:35:22.416471-07:00"
+    created: "2026-10-20T09:45:01.061706-07:00"
     description: Virtual cluster provisioning using K3K
     digest: b28ae732b89cdaba64757dbe88e12572c8103e9f2d15505f375128f2df89ab91
     icon: https://raw.githubusercontent.com/rancher/virtual-clusters-ui/refs/heads/main/pkg/virtual-clusters/assets/icon-k3k.svg
@@ -88,4 +88,4 @@ entries:
     urls:
     - assets/virtual-clusters/virtual-clusters-1.3.0-dev.tgz
     version: 1.3.0-dev
-generated: "2026-10-20T09:35:22.415242-07:00"
+generated: "2026-10-20T09:45:01.060894-07:00"
