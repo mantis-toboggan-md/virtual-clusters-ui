@@ -11,6 +11,7 @@ import versions from '@shell/utils/versions';
 import { isRancherPrime } from '@shell/config/version';
 import { NotificationLevel } from '@shell/types/notifications';
 import { K3K } from './types';
+import { virtualClusterTelemetry } from './utils/telemetry';
 
 const createRoleIfNotFound = async(roleTemplate: any, store:any) => {
   const rolesMatching = await store.dispatch('management/findLabelSelector', {
@@ -81,4 +82,6 @@ export default function(plugin: IPlugin): void {
 
   plugin.addPanel(PanelLocation.RESOURCE_LIST, { resource: [K3K.POLICY, K3K.CLUSTER] },
     { component: () => import('./components/K3kVersionBanner.vue') });
+
+  plugin.register('telemetry', 'virtual-clusters', virtualClusterTelemetry);
 }
